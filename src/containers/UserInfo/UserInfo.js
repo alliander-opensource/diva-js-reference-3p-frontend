@@ -1,37 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import Chip from 'material-ui/Chip';
 
-// TODO move to config
-const API_URL = '/api/get-session';
+import { fetchSession } from '../../actions'
 
 class UserInfo extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      sessionId: 'unknown',
-      attributes: [],
-    };
-  }
-
-  // TODO: decide if we need redux for this example
   componentDidMount() {
-    fetch(API_URL, {
-        credentials: 'include'
-      })
-      .then(response => {
-        console.log(response);
-        return response;
-      })
-      .then(response => response.json())
-      .then(data => this.setState({
-        sessionId: data.user.sessionId,
-        attributes: data.user.attributes,
-      }));
+    const { dispatch } = this.props;
+    dispatch(fetchSession());
   }
 
   render() {
-    const { sessionId, attributes } = this.state;
+    const { sessionId, attributes, lastUpdated } = this.props;
+    console.log(this.props);
 
     return (
       <div>
@@ -47,9 +29,37 @@ class UserInfo extends Component {
           )}
 
         </div>
+
+        <br/><br/>
+
+        {lastUpdated &&
+        <span>
+          Last updated at {new Date(lastUpdated).toLocaleTimeString()}.
+        </span>
+        }
+        <br/>
       </div>
     );
   }
 }
 
-export default UserInfo;
+UserInfo.propTypes = {
+  sessionId: PropTypes.string.isRequired,
+  attributes: PropTypes.array.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  lastUpdated: PropTypes.number,
+  dispatch: PropTypes.func.isRequired,
+}
+
+function mapStateToProps(state) {
+  const { user } = state
+
+  return {
+    sessionId: user.sessionId,
+    attributes: user.attributes,
+    isFetching: user.isFetching,
+    lastUpdated: user.lastUpdated,
+  }
+}
+
+export default connect(mapStateToProps)(UserInfo);
