@@ -8,8 +8,11 @@
     "url": "git+ssh://git@github.com/Alliander/diva-js.git"
   },
   "dependencies": {
+    "material-ui": "0.19.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-flexbox-grid": "1.1.5",
+    "react-router-dom": "4.2.2",
     "react-scripts": "1.0.14"
   },
   "proxy": "http://localhost:4000",
