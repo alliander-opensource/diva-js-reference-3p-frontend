@@ -13,7 +13,6 @@ class UserInfo extends Component {
 
   render() {
     const { sessionId, attributes, lastUpdated } = this.props;
-    console.log(this.props);
 
     return (
       <div>
