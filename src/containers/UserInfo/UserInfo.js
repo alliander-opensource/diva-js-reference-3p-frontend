@@ -74,7 +74,7 @@ UserInfo.propTypes = {
   sessionId: PropTypes.string.isRequired,
   attributes: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  lastUpdated: PropTypes.string.isRequired,
+  lastUpdated: PropTypes.number,
   dispatch: PropTypes.func.isRequired,
 }
 
