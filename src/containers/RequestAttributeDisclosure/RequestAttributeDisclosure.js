@@ -9,17 +9,25 @@ class RequestAttributeDisclosure extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     const { requiredAttribute } = this.props;
-    return fetch(`/api/start-disclosure-session?attribute=${requiredAttribute}&attributesLabel=${requiredAttribute}`, {
+
+    fetch(`/api/start-disclosure-session?attribute=${requiredAttribute}&attributesLabel=${requiredAttribute}`, {
       credentials: 'include'
     })
     .then(response => response.json())
     .then(data => {
-      this.setState({
-        qrContent: data,
-      })
+      if (this._isMounted) { // TODO: move to redux actions
+        this.setState({
+          qrContent: data,
+        })
+      }
     });
-  }  
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
   render() {
     const { requiredAttribute } = this.props;
