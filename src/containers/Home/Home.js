@@ -4,7 +4,7 @@ const Home = () => (
   <div>
     <h2>Home</h2>
 
-    Welcom at the DIVA 3rd party reference implementation.<br/>
+    Welcome to the DIVA 3rd party reference implementation.<br/>
     <br/>
     Visit the pages using the left menu.<br/>
     <br/>

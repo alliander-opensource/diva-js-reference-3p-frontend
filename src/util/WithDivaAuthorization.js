@@ -20,7 +20,7 @@ export default function WithDivaAuthorization(requiredAttribute) {
         if (user.attributes.includes(requiredAttribute)) {
           return <WrappedComponent {...this.props} />;
         } else {
-          return <RequestAttributeDisclosure/>;
+          return <RequestAttributeDisclosure requiredAttribute={requiredAttribute}/>;
         }
       };
     };
