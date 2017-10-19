@@ -10,7 +10,7 @@ class RequestAttributeDisclosure extends Component {
 
   componentDidMount() {
     const { requiredAttribute } = this.props;
-    fetch(`/api/attributes-required?type=json&attribute=${requiredAttribute}&attributesLabel=${requiredAttribute}`, {
+    fetch(`/api/start-disclosure-session?attribute=${requiredAttribute}&attributesLabel=${requiredAttribute}`, {
       credentials: 'include'
     })
     .then(response => response.json())
