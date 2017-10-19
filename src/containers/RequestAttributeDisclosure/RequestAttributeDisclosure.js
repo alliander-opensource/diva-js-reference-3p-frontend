@@ -10,7 +10,7 @@ class RequestAttributeDisclosure extends Component {
 
   componentDidMount() {
     const { requiredAttribute } = this.props;
-    fetch(`/api/start-disclosure-session?attribute=${requiredAttribute}&attributesLabel=${requiredAttribute}`, {
+    return fetch(`/api/start-disclosure-session?attribute=${requiredAttribute}&attributesLabel=${requiredAttribute}`, {
       credentials: 'include'
     })
     .then(response => response.json())
@@ -19,7 +19,7 @@ class RequestAttributeDisclosure extends Component {
         qrContent: data,
       })
     });
-  }
+  }  
 
   render() {
     const { requiredAttribute } = this.props;
@@ -32,7 +32,7 @@ class RequestAttributeDisclosure extends Component {
             <Col xs={6}>
               In order to view this page, the <b>{requiredAttribute}</b> attribute is required.<br/>
               <br/>
-              <QRCode value={qrContent} size={256}/><br/>
+              <QRCode value={JSON.stringify(qrContent)} size={256}/><br/>
               <br/>
               Please scan the QR code with your IRMA app to continue.
             </Col>

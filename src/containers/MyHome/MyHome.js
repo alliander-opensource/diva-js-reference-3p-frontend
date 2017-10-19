@@ -4,14 +4,14 @@ import { connect } from 'react-redux'
 
 class MyHome extends Component {
   render() {
-    const { street, houseNumber } = this.props;
+    const { address } = this.props;
 
     return (
       <div>
-        <h2>Mijn Huis</h2>
+        <h2>My Home</h2>
 
         <br/><br/>
-        Adres: { street } { houseNumber }
+        Address: { address.attributeValue }
 
         <br/>
       </div>
@@ -20,16 +20,19 @@ class MyHome extends Component {
 }
 
 MyHome.propTypes = {
-  street: PropTypes.string.isRequired,
-  houseNumber: PropTypes.string.isRequired,
+  address: PropTypes.object.isRequired,
 }
 
 function mapStateToProps(state) {
   const { user } = state
 
+  const addresses = user.attributes.filter(attribute => {
+    return attribute.attributeName === 'pbdf.pbdf.idin.address';
+  })
+  console.log(addresses);
+
   return {
-    street: user.attributes.address.street || 'straat',
-    houseNumber: user.attributes.address.houseNumber || 'huisnummer',
+    address: addresses[0] || 'Address Unknown',
   }
 }
 

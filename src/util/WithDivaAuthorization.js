@@ -17,7 +17,10 @@ export default function WithDivaAuthorization(requiredAttribute) {
       };
       render() {
         const { user } = this.props;
-        if (user.attributes.includes(requiredAttribute)) {
+        const attributesOfRequiredType = user.attributes.filter(attribute => {
+          return attribute.attributeName === requiredAttribute;
+        });
+        if (attributesOfRequiredType.length > 0) {
           return <WrappedComponent {...this.props} />;
         } else {
           return <RequestAttributeDisclosure requiredAttribute={requiredAttribute}/>;

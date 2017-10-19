@@ -46,7 +46,7 @@ class UserInfo extends Component {
 
           <List>
             {attributes.map(attribute =>
-              <ListItem primaryText="{attribute}" leftIcon={<IconActionHome/>} />
+              <ListItem key={attribute.attributeValue} primaryText={attribute.attributeValue} secondaryText={attribute.attributeName} leftIcon={<IconActionHome/>} />
             )}
             { attributes.length === 0 &&
               <ListItem primaryText="There are no attributes disclosed to your session"/>
@@ -74,7 +74,7 @@ UserInfo.propTypes = {
   sessionId: PropTypes.string.isRequired,
   attributes: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  lastUpdated: PropTypes.number,
+  lastUpdated: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
 }
 
