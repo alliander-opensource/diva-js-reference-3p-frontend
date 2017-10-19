@@ -51,39 +51,41 @@ class App extends Component {
   }
 
   render() {
-    return <BrowserRouter>
-      <div>
-        <AppBar
-          title="DIVA 3rd party reference implementation"
-          iconElementRight={<IconButton><IconSocialPerson/></IconButton>}
-          onLeftIconButtonTouchTap={ () => this.toggleMenu() }
-          onRightIconButtonTouchTap={ () => this.toggleUserInfo() }
-        />
-        <Row>
-          {
-            this.state.showMenu &&
-            <Col xs={12} sm={3}>
-              <SideMenu/>
-            </Col>
-          }
+    return (
+      <BrowserRouter>
+        <div>
+          <AppBar
+            title="DIVA 3rd party reference implementation"
+            iconElementRight={<IconButton><IconSocialPerson/></IconButton>}
+            onLeftIconButtonTouchTap={ () => this.toggleMenu() }
+            onRightIconButtonTouchTap={ () => this.toggleUserInfo() }
+          />
+          <Row>
+            {
+              this.state.showMenu &&
+              <Col xs={12} sm={3}>
+                <SideMenu/>
+              </Col>
+            }
 
-          <Col xs>
-            <Paper style={styles.main}>
-              <Route exact path="/" component={Home}/>
-              <Route path="/my-home" component={WithDivaAuthorization('x')(MyHome)}/>
-              <Route path="/my-account" component={WithDivaAuthorization('x')(<div>My Account</div>)}/>
-            </Paper>
-          </Col>
-
-          {
-            this.state.showUserInfo &&
-            <Col xs={12} sm={3}>
-              <UserInfo/>
+            <Col xs>
+              <Paper style={styles.main}>
+                <Route exact path="/" component={Home}/>
+                <Route path="/my-home" component={WithDivaAuthorization('pbdf.pbdf.idin.address')(MyHome)}/>
+                <Route path="/my-account" component={WithDivaAuthorization('pbdf.pbdf.idin.address')(<div>My Account</div>)}/>
+              </Paper>
             </Col>
-          }
-        </Row>
-      </div>
-    </BrowserRouter>
+
+            {
+              this.state.showUserInfo &&
+              <Col xs={12} sm={3}>
+                <UserInfo/>
+              </Col>
+            }
+          </Row>
+        </div>
+      </BrowserRouter>
+    )
   }
 }
 
