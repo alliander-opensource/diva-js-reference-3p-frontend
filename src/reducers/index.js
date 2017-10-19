@@ -7,7 +7,6 @@ import {
 function user(
   state = {
     isFetching: false,
-    lastUpdated: 'Never',
     sessionId: '',
     attributes: []
   },

@@ -12,8 +12,8 @@ export function requestSession() {
 function receiveSession(json) {
   return {
     type: RECEIVE_SESSION,
-    sessionId: json.user.sessionId,
-    attributes: json.user.attributes,
+    sessionId: json.sessionId,
+    attributes: json.attributes,
     receivedAt: Date.now(),
   }
 }
