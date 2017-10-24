@@ -19,6 +19,8 @@ class UserInfo extends Component {
   render() {
     const { sessionId, attributes, lastUpdated } = this.props;
 
+    const attributeTypes = Object.keys(attributes);
+
     const style = {
       height: '100%',
       margin: 20,
@@ -45,9 +47,11 @@ class UserInfo extends Component {
           <Divider/>
 
           <List>
-            {attributes.map(attribute =>
-              <ListItem key={attribute.attributeValue} primaryText={attribute.attributeValue} secondaryText={attribute.attributeName} leftIcon={<IconActionHome/>} />
-            )}
+            {attributeTypes.map(attributeType => {
+              return attributes[attributeType].map(attribute =>
+                <ListItem key={attribute.attributeValue} primaryText={attribute.attributeValue} secondaryText={attribute.attributeName} leftIcon={<IconActionHome/>} />
+              )
+            })}
             { attributes.length === 0 &&
               <ListItem primaryText="There are no attributes disclosed to your session"/>
             }
@@ -72,7 +76,7 @@ class UserInfo extends Component {
 
 UserInfo.propTypes = {
   sessionId: PropTypes.string.isRequired,
-  attributes: PropTypes.array.isRequired,
+  attributes: PropTypes.object.isRequired,
   isFetching: PropTypes.bool.isRequired,
   lastUpdated: PropTypes.number,
   dispatch: PropTypes.func.isRequired,
