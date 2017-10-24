@@ -8,7 +8,7 @@ function user(
   state = {
     isFetching: false,
     sessionId: '',
-    attributes: []
+    attributes: {}
   },
   action
 ) {
