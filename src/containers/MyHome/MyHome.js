@@ -19,7 +19,7 @@ class MyHome extends Component {
 }
 
 MyHome.propTypes = {
-  addresses: PropTypes.object.isRequired,
+  addresses: PropTypes.array.isRequired,
 }
 
 function mapStateToProps(state) {
