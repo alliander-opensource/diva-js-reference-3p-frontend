@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
-
 import { Row, Col } from 'react-flexbox-grid';
+
+import { fetchSession } from '../../actions';
+
 class RequestAttributeDisclosure extends Component {
   constructor(props) {
     super(props);
@@ -21,18 +26,18 @@ class RequestAttributeDisclosure extends Component {
         this.setState({
           qrContent: data.qrContent,
         });
-        this.startPoll(data.irmaSessionId);
-        setTimeout(this.stopPoll, 150000);
+        this.startPolling(data.irmaSessionId);
+        setTimeout(this.stopPolling, 30000);
       }
     });
   }
 
-  startPoll = irmaSessionId => {
+  startPolling = irmaSessionId => {
     const pollTimerId = setInterval(this.poll, 3000, irmaSessionId, this);
     this.setState({ pollTimerId });
   }
 
-  stopPoll = () => {
+  stopPolling = () => {
     if (this.state.pollTimerId) {
       clearInterval(this.state.pollTimerId);
       this.setState({ pollTimerId: undefined });
@@ -44,10 +49,16 @@ class RequestAttributeDisclosure extends Component {
       .getDisclosureStatus(irmaSessionId)
       .then(result => {
         console.log(result);
-        self.setState({
-          disclosureStatus: result.disclosureStatus,
-          proofStatus: result.proofStatus,
-        });
+        if (result.disclosureStatus === 'COMPLETED') {
+          self.stopPolling();
+          setTimeout(() => { self.refreshSession() }, 2000);
+        }
+        if (this._isMounted) {
+          self.setState({
+            disclosureStatus: result.disclosureStatus,
+            proofStatus: result.proofStatus,
+          });
+        }
       });
   }
 
@@ -60,6 +71,11 @@ class RequestAttributeDisclosure extends Component {
 
   componentWillUnmount() {
     this._isMounted = false;
+    this.stopPolling();
+  }
+
+  refreshSession() {
+    this.props.dispatch(fetchSession());
   }
 
   render() {
@@ -80,11 +96,9 @@ class RequestAttributeDisclosure extends Component {
               </Col>
             ) : (
               <Col xs={6}>
-
                 Status: { disclosureStatus }<br/>
                 <br/>
                 Result: { proofStatus }
-
               </Col>
             )}
           </Row>
@@ -94,4 +108,8 @@ class RequestAttributeDisclosure extends Component {
   }
 }
 
-export default RequestAttributeDisclosure;
+RequestAttributeDisclosure.propTypes = {
+  history: PropTypes.object.isRequired,
+}
+
+export default withRouter(connect()(RequestAttributeDisclosure));

@@ -11,6 +11,7 @@ import WithDivaAuthorization from '../../util/WithDivaAuthorization';
 import  SideMenu from '../../containers/SideMenu/SideMenu';
 
 import  Home from '../../containers/Home/Home';
+import  MyAccount from '../../containers/MyAccount/MyAccount';
 import  MyHome from '../../containers/MyHome/MyHome';
 import  UserInfo from '../../containers/UserInfo/UserInfo';
 
@@ -72,7 +73,7 @@ class App extends Component {
               <Paper style={styles.main}>
                 <Route exact path="/" component={Home}/>
                 <Route path="/my-home" component={WithDivaAuthorization('pbdf.pbdf.idin.address')(MyHome)}/>
-                <Route path="/my-account" component={WithDivaAuthorization('pbdf.pbdf.idin.address')(<div>My Account</div>)}/>
+                <Route path="/my-account" component={WithDivaAuthorization('pbdf.pbdf.email.email')(MyAccount)}/>
               </Paper>
             </Col>
 
