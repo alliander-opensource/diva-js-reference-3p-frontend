@@ -7,7 +7,7 @@ class MyAccount extends Component {
     const { emails } = this.props;
 
     return (
-      <div>
+      <div style={{ padding: '20px' }}>
         <h2>My Account</h2>
 
         <br/><br/>
