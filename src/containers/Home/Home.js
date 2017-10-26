@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Home = () => (
-  <div>
+  <div style={{ padding: '20px' }}>
     <h2>Home</h2>
 
     Welcome to the DIVA 3rd party reference implementation.<br/>

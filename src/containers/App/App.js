@@ -4,7 +4,7 @@ import AppBar from 'material-ui/AppBar';
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import IconSocialPerson from 'material-ui/svg-icons/social/person';
-import { Row, Col } from 'react-flexbox-grid';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import WithDivaAuthorization from '../../util/WithDivaAuthorization';
 
@@ -21,7 +21,6 @@ const styles = {
   main: {
     minHeight: 200,
     margin: 20,
-    padding: 20,
   },
 };
 
@@ -61,29 +60,31 @@ class App extends Component {
             onLeftIconButtonTouchTap={ () => this.toggleMenu() }
             onRightIconButtonTouchTap={ () => this.toggleUserInfo() }
           />
-          <Row>
-            {
-              this.state.showMenu &&
-              <Col xs={12} sm={3}>
-                <SideMenu/>
-              </Col>
-            }
+          <Grid fluid>
+            <Row>
+              {
+                this.state.showMenu &&
+                <Col xs={12} sm={3}>
+                  <SideMenu/>
+                </Col>
+              }
 
-            <Col xs>
-              <Paper style={styles.main}>
-                <Route exact path="/" component={Home}/>
-                <Route path="/my-home" component={WithDivaAuthorization('pbdf.pbdf.idin.address')(MyHome)}/>
-                <Route path="/my-account" component={WithDivaAuthorization('pbdf.pbdf.email.email')(MyAccount)}/>
-              </Paper>
-            </Col>
-
-            {
-              this.state.showUserInfo &&
-              <Col xs={12} sm={3}>
-                <UserInfo/>
+              <Col xs>
+                <Paper style={styles.main}>
+                  <Route exact path="/" component={Home}/>
+                  <Route path="/my-home" component={WithDivaAuthorization('pbdf.pbdf.idin.address')(MyHome)}/>
+                  <Route path="/my-account" component={WithDivaAuthorization('pbdf.pbdf.email.email')(MyAccount)}/>
+                </Paper>
               </Col>
-            }
-          </Row>
+
+              {
+                this.state.showUserInfo &&
+                <Col xs={12} sm={3}>
+                  <UserInfo/>
+                </Col>
+              }
+            </Row>
+          </Grid>
         </div>
       </BrowserRouter>
     )
