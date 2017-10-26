@@ -4,6 +4,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 import { Row, Col } from 'react-flexbox-grid';
+import CircularProgress from 'material-ui/CircularProgress';
+import IconActionCheckCircle from 'material-ui/svg-icons/action/check-circle';
+import IconActionHelp from 'material-ui/svg-icons/action/help';
+import IconActionInfo from 'material-ui/svg-icons/action/info';
+import IconAlertError from 'material-ui/svg-icons/alert/error';
+
+import IconButton from 'material-ui/IconButton';
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 
 import { fetchSession } from '../../actions';
 
@@ -87,24 +95,84 @@ class RequestAttributeDisclosure extends Component {
     return (
       <div>
         {qrContent ? (
-          <Row center="xs">
+          <div>
             {(disclosureStatus !== "COMPLETED") ? (
-              <Col xs={6}>
-                In order to view this page, the <b>{requiredAttribute}</b> attribute is required.<br/>
-                <br/>
-                <QRCode value={JSON.stringify(qrContent)} size={256}/><br/>
-                <br/>
-                Please scan the QR code with your IRMA app to continue.
-              </Col>
+              <div>
+                <Toolbar style={{ backgroundColor: 'none' }}>
+                  <ToolbarGroup>
+                    <ToolbarTitle text="Attribute Required" />
+                  </ToolbarGroup>
+                  <ToolbarGroup lastChild={true}>
+                    <IconButton tooltip="Help">
+                      <IconActionHelp/>
+                    </IconButton>
+                    <IconButton tooltip="Info">
+                      <IconActionInfo/>
+                    </IconButton>
+                  </ToolbarGroup>
+                </Toolbar>
+                <div style={{ padding: '20px' }}>
+                  <Row center="xs">
+                    <Col xs={6}>
+                      In order to view this page, the <b>{requiredAttribute}</b> attribute is required.<br/>
+                      <br/>
+                    </Col>
+                  </Row>
+                  <Row center="xs">
+                    <Col xs>
+                      <QRCode value={JSON.stringify(qrContent)} size={256}/><br/>
+                      <br/>
+                    </Col>
+                  </Row>
+                  <Row center="xs">
+                    <Col xs={6}>
+                      Please scan the QR code with your IRMA app to continue.
+                      <br/>
+                    </Col>
+                  </Row>
+                </div>
+              </div>
             ) : (
-              <Col xs={6}>
-                Status: { disclosureStatus }<br/>
-                <br/>
-                Result: { proofStatus }
-              </Col>
+              <div>
+                {(proofStatus === "VALID") ? (
+                  <div>
+                    <Row center="xs">
+                      <Col xs>
+                        <IconActionCheckCircle style={{ width: '100px', height: '100px', color: 'limegreen'}}/>
+                      </Col>
+                    </Row>
+                    <Row center="xs">
+                      <Col xs={6}>
+                        Attribute disclosure successful!
+                      </Col>
+                    </Row>
+                  </div>
+                ) : (
+                  <div>
+                    <Row center="xs">
+                      <Col xs>
+                        <IconAlertError style={{ width: '100px', height: '100px', color: 'orangered'}}/>
+                      </Col>
+                    </Row>
+                    <Row center="xs">
+                      <Col xs={6}>
+                        Oops, something went wrong!
+                      </Col>
+                    </Row>
+                  </div>
+                )}
+              </div>
             )}
-          </Row>
-        ) : ("Loading...")}
+          </div>
+        ) : (
+          <div>
+            <Row center="xs">
+              <Col xs>
+                <CircularProgress/>
+              </Col>
+            </Row>
+          </div>
+        )}
       </div>
     );
   }
