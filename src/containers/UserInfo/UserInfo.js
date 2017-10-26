@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import IconActionHome from 'material-ui/svg-icons/action/home';
+import IconActionLabel from 'material-ui/svg-icons/action/label';
 import IconSocialPerson from 'material-ui/svg-icons/social/person';
 
 import { fetchSession } from '../../actions';
@@ -34,7 +34,7 @@ class UserInfo extends Component {
       height: '100%',
       margin: 20,
     };
-    
+
     return (
       <div>
         <Paper style={style}>
@@ -57,7 +57,7 @@ class UserInfo extends Component {
 
           <List>
             {attributesList.map(a =>
-              <ListItem key={a.value} primaryText={a.value} secondaryText={a.type} leftIcon={<IconActionHome/>} />
+              <ListItem key={a.value} primaryText={a.value} secondaryText={a.type} leftIcon={<IconActionLabel/>} />
             )}
             { attributesList.length === 0 &&
               <ListItem primaryText="There are no attributes disclosed to your session"/>
