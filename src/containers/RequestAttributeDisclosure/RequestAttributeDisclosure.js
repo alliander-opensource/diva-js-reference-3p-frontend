@@ -10,26 +10,30 @@ import { fetchSession } from '../../actions';
 class RequestAttributeDisclosure extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      sessionStarted: false,
+    };
   }
 
   componentDidMount() {
     this._isMounted = true;
     const { requiredAttribute } = this.props;
 
-    fetch(`/api/start-disclosure-session?attribute=${requiredAttribute}&attributesLabel=${requiredAttribute}`, {
-      credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (this._isMounted) { // TODO: move to redux actions
-        this.setState({
-          qrContent: data.qrContent,
-        });
-        this.startPolling(data.irmaSessionId);
-        setTimeout(this.stopPolling, 30000);
-      }
-    });
+    if (!this.state.sessionStarted) {
+      fetch(`/api/start-disclosure-session?attribute=${requiredAttribute}&attributesLabel=${requiredAttribute}`, {
+        credentials: 'include'
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (this._isMounted) {
+          this.setState({
+            qrContent: data.qrContent,
+          });
+          this.startPolling(data.irmaSessionId);
+          setTimeout(this.stopPolling, 30000);
+        }
+      });
+    }
   }
 
   startPolling = irmaSessionId => {
