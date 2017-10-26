@@ -37,7 +37,7 @@ class RequestAttributeDisclosure extends Component {
   }
 
   startPolling = irmaSessionId => {
-    const pollTimerId = setInterval(this.poll, 3000, irmaSessionId, this);
+    const pollTimerId = setInterval(this.poll, 1000, irmaSessionId, this);
     this.setState({ pollTimerId });
   }
 
@@ -53,15 +53,13 @@ class RequestAttributeDisclosure extends Component {
       .getDisclosureStatus(irmaSessionId)
       .then(result => {
         console.log(result);
+        self.setState({
+          disclosureStatus: result.disclosureStatus,
+          proofStatus: result.proofStatus,
+        });
         if (result.disclosureStatus === 'COMPLETED') {
           self.stopPolling();
           setTimeout(() => { self.refreshSession() }, 2000);
-        }
-        if (this._isMounted) {
-          self.setState({
-            disclosureStatus: result.disclosureStatus,
-            proofStatus: result.proofStatus,
-          });
         }
       });
   }
