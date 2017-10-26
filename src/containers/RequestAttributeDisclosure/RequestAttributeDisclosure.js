@@ -111,6 +111,7 @@ class RequestAttributeDisclosure extends Component {
 }
 
 RequestAttributeDisclosure.propTypes = {
+  requiredAttribute: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired,
 }
 
