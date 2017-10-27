@@ -4,6 +4,7 @@ import fetch from 'isomorphic-fetch';
 
 export const REQUEST_SESSION = 'get_session';
 export const RECEIVE_SESSION = 'update_session';
+export const DEAUTHENTICATE = 'deauthenticate';
 
 export function requestSession() {
   return { type: REQUEST_SESSION }
@@ -26,5 +27,14 @@ export function fetchSession() {
       })
       .then(response => response.json())
       .then(json => dispatch(receiveSession(json)));
+  }
+}
+
+export function deauthenticate() {
+  return dispatch => {
+    return fetch('/api/deauthenticate', {
+        credentials: 'same-origin',
+      })
+      .then(() => dispatch(fetchSession()));
   }
 }
