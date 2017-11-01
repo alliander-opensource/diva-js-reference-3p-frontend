@@ -6,21 +6,30 @@ import RequestAttributeDisclosure from '../containers/RequestAttributeDisclosure
 
 /**
  * HOC that Handles whether or not the user is allowed to see the page.
- * @param {array} requiredAttribute - user attribute that is required to see the page.
+ * @param {string} requiredAttribute - user attribute that is required to see the page.
+ * @param {string} attributeLabel - label for this attribute
  * @returns {Component}
  */
-export default function WithDivaAuthorization(requiredAttribute) {
+export default function WithDivaAuthorization(content) {
   return WrappedComponent => {
     class WithAuthorization extends Component {
       static propTypes = {
         user: PropTypes.object,
       };
+
+      hasRequiredAttributes = (existing, content) => {
+        const existingAttributes = Object.keys(existing);
+        return content.reduce((accumulator, attributeGroup) => {
+          return accumulator && attributeGroup.attributes.some(el => existingAttributes.includes(el));
+        }, true);
+      }
+
       render() {
         const { user } = this.props;
-        if (user.attributes[requiredAttribute]) {
+        if (this.hasRequiredAttributes(user.attributes, content)) {
           return <WrappedComponent {...this.props} />;
         } else {
-          return <RequestAttributeDisclosure requiredAttribute={requiredAttribute}/>;
+          return <RequestAttributeDisclosure requiredAttributes={content}/>;
         }
       };
     };

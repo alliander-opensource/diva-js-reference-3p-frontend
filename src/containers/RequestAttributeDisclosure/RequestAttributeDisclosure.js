@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 import { Row, Col } from 'react-flexbox-grid';
+import fetch from 'isomorphic-fetch';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import IconActionCheckCircle from 'material-ui/svg-icons/action/check-circle';
@@ -34,14 +35,22 @@ class RequestAttributeDisclosure extends Component {
   }
 
   fetchQR = () => {
-    const { requiredAttribute } = this.props;
+    const { requiredAttributes } = this.props;
     this.setState({
       disclosureStatus: 'PENDING',
       serverStatus: 'INITIALIZED',
       sessionStarted: true,
     });
-    fetch(`/api/start-disclosure-session?attribute=${requiredAttribute}&attributesLabel=${requiredAttribute}`, {
-      credentials: 'include'
+    fetch(`/api/start-disclosure-session`, {
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        content: requiredAttributes
+      }),
     })
     .then(response => response.json())
     .then(data => {
@@ -107,8 +116,7 @@ class RequestAttributeDisclosure extends Component {
   }
 
   render() {
-    console.log('STATE', this.state);
-    const { requiredAttribute } = this.props;
+    const { requiredAttributes } = this.props;
     const {
       qrContent,
       disclosureStatus,
@@ -142,7 +150,9 @@ class RequestAttributeDisclosure extends Component {
                   <div style={{ padding: '20px' }}>
                     <Row center="xs">
                       <Col xs={6}>
-                        In order to view this page, the <b>{requiredAttribute}</b> attribute is required.<br/>
+                        In order to view this page, the following attributes are required:<br/>
+                        <br />
+                        <b>{requiredAttributes.map(el => el.label).join(', ')}</b><br />
                         <br/>
                       </Col>
                     </Row>
@@ -273,7 +283,7 @@ class RequestAttributeDisclosure extends Component {
 }
 
 RequestAttributeDisclosure.propTypes = {
-  requiredAttribute: PropTypes.string.isRequired,
+  requiredAttributes: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
 }
 
