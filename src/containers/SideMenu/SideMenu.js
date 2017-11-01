@@ -35,7 +35,7 @@ export default class SideMenu extends React.Component {
               <ListItem primaryText="My Home" leftIcon={<IconActionHome />} />
             </Link>
             <Link to="/my-account">
-              <ListItem primaryText="My account" leftIcon={<IconSocialPerson />} />
+              <ListItem primaryText="My Account" leftIcon={<IconSocialPerson />} />
             </Link>
           </List>
         </Paper>
