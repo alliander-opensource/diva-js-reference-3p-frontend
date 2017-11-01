@@ -151,7 +151,8 @@ class RequestAttributeDisclosure extends Component {
                     <Row center="xs">
                       <Col xs={6}>
                         In order to view this page, the following attributes are required:<br/>
-                        <b>{requiredAttributes.map(el => el.label)}</b>
+                        <br />
+                        <b>{requiredAttributes.map(el => el.label).join(', ')}</b><br />
                         <br/>
                       </Col>
                     </Row>
