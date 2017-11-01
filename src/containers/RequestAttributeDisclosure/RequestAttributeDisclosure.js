@@ -50,7 +50,6 @@ class RequestAttributeDisclosure extends Component {
           qrContent: data.qrContent,
         });
         this.startPolling(data.irmaSessionId);
-        setTimeout(this.stopPolling, 30000);
       }
     });
   }
@@ -77,10 +76,16 @@ class RequestAttributeDisclosure extends Component {
           serverStatus: result.serverStatus,
           proofStatus: result.proofStatus,
         });
-        if (result.disclosureStatus === 'COMPLETED' ||
-            result.disclosureStatus === 'ABORTED') {
-          self.stopPolling();
-          setTimeout(() => { self.refreshSession() }, 2000);
+        switch (result.disclosureStatus) {
+          case 'COMPLETED':
+            setTimeout(() => { self.refreshSession() }, 2000);
+            self.stopPolling();
+            break;
+          case 'ABORTED':
+            self.stopPolling();
+            break;
+          default:
+            break;
         }
       });
   }
