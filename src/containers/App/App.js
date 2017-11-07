@@ -12,7 +12,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import WithSimpleDivaAuthorization from '../../util/WithSimpleDivaAuthorization';
 import WithDivaAuthorization from '../../util/WithDivaAuthorization';
 
-import  SideMenu from '../../containers/SideMenu/SideMenu';
+import  SideMenu from '../../components/SideMenu/SideMenu';
 
 import  Home from '../../containers/Home/Home';
 import  MyAccount from '../../containers/MyAccount/MyAccount';
@@ -38,10 +38,12 @@ class App extends Component {
 
   render() {
     const RightMenu = (props) => (
-      <IconMenu
+      <IconMenu id="user-menu"
         {...props}
         iconButtonElement={
-          <IconButton><IconSocialPerson style={{color: 'red'}}/></IconButton>
+          <IconButton id="navbar-user-icon">
+            <IconSocialPerson style={{color: 'red'}}/>
+          </IconButton>
         }
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
@@ -49,8 +51,10 @@ class App extends Component {
         <Link to='/'>
           <MenuItem primaryText="About" />
         </Link>
-        <MenuItem primaryText="Clear session" onClick={ () => this.handleDeauth() }
-/>
+        <MenuItem primaryText="Clear session"
+          id="deauthenticate-button"
+          onClick={ () => this.handleDeauth() }
+        />
       </IconMenu>
     );
 
@@ -68,7 +72,7 @@ class App extends Component {
               </Col>
 
               <Col xs>
-                <Paper style={styles.main}>
+                <Paper style={styles.main} id="main-content">
                   <Route exact path="/" component={Home}/>
                   <Route path="/my-home" component={WithDivaAuthorization([
                     {

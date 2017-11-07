@@ -8,6 +8,7 @@
     "url": "git+ssh://git@github.com/Alliander/diva-js.git"
   },
   "dependencies": {
+    "axios": "0.17.0",
     "material-ui": "0.19.4",
     "qrcode.react": "0.7.2",
     "react": "^16.0.0",
@@ -26,6 +27,7 @@
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "lint": "./node_modules/.bin/eslint -c .eslintrc src",
+    "cypres:open": "npx cypress open",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
@@ -43,6 +45,7 @@
   ],
   "license": "BSD-3-Clause",
   "devDependencies": {
+    "cypress": "1.0.3",
     "eslint": "4.8.0",
     "eslint-config-airbnb": "15.1.0",
     "eslint-config-react-app": "2.0.1",
