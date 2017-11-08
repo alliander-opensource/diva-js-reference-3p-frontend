@@ -8,7 +8,7 @@ class MyHome extends Component {
     const { addresses, cities } = this.props;
 
     return (
-      <div style={{ padding: '20px' }}>
+      <div style={{ padding: '20px' }} id="my-home-page">
         <h2>My Home</h2>
 
         <br/><br/>

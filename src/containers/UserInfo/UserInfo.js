@@ -36,7 +36,7 @@ class UserInfo extends Component {
     };
 
     return (
-      <div>
+      <div id="user-panel">
         <Paper style={style}>
           <List>
             <ListItem primaryText="User Session" leftIcon={<IconSocialPerson/>}/>
@@ -47,7 +47,8 @@ class UserInfo extends Component {
               <Divider/>
               <List>
                 <ListItem>
-                  SessionId:<br/> {sessionId}
+                  SessionId:<br/>
+                  <span id="session-id">{sessionId}</span>
                 </ListItem>
               </List>
             </div>

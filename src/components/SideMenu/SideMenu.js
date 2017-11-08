@@ -8,13 +8,6 @@ import IconSocialPerson from 'material-ui/svg-icons/social/person';
 
 export default class SideMenu extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {open: true};
-  }
-
-  handleToggle = () => this.setState({open: !this.state.open});
-
   render() {
     const style = {
       height: '100%',
@@ -23,7 +16,7 @@ export default class SideMenu extends React.Component {
 
     return (
       <div>
-        <Paper style={style}>
+        <Paper style={style} id="navigation-menu">
           <List>
             <Link to="/">
               <ListItem primaryText="Navigation menu"/>

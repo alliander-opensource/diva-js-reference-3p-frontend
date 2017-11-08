@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+import axios from 'axios';
 
 // action types
 
@@ -22,18 +22,21 @@ function receiveSession(json) {
 export function fetchSession() {
   return dispatch => {
     dispatch(requestSession());
-    return fetch('/api/get-session', {
-        credentials: 'same-origin',
+    return axios
+      .get('/api/get-session', {
+        withCredentials: true,
       })
-      .then(response => response.json())
+      // .then(response => response.json())
+      .then(response => response.data)
       .then(json => dispatch(receiveSession(json)));
   }
 }
 
 export function deauthenticate() {
   return dispatch => {
-    return fetch('/api/deauthenticate', {
-        credentials: 'same-origin',
+    return axios
+      .get('/api/deauthenticate', {
+        withCredentials: true,
       })
       .then(() => dispatch(fetchSession()));
   }

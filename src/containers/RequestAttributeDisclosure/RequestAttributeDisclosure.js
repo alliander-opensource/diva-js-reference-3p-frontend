@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 import { Row, Col } from 'react-flexbox-grid';
-import fetch from 'isomorphic-fetch';
+import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import IconActionCheckCircle from 'material-ui/svg-icons/action/check-circle';
@@ -41,26 +41,25 @@ class RequestAttributeDisclosure extends Component {
       serverStatus: 'INITIALIZED',
       sessionStarted: true,
     });
-    fetch(`/api/start-disclosure-session`, {
-      credentials: 'include',
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    axios
+      .post('/api/start-disclosure-session', {
         content: requiredAttributes
-      }),
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (this._isMounted) {
-        this.setState({
-          qrContent: data.qrContent,
-        });
-        this.startPolling(data.irmaSessionId);
-      }
-    });
+      }, {
+        withCredentials: true,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      })
+      .then(response => response.data)
+      .then(data => {
+        if (this._isMounted) {
+          this.setState({
+            qrContent: data.qrContent,
+          });
+          this.startPolling(data.irmaSessionId);
+        }
+      });
   }
 
   startPolling = irmaSessionId => {
@@ -100,10 +99,11 @@ class RequestAttributeDisclosure extends Component {
   }
 
   getDisclosureStatus(irmaSessionId) {
-    return fetch(`/api/disclosure-status?irmaSessionId=${irmaSessionId}`, {
-      credentials: 'include'
-    })
-    .then(response => response.json());
+    return  axios
+      .get(`/api/disclosure-status?irmaSessionId=${irmaSessionId}`, {
+        withCredentials: true,
+      })
+      .then(response => response.data);
   }
 
   componentWillUnmount() {
@@ -159,6 +159,7 @@ class RequestAttributeDisclosure extends Component {
                     <Row center="xs">
                       <Col xs>
                         <QRCode value={JSON.stringify(qrContent)} size={256}/><br/>
+                        <span style={{display: 'none'}} id="qr-content">JSON.stringify(qrContent</span>
                         <br/>
                       </Col>
                     </Row>
@@ -172,7 +173,7 @@ class RequestAttributeDisclosure extends Component {
                 )}
 
                 {(serverStatus === 'CONNECTED') && (
-                  <div style={{ padding: '20px' }}>
+                  <div style={{ padding: '20px' }} id='qr-scanned'>
                     <Row center="xs">
                       <Col xs={6}>
                         To continue, approve attribute disclosure with your IRMA app.<br/>
@@ -188,7 +189,7 @@ class RequestAttributeDisclosure extends Component {
             {(disclosureStatus === 'COMPLETED') && (
               <div>
                 {(proofStatus === 'VALID') ? (
-                  <div>
+                  <div id='disclosure-proof-completed'>
                     <Row center="xs">
                       <Col xs>
                         <IconActionCheckCircle style={{ width: '100px', height: '100px', color: 'limegreen'}}/>
@@ -201,7 +202,7 @@ class RequestAttributeDisclosure extends Component {
                     </Row>
                   </div>
                 ) : (
-                  <div>
+                  <div id="disclosure-error">
                     <Row center="xs">
                       <Col xs>
                         <IconAlertError style={{ width: '100px', height: '100px', color: 'orangered'}}/>
@@ -237,7 +238,7 @@ class RequestAttributeDisclosure extends Component {
               </Toolbar>
 
                 {(serverStatus === 'CANCELLED') && (
-                  <div style={{ padding: '20px' }}>
+                  <div style={{ padding: '20px' }} id="disclosure-cancelled">
                     <Row center="xs">
                       <Col xs={6}>
                         You cancelled attribute disclosure.<br/>
@@ -252,7 +253,7 @@ class RequestAttributeDisclosure extends Component {
                 )}
 
                 {(serverStatus === 'NOT_FOUND') && (
-                  <div style={{ padding: '20px' }}>
+                  <div style={{ padding: '20px' }} id="qr-expired">
                     <Row center="xs">
                       <Col xs={6}>
                         The QR code expired.<br/>
