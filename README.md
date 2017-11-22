@@ -1,29 +1,60 @@
 # diva-js-reference-3p-frontend
 
-This repository contains an example/reference frontend implementation using [diva-irma-js](https://github.com/Alliander/diva-irma-js)
-DIVA is an SDK to easily integrate [IRMA attributes](https://privacybydesign.foundation/irma-controleur/) into NodeJS based applications.
+This repository contains an example/reference frontend implementation to show a nice GUI for [diva-js-reference-3p-backend](https://github.com/Alliander/diva-js-reference-3p-backend)
+that uses the DIVA SDK [diva-irma-js](https://github.com/Alliander/diva-irma-js) to easily integrate [IRMA attributes](https://privacybydesign.foundation/irma-controleur/) into NodeJS based applications.
 
-The backend of this reference implementation can be found in [diva-js-reference-3p-frontend](https://github.com/Alliander/diva-js-reference-3p-backend).
+IRMA is a decentralized, attribute based Identity Management protocol that allows easy and fine-grained authentication (and based on specific attributes) authorization. Attributes are issued by trusted issuers and therefore provide easy validation of users.
 
 ## Features
 
-...
+This frontend in particular demonstrates
+- How attribute based authentication can be integrated into a frontend application.
+- How attribute based authorization can be integrated into a frontend application.
+- How frontends may use and display authentication/authorization status to their users.
+
+# DIVA middleware components
+
+Any container component can be wrapped with the `WithSimpleDivaAuthorization` component to control identity requirements.
+For example to require the `pbdf.pbdf.email.email` attribute,
+
+```
+<Route 	path="/my-account”
+	component={ MyAccount }/>
+```
+
+becomes
+
+```
+<Route 	path="/my-account”
+	component={ WithSimpleDivaAuthorization('pbdf.pbdf.email.email')(MyAccount) }/>
+```
+
+Note: for more complex scenarios see the `WithDivaAuthorization` component.
 
 ## Running the application
 
-`npm start`
+- Checkout the code
+- `npm install`
+- `npm start`
+
+Note: for development, user `npm run dev` to run the application in development mode with hot reloading.
+
+## Tests
+
+[Cypress.io](https://cypress.io) is used to perform frontend tests.
+To run the tests:
+
+- make sure the frontend is running
+- `npm run test`
+
+Note: during tests, the backend is mocked.
 
 ## IRMA
 
-IRMA is ...
+For more information about IRMA, see: https://privacybydesign.foundation/irma/
 
 Other components in the IRMA ecosystem include:
 
-- [Android app](https://github.com/credentials/irma_android_cardemu)
-- [iOS app]()
-- [API server](https://github.com/credentials/irma_api_server)
-
-More information about IRMA can be found at
-
-- https://privacybydesign.foundation/irma/
-- https://github.com/credentials/
+- [IRMA Android app](https://github.com/credentials/irma_android_cardemu)
+- [IRMA iOS app](https://github.com/credentials/irma_mobile)
+- [IRMA API server](https://github.com/credentials/irma_api_server)
