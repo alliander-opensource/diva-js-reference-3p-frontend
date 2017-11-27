@@ -1,7 +1,7 @@
 # diva-js-reference-3p-frontend
 
 This repository contains an example/reference frontend implementation to show a nice GUI for [diva-js-reference-3p-backend](https://github.com/Alliander/diva-js-reference-3p-backend)
-that uses the DIVA SDK [diva-irma-js](https://github.com/Alliander/diva-irma-js) to easily integrate [IRMA attributes](https://privacybydesign.foundation/irma-controleur/) into NodeJS based applications.
+that uses the DIVA SDK [diva-irma-js](https://github.com/Alliander/diva-irma-js) to easily integrate [IRMA attributes](https://privacybydesign.foundation/irma-verifier/) into NodeJS based applications.
 
 IRMA is a decentralized, attribute based Identity Management protocol that allows easy and fine-grained authentication (and based on specific attributes) authorization. Attributes are issued by trusted issuers and therefore provide easy validation of users.
 
@@ -29,7 +29,7 @@ becomes
 	component={ WithSimpleDivaAuthorization('pbdf.pbdf.email.email')(MyAccount) }/>
 ```
 
-Note: for more complex scenarios see the `WithDivaAuthorization` component.
+Note: for more complex scenarios see the `WithDivaAuthorization` higher order component.
 
 ## Running the application
 
@@ -37,7 +37,7 @@ Note: for more complex scenarios see the `WithDivaAuthorization` component.
 - `npm install`
 - `npm start`
 
-Note: for development, user `npm run dev` to run the application in development mode with hot reloading.
+Note: for development, use `npm run dev` to run the application in development mode with hot reloading.
 
 ## Tests
 
@@ -52,6 +52,11 @@ Note: during tests, the backend is mocked.
 ## IRMA
 
 For more information about IRMA, see: https://privacybydesign.foundation/irma/
+
+The IRMA client apps can be downloaded from their respective app stores:
+
+- [Apple App Store](https://itunes.apple.com/nl/app/irma-authentication/id1294092994?mt=8)
+- [Google Play Store](https://play.google.com/store/apps/details?id=org.irmacard.cardemu)
 
 Other components in the IRMA ecosystem include:
 
