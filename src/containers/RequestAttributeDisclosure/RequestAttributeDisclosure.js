@@ -42,7 +42,7 @@ class RequestAttributeDisclosure extends Component {
       sessionStarted: true,
     });
     axios
-      .post('/api/start-disclosure-session', {
+      .post('/api/start-irma-session', {
         content: requiredAttributes
       }, {
         withCredentials: true,

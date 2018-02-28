@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 import { Row, Col } from 'react-flexbox-grid';
@@ -15,14 +13,11 @@ import IconAlertError from 'material-ui/svg-icons/alert/error';
 import IconButton from 'material-ui/IconButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 
-import { fetchSession } from '../../actions';
-
 class SignPolicy extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signatureStatus: 'PENDING',
-      serverStatus: 'INITIALIZED',
+      serverStatus: 'PENDING',
       sessionStarted: false,
     };
   }
@@ -37,8 +32,6 @@ class SignPolicy extends Component {
   fetchQR = () => {
     const { requiredAttributes, message } = this.props;
     this.setState({
-      signatureStatus: 'PENDING',
-      serverStatus: 'INITIALIZED',
       sessionStarted: true,
     });
     axios
@@ -79,18 +72,21 @@ class SignPolicy extends Component {
     self
       .getSignatureStatus(irmaSessionId)
       .then(result => {
-        console.log(result);
         self.setState({
-          signatureStatus: result.signatureStatus,
           serverStatus: result.serverStatus,
           proofStatus: result.proofStatus,
         });
-        switch (result.signatureStatus) {
-          case 'COMPLETED':
-            this.props.onComplete();
+        switch (result.serverStatus) {
+          case 'DONE':
+            self.stopPolling();
+            self.props.onComplete(result);
+            break;
+          case 'CANCELLED':
+            // self.props.onFailure(result);
             self.stopPolling();
             break;
-          case 'ABORTED':
+          case 'NOT_FOUND':
+            // self.props.onFailure(result);
             self.stopPolling();
             break;
           default:
@@ -116,7 +112,6 @@ class SignPolicy extends Component {
     const { requiredAttributes, message } = this.props;
     const {
       qrContent,
-      signatureStatus,
       proofStatus,
       serverStatus
     } = this.state;
@@ -126,7 +121,7 @@ class SignPolicy extends Component {
         {qrContent ? (
           <div>
 
-            {(signatureStatus === 'PENDING') && (
+            {(serverStatus === 'INITIALIZED' || serverStatus === 'CONNECTED' || serverStatus === 'DONE') && (
               <div>
 
                 <Toolbar style={{ backgroundColor: 'none' }}>
@@ -184,7 +179,7 @@ class SignPolicy extends Component {
               </div>
             )}
 
-            {(signatureStatus === 'COMPLETED') && (
+            {(serverStatus === 'DONE') && (
               <div>
                 {(proofStatus === 'VALID') ? (
                   <div id='signature-proof-completed'>
@@ -219,7 +214,7 @@ class SignPolicy extends Component {
                 )}
               </div>
             )}
-            {(signatureStatus === 'ABORTED') && (
+            {(serverStatus === 'CANCELLED' || serverStatus === 'NOT_FOUND') && (
               <div>
               <Toolbar style={{ backgroundColor: 'none' }}>
                 <ToolbarGroup>
@@ -283,8 +278,8 @@ class SignPolicy extends Component {
 
 SignPolicy.propTypes = {
   requiredAttributes: PropTypes.array.isRequired,
-  history: PropTypes.object.isRequired,
   message: PropTypes.string.isRequired, // TODO: include entire policy
+  onComplete: PropTypes.func.isRequired,
 }
 
-export default withRouter(connect()(SignPolicy));
+export default SignPolicy;
