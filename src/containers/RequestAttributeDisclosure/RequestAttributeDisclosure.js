@@ -34,19 +34,6 @@ class RequestAttributeDisclosure extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this._isMounted = false; // eslint-disable-line no-underscore-dangle
-    this.stopPolling();
-  }
-
-  getDisclosureStatus(irmaSessionId) { // eslint-disable-line class-methods-use-this
-    return axios
-      .get(`/api/disclosure-status?irmaSessionId=${irmaSessionId}`, {
-        withCredentials: true,
-      })
-      .then(response => response.data);
-  }
-
   startPolling = (irmaSessionId) => {
     const pollTimerId = setInterval(() => this.poll(irmaSessionId), 1000);
     this.setState({ pollTimerId });
@@ -109,6 +96,19 @@ class RequestAttributeDisclosure extends Component {
           this.startPolling(data.irmaSessionId);
         }
       });
+  }
+
+  getDisclosureStatus(irmaSessionId) {
+    return  axios
+      .get(`/api/disclosure-status?irmaSessionId=${irmaSessionId}`, {
+        withCredentials: true,
+      })
+      .then(response => response.data);
+	}
+
+  componentWillUnmount() {
+    this._isMounted = false; // eslint-disable-line no-underscore-dangle
+    this.stopPolling();
   }
 
   refreshSession() {
