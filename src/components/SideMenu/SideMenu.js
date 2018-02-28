@@ -25,10 +25,13 @@ export default class SideMenu extends React.Component {
           <Divider />
           <List>
             <Link to="/my-home">
-              <ListItem primaryText="My Home" leftIcon={<IconActionHome />} />
+              <ListItem primaryText="Mijn Huis" leftIcon={<IconActionHome />} />
             </Link>
             <Link to="/my-account">
-              <ListItem primaryText="My Account" leftIcon={<IconSocialPerson />} />
+              <ListItem primaryText="Mijn Account" leftIcon={<IconSocialPerson />} />
+            </Link>
+            <Link to="/my-policies">
+              <ListItem primaryText="Mijn Toestemmingen" leftIcon={<IconSocialPerson />} />
             </Link>
           </List>
         </Paper>

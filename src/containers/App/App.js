@@ -17,6 +17,7 @@ import  SideMenu from '../../components/SideMenu/SideMenu';
 import  Home from '../../containers/Home/Home';
 import  MyAccount from '../../containers/MyAccount/MyAccount';
 import  MyHome from '../../containers/MyHome/MyHome';
+import  MyPolicies from '../../containers/MyPolicies/MyPolicies';
 import  UserInfo from '../../containers/UserInfo/UserInfo';
 
 import { deauthenticate } from '../../actions';
@@ -84,6 +85,15 @@ class App extends Component {
                     },
                   ])(MyHome)}/>
                   <Route path="/my-account" component={WithSimpleDivaAuthorization('pbdf.pbdf.email.email')(MyAccount)}/>
+                  <Route path="/my-policies" component={WithDivaAuthorization([
+                    {
+                      label: 'Address',
+                      attributes: ['pbdf.pbdf.idin.address'],
+                    },{
+                      label: 'City',
+                      attributes: ['pbdf.pbdf.idin.city'],
+                    },
+                  ])(MyPolicies)}/>
                 </Paper>
               </Col>
 
