@@ -86,14 +86,18 @@ class App extends Component {
                   ])(MyHome)}/>
                   <Route path="/my-account" component={WithSimpleDivaAuthorization('pbdf.pbdf.email.email')(MyAccount)}/>
                   <Route path="/my-policies" component={WithDivaAuthorization([
-                    {
-                      label: 'Address',
-                      attributes: ['pbdf.pbdf.idin.address'],
-                    },{
-                      label: 'City',
-                      attributes: ['pbdf.pbdf.idin.city'],
-                    },
-                  ])(MyPolicies)}/>
+                  <Route path="/new-policy" component={SignPolicy({
+                    requiredAttributes: [
+                      {
+                        label: 'Address',
+                        attributes: ['pbdf.pbdf.idin.address'],
+                      },{
+                        label: 'City',
+                        attributes: ['pbdf.pbdf.idin.city'],
+                      },
+                    ],
+                    message: 'I owe you nothing',
+                  })}/>
                 </Paper>
               </Col>
 
