@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Row, Col } from 'react-flexbox-grid';
 import Moment from 'react-moment';
 import 'moment/locale/nl';
 
@@ -15,12 +15,11 @@ class MyPolicies extends Component {
   }
 
   render() {
-    const { addresses, cities, policies } = this.props;
-    console.log(policies);
+    const { policies } = this.props;
 
     const policyContainerStyle = {padding: '10px', backgroundColor: '#b3f0ff', marginBottom: '10px'};
-    const emphasisStyle = { textTransform: 'uppercase', color: 'green' };
-    const emphasisStyle2 = { textTransform: 'uppercase', color: 'red' };
+    // const emphasisStyle = { textTransform: 'uppercase', color: 'green' };
+    // const emphasisStyle2 = { textTransform: 'uppercase', color: 'red' };
 
     return (
       <div style={{ padding: '20px' }} id="my-policies-page">
