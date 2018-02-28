@@ -15,10 +15,19 @@ import WithDivaAuthorization from '../../util/WithDivaAuthorization';
 
 import SideMenu from '../../components/SideMenu/SideMenu';
 
+<<<<<<< HEAD
 import Home from '../../containers/Home/Home';
 import MyAccount from '../../containers/MyAccount/MyAccount';
 import MyHome from '../../containers/MyHome/MyHome';
 import UserInfo from '../../containers/UserInfo/UserInfo';
+=======
+import  Home from '../../containers/Home/Home';
+import  MyAccount from '../../containers/MyAccount/MyAccount';
+import  MyHome from '../../containers/MyHome/MyHome';
+import  MyPolicies from '../../containers/MyPolicies/MyPolicies';
+import  UserInfo from '../../containers/UserInfo/UserInfo';
+import SignPolicyPage from '../SignPolicyPage/SignPolicyPage';
+>>>>>>> 8650ad5... refactor: split SIgnPolicy component from SignPolicyPage
 
 import { deauthenticate } from '../../actions';
 
@@ -85,20 +94,9 @@ class App extends Component {
                       label: 'City',
                       attributes: ['pbdf.pbdf.idin.city'],
                     },
-                  ])(MyHome)}/>
+                  ])(MyPolicies)}/>
                   <Route path="/my-account" component={WithSimpleDivaAuthorization('pbdf.pbdf.email.email')(MyAccount)}/>
-                  <Route path="/new-policy" component={SignPolicy({
-                    requiredAttributes: [
-                      {
-                        label: 'Address',
-                        attributes: ['pbdf.pbdf.idin.address'],
-                      },{
-                        label: 'City',
-                        attributes: ['pbdf.pbdf.idin.city'],
-                      },
-                    ],
-                    message: 'I owe you nothing',
-                  })}/>
+                  <Route path="/new-policy" component={SignPolicyPage}/>
                 </Paper>
               </Col>
 
