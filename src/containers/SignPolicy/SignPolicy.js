@@ -82,11 +82,11 @@ class SignPolicy extends Component {
             self.props.onComplete(result);
             break;
           case 'CANCELLED':
-            // self.props.onFailure(result);
+            self.props.onFailure(result);
             self.stopPolling();
             break;
           case 'NOT_FOUND':
-            // self.props.onFailure(result);
+            self.props.onFailure(result);
             self.stopPolling();
             break;
           default:
@@ -280,6 +280,7 @@ SignPolicy.propTypes = {
   requiredAttributes: PropTypes.array.isRequired,
   message: PropTypes.string.isRequired, // TODO: include entire policy
   onComplete: PropTypes.func.isRequired,
+  onFailure: PropTypes.func.isRequired,
 }
 
 export default SignPolicy;
