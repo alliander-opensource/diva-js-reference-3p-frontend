@@ -87,7 +87,7 @@ class App extends Component {
                       label: 'City',
                       attributes: ['pbdf.pbdf.idin.city'],
                     },
-                  ])(MyPolicies)}/>
+                  ])(MyHome)}/>
                   <Route path="/my-account" component={WithSimpleDivaAuthorization('pbdf.pbdf.email.email')(MyAccount)}/>
                   <Route path="/my-policies" component={WithDivaAuthorization([
                     {
@@ -97,7 +97,7 @@ class App extends Component {
                       label: 'City',
                       attributes: ['pbdf.pbdf.idin.city'],
                     },
-                  ])(MyHome)}/>
+                  ])(MyPolicies)}/>
                   <Route path="/new-policy" component={SignPolicyPage}/>
                 </Paper>
               </Col>
