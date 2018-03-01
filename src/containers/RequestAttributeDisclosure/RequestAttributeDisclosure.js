@@ -159,7 +159,7 @@ class RequestAttributeDisclosure extends Component {
                     <Row center="xs">
                       <Col xs>
                         <QRCode value={JSON.stringify(qrContent)} size={256}/><br/>
-                        <span style={{display: 'none'}} id="qr-content">JSON.stringify(qrContent</span>
+                        <span style={{display: 'none'}} id="qr-content">{JSON.stringify(qrContent)}</span>
                         <br/>
                       </Col>
                     </Row>
