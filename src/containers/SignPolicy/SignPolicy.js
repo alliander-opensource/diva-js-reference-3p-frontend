@@ -109,6 +109,7 @@ class SignPolicy extends Component {
   }
 
   render() {
+    console.log(this.state);
     const { requiredAttributes, message } = this.props;
     const {
       qrContent,
