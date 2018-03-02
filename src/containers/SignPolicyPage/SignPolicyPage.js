@@ -125,6 +125,13 @@ class SignPolicyPage extends Component {
       />
     ) : "Toestemmingverzoek wordt aangemaakt..."
   }
+
+  componentDidUpdate() {
+    if (this.state.signPolicyCompleted) {
+      this.props.history.push('/my-policies');
+    }
+  }
+
 }
 
 export default withRouter(SignPolicyPage);
