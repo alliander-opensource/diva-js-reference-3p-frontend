@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-flexbox-grid';
@@ -28,7 +29,7 @@ class MyPolicies extends Component {
             <h2>Mijn Toestemmingen</h2>
           </Col>
           <Col xs={4} style={{ textAlign: 'right' }}>
-            <RaisedButton label="Toevoegen" primary={true} style={{}}/>
+            <RaisedButton onClick={() => this.props.history.push('/new-policy?spId=hhb')} label="Toevoegen" primary={true} style={{}}/>
           </Col>
         </Row>
 
@@ -37,9 +38,9 @@ class MyPolicies extends Component {
           {
             policies.policies.map(policy =>
               <div key={ policy.id } style={policyContainerStyle}>
-                <Row>
+              {/*}<Row> // TODO: format this better?
                   <Col xs={12}> { policy.id } </Col>
-                </Row>
+              </Row>{*/}
                 <Row>
                   <Col xs={1} sm={2} md={2} lg={2}> { policy.service_provider } </Col>
                   <Col xs={11} sm={10} md={10} lg={10}> { policy.message }</Col>
@@ -103,4 +104,4 @@ const mapDispatchToProps = {
   deletePolicy,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyPolicies);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MyPolicies));
