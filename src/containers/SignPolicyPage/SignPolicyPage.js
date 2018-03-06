@@ -84,12 +84,13 @@ class SignPolicyPage extends Component {
 
   fetchMessage = () => {
     const actorId = this.getServiceProvider();
+
     const policy = {
       actorId,
-      action: "lezen",
-      actee: "mijn inkomensgegevens",
+      action: "verwerken en onderling delen",
+      actee: "mijn (persoonlijke) gegevens",
       conditions: [],
-      goal: "om mijn financien te regelen."
+      goal: "het Huishoudboekje mijn Inkomsten en Vaste Lasten voor mij kan beheren"
     };
     const options = {
       headers: {

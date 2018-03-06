@@ -144,8 +144,8 @@ class SignPolicy extends Component {
                   <div style={{ padding: '20px' }}>
                     <Row center="xs">
                       <Col xs={6}>
-                        Toestemming: {message}
-                        <br />
+                        Toestemming:<br/>{message}
+                        <br /><br />
                         Ondertekenen met: <br />
                         <b>{requiredAttributes.map(el => el.label).join(', ')}</b><br />
                         <br/>
