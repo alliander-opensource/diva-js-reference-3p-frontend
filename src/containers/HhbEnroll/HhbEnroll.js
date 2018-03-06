@@ -16,16 +16,16 @@ function sendDataToHhb(policy, formData) {
   const body = {
     Mail: formData.mail,
     Toestemming: policy,
-    BSN: "FAKE017496111",
-    Geboortedatum: "24-7-1978",
-    Telefoon: "0601234567",
-    Voorletters: "C",
-    "Tussenvoegsel Achternaam": "Groen",
-    Geslacht: "Vrouw",
-    Postcode: "3511gd",
-    Straat: "Gedeelde grond",
-    Huisnummer: "5",
-    Plaats: "Utrecht",
+    BSN: formData.bsn,
+    Geboortedatum: formData.birthdate,
+    Telefoon: formData.telefoon,
+    Voorletters: formData.initials,
+    "Tussenvoegsel Achternaam": formData.surname,
+    Geslacht: formData.gender,
+    Postcode: formData.postcode,
+    Straat: formData.street,
+    Huisnummer: formData.housenumber,
+    Plaats: formData.city,
   };
   const options = {
     headers: {
@@ -45,6 +45,15 @@ class HhbEnroll extends Component {
       error: false,
       formData: {
         mail: '',
+        initials: '',
+        surname: '',
+        postcode: '',
+        city: '',
+        telefoon: '',
+        street: '',
+        housenumber: '',
+        bsn: '',
+        birthdate: '1978-07-24',
       },
     };
   }
