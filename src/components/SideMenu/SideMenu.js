@@ -5,6 +5,7 @@ import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import IconActionHome from 'material-ui/svg-icons/action/home';
 import IconSocialPerson from 'material-ui/svg-icons/social/person';
+import IconCheckBox from 'material-ui/svg-icons/toggle/check-box';
 
 export default class SideMenu extends React.Component {
 
@@ -31,7 +32,7 @@ export default class SideMenu extends React.Component {
               <ListItem primaryText="Mijn Account" leftIcon={<IconSocialPerson />} />
             </Link>
             <Link to="/my-policies">
-              <ListItem primaryText="Mijn Toestemmingen" leftIcon={<IconSocialPerson />} />
+              <ListItem primaryText="Mijn Toestemmingen" leftIcon={<IconCheckBox />} />
             </Link>
           </List>
         </Paper>

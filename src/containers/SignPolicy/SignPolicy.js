@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 import { Row, Col } from 'react-flexbox-grid';
@@ -15,13 +13,11 @@ import IconAlertError from 'material-ui/svg-icons/alert/error';
 import IconButton from 'material-ui/IconButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 
-import { fetchSession } from '../../actions';
-
-class RequestAttributeDisclosure extends Component {
+class SignPolicy extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      disclosureStatus: 'PENDING',
+      signatureStatus: 'PENDING',
       serverStatus: 'INITIALIZED',
       sessionStarted: false,
     };
@@ -35,15 +31,16 @@ class RequestAttributeDisclosure extends Component {
   }
 
   fetchQR = () => {
-    const { requiredAttributes } = this.props;
+    const { requiredAttributes, message } = this.props;
     this.setState({
-      disclosureStatus: 'PENDING',
+      signatureStatus: 'PENDING',
       serverStatus: 'INITIALIZED',
       sessionStarted: true,
     });
     axios
       .post('/api/start-irma-session', {
-        content: requiredAttributes
+        content: requiredAttributes,
+        message,
       }, {
         withCredentials: true,
         headers: {
@@ -76,20 +73,20 @@ class RequestAttributeDisclosure extends Component {
 
   poll(irmaSessionId, self) {
     self
-      .getDisclosureStatus(irmaSessionId)
+      .getSignatureStatus(irmaSessionId)
       .then(result => {
-        console.log(result);
         self.setState({
-          disclosureStatus: result.disclosureStatus,
+          signatureStatus: result.signatureStatus,
           serverStatus: result.serverStatus,
           proofStatus: result.proofStatus,
         });
-        switch (result.disclosureStatus) {
+        switch (result.signatureStatus) {
           case 'COMPLETED':
-            setTimeout(() => { self.refreshSession() }, 2000);
             self.stopPolling();
+            self.props.onComplete(result);
             break;
           case 'ABORTED':
+            self.props.onFailure(result);
             self.stopPolling();
             break;
           default:
@@ -98,9 +95,9 @@ class RequestAttributeDisclosure extends Component {
       });
   }
 
-  getDisclosureStatus(irmaSessionId) {
+  getSignatureStatus(irmaSessionId) {
     return  axios
-      .get(`/api/disclosure-status?irmaSessionId=${irmaSessionId}`, {
+      .get(`/api/signature-status?irmaSessionId=${irmaSessionId}`, {
         withCredentials: true,
       })
       .then(response => response.data);
@@ -111,15 +108,12 @@ class RequestAttributeDisclosure extends Component {
     this.stopPolling();
   }
 
-  refreshSession() {
-    this.props.dispatch(fetchSession());
-  }
-
   render() {
-    const { requiredAttributes } = this.props;
+    console.log(this.state);
+    const { requiredAttributes, message } = this.props;
     const {
       qrContent,
-      disclosureStatus,
+      signatureStatus,
       proofStatus,
       serverStatus
     } = this.state;
@@ -129,12 +123,12 @@ class RequestAttributeDisclosure extends Component {
         {qrContent ? (
           <div>
 
-            {(disclosureStatus === 'PENDING') && (
+            {(signatureStatus === 'PENDING') && (
               <div>
 
                 <Toolbar style={{ backgroundColor: 'none' }}>
                   <ToolbarGroup>
-                    <ToolbarTitle text='Attribute Required' />
+                    <ToolbarTitle text='Toestemming instellen' />
                   </ToolbarGroup>
                   <ToolbarGroup lastChild={true}>
                     <IconButton tooltip="Help">
@@ -150,8 +144,9 @@ class RequestAttributeDisclosure extends Component {
                   <div style={{ padding: '20px' }}>
                     <Row center="xs">
                       <Col xs={6}>
-                        In order to view this page, the following attributes are required:<br/>
+                        Toestemming: {message}
                         <br />
+                        Ondertekenen met: <br />
                         <b>{requiredAttributes.map(el => el.label).join(', ')}</b><br />
                         <br/>
                       </Col>
@@ -165,7 +160,7 @@ class RequestAttributeDisclosure extends Component {
                     </Row>
                     <Row center="xs">
                       <Col xs={6}>
-                        Please scan the QR code with your IRMA app to continue.
+                        Scan de QR-code met de IRMA app om de toestemming te ondertekenen.
                         <br/>
                       </Col>
                     </Row>
@@ -176,7 +171,7 @@ class RequestAttributeDisclosure extends Component {
                   <div style={{ padding: '20px' }} id='qr-scanned'>
                     <Row center="xs">
                       <Col xs={6}>
-                        To continue, approve attribute disclosure with your IRMA app.<br/>
+                        Om verder te gaan, onderteken het bericht in IRMA-app.<br/>
                         <br/>
                       </Col>
                     </Row>
@@ -186,10 +181,10 @@ class RequestAttributeDisclosure extends Component {
               </div>
             )}
 
-            {(disclosureStatus === 'COMPLETED') && (
+            {(signatureStatus === 'COMPLETED') && (
               <div>
                 {(proofStatus === 'VALID') ? (
-                  <div id='disclosure-proof-completed'>
+                  <div id='signature-proof-completed'>
                     <Row center="xs">
                       <Col xs>
                         <IconActionCheckCircle style={{ width: '100px', height: '100px', color: 'limegreen'}}/>
@@ -197,12 +192,12 @@ class RequestAttributeDisclosure extends Component {
                     </Row>
                     <Row center="xs">
                       <Col xs={6}>
-                        Attribute disclosure successful!
+                        Toestemming succesvol ingesteld!
                       </Col>
                     </Row>
                   </div>
                 ) : (
-                  <div id="disclosure-error">
+                  <div id="signature-error">
                     <Row center="xs">
                       <Col xs>
                         <IconAlertError style={{ width: '100px', height: '100px', color: 'orangered'}}/>
@@ -210,7 +205,7 @@ class RequestAttributeDisclosure extends Component {
                     </Row>
                     <Row center="xs">
                       <Col xs={6}>
-                        Oops, something went wrong!<br/>
+                        Er is iets misgegaan!<br/>
                         <br/>
                         <RaisedButton label="Retry"
                           primary={true} style={{}}
@@ -221,11 +216,11 @@ class RequestAttributeDisclosure extends Component {
                 )}
               </div>
             )}
-            {(disclosureStatus === 'ABORTED') && (
+            {(signatureStatus === 'ABORTED') && (
               <div>
               <Toolbar style={{ backgroundColor: 'none' }}>
                 <ToolbarGroup>
-                  <ToolbarTitle text="Disclosure cancelled" />
+                  <ToolbarTitle text="Toestemming instellen geannuleerd" />
                 </ToolbarGroup>
                 <ToolbarGroup lastChild={true}>
                   <IconButton tooltip="Help">
@@ -238,10 +233,10 @@ class RequestAttributeDisclosure extends Component {
               </Toolbar>
 
                 {(serverStatus === 'CANCELLED') && (
-                  <div style={{ padding: '20px' }} id="disclosure-cancelled">
+                  <div style={{ padding: '20px' }} id="signature-cancelled">
                     <Row center="xs">
                       <Col xs={6}>
-                        You cancelled attribute disclosure.<br/>
+                        Je hebt het toestemming instellen geannuleerd.<br/>
                         <br/>
                         <RaisedButton label="Retry"
                           primary={true} style={{}}
@@ -256,7 +251,7 @@ class RequestAttributeDisclosure extends Component {
                   <div style={{ padding: '20px' }} id="qr-expired">
                     <Row center="xs">
                       <Col xs={6}>
-                        The QR code expired.<br/>
+                        De QR code is verlopen.<br/>
                         <br/>
                         <RaisedButton label="Retry"
                           primary={true} style={{}}
@@ -283,9 +278,11 @@ class RequestAttributeDisclosure extends Component {
   }
 }
 
-RequestAttributeDisclosure.propTypes = {
+SignPolicy.propTypes = {
   requiredAttributes: PropTypes.array.isRequired,
-  history: PropTypes.object.isRequired,
+  message: PropTypes.string.isRequired, // TODO: include entire policy
+  onComplete: PropTypes.func.isRequired,
+  onFailure: PropTypes.func.isRequired,
 }
 
-export default withRouter(connect()(RequestAttributeDisclosure));
+export default SignPolicy;
