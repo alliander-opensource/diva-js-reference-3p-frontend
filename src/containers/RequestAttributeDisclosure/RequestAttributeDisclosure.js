@@ -150,7 +150,7 @@ class RequestAttributeDisclosure extends Component {
                   <div style={{ padding: '20px' }}>
                     <Row center="xs">
                       <Col xs={6}>
-                        In order to view this page, the following attributes are required:<br/>
+                        Om uw toestemmingen te bekijken moet u de volgende attributen tonen:<br/>
                         <br />
                         <b>{requiredAttributes.map(el => el.label).join(', ')}</b><br />
                         <br/>
@@ -165,7 +165,7 @@ class RequestAttributeDisclosure extends Component {
                     </Row>
                     <Row center="xs">
                       <Col xs={6}>
-                        Please scan the QR code with your IRMA app to continue.
+                        Scan de QR-code met de IRMA app om door te gaan.
                         <br/>
                       </Col>
                     </Row>
@@ -176,7 +176,7 @@ class RequestAttributeDisclosure extends Component {
                   <div style={{ padding: '20px' }} id='qr-scanned'>
                     <Row center="xs">
                       <Col xs={6}>
-                        To continue, approve attribute disclosure with your IRMA app.<br/>
+                        Om verder te gaan, ga akkoord met het verzoek in de IRMA-app.<br/>
                         <br/>
                       </Col>
                     </Row>
@@ -197,7 +197,7 @@ class RequestAttributeDisclosure extends Component {
                     </Row>
                     <Row center="xs">
                       <Col xs={6}>
-                        Attribute disclosure successful!
+                        Attributen succesvol getoond!
                       </Col>
                     </Row>
                   </div>
@@ -210,7 +210,7 @@ class RequestAttributeDisclosure extends Component {
                     </Row>
                     <Row center="xs">
                       <Col xs={6}>
-                        Oops, something went wrong!<br/>
+                        Er is iets misgegaan!<br/>
                         <br/>
                         <RaisedButton label="Retry"
                           primary={true} style={{}}
@@ -225,7 +225,7 @@ class RequestAttributeDisclosure extends Component {
               <div>
               <Toolbar style={{ backgroundColor: 'none' }}>
                 <ToolbarGroup>
-                  <ToolbarTitle text="Disclosure cancelled" />
+                  <ToolbarTitle text="Attributen tonen geannuleerd" />
                 </ToolbarGroup>
                 <ToolbarGroup lastChild={true}>
                   <IconButton tooltip="Help">
@@ -241,7 +241,7 @@ class RequestAttributeDisclosure extends Component {
                   <div style={{ padding: '20px' }} id="disclosure-cancelled">
                     <Row center="xs">
                       <Col xs={6}>
-                        You cancelled attribute disclosure.<br/>
+                        Je hebt het tonen van attributen geannuleerd.<br/>
                         <br/>
                         <RaisedButton label="Retry"
                           primary={true} style={{}}
@@ -256,7 +256,7 @@ class RequestAttributeDisclosure extends Component {
                   <div style={{ padding: '20px' }} id="qr-expired">
                     <Row center="xs">
                       <Col xs={6}>
-                        The QR code expired.<br/>
+                        De QR code is verlopen.<br/>
                         <br/>
                         <RaisedButton label="Retry"
                           primary={true} style={{}}

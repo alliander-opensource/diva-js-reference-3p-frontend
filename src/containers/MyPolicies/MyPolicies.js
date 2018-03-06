@@ -86,15 +86,17 @@ class MyPolicies extends Component {
 }
 
 MyPolicies.propTypes = {
-  addresses: PropTypes.array.isRequired,
-  cities: PropTypes.array.isRequired,
+  initials: PropTypes.array.isRequired,
+  familyname: PropTypes.array.isRequired,
+  bsn: PropTypes.array.isRequired,
 }
 
 function mapStateToProps(state) {
   const { user, policies } = state
   return {
-    addresses: user.attributes['irma-demo.idin.idin.address'],
-    cities: user.attributes['irma-demo.idin.idin.city'],
+    initials: user.attributes['irma-demo.idin.idin.initials'],
+    familyname: user.attributes['irma-demo.idin.idin.familyname'],
+    bsn: user.attributes['irma-demo.MijnOverheid.root.BSN'],
     policies: policies,
   }
 }

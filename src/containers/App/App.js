@@ -88,11 +88,14 @@ class App extends Component {
                   <Route path="/my-account" component={WithSimpleDivaAuthorization('irma-demo.email.email')(MyAccount)}/>
                   <Route path="/my-policies" component={WithDivaAuthorization([
                     {
-                      label: 'Address',
-                      attributes: ['irma-demo.idin.idin.address'],
+                      label: 'Voorletters',
+                      attributes: ['irma-demo.idin.idin.initials'],
                     },{
-                      label: 'City',
-                      attributes: ['irma-demo.idin.idin.city'],
+                      label: 'Achternaam',
+                      attributes: ['irma-demo.idin.idin.familyname'],
+                    },{
+                      label: 'BSN',
+                      attributes: ['irma-demo.MijnOverheid.root.BSN'],
                     },
                   ])(MyPolicies)}/>
                   <Route path="/new-policy" component={SignPolicyPage}/>

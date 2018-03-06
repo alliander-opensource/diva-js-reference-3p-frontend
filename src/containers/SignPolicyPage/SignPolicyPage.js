@@ -35,12 +35,15 @@ class SignPolicyPage extends Component {
       signPolicyCompleted: false,
       signPolicyFailed: false,
       attributesForSigning: [{
-        label: 'Address',
-        attributes: ['irma-demo.idin.idin.address'],
-      },{
-        label: 'City',
-        attributes: ['irma-demo.idin.idin.city'],
-      }],
+          label: 'Voorletters',
+          attributes: ['irma-demo.idin.idin.initials'],
+        },{
+          label: 'Achternaam',
+          attributes: ['irma-demo.idin.idin.familyname'],
+        },{
+          label: 'BSN',
+          attributes: ['irma-demo.MijnOverheid.root.BSN'],
+        }],
     };
   }
 

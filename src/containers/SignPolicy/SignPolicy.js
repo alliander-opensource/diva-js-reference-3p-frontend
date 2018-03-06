@@ -171,7 +171,7 @@ class SignPolicy extends Component {
                   <div style={{ padding: '20px' }} id='qr-scanned'>
                     <Row center="xs">
                       <Col xs={6}>
-                        Om verder te gaan, onderteken het bericht in IRMA-app.<br/>
+                        Om verder te gaan, onderteken het bericht in de IRMA-app.<br/>
                         <br/>
                       </Col>
                     </Row>
