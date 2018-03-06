@@ -18,8 +18,8 @@ import  Home from '../../containers/Home/Home';
 import  MyAccount from '../../containers/MyAccount/MyAccount';
 import  MyHome from '../../containers/MyHome/MyHome';
 import  MyPolicies from '../../containers/MyPolicies/MyPolicies';
-import  UserInfo from '../../containers/UserInfo/UserInfo';
 import SignPolicyPage from '../SignPolicyPage/SignPolicyPage';
+import HhbEnroll from '../HhbEnroll/HhbEnroll';
 
 import { deauthenticate } from '../../actions';
 
@@ -64,7 +64,7 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <AppBar
-            title="DIVA 3rd party reference implementation"
+            title="Huishoudboekje incheckapp"
             iconElementRight={<RightMenu/>}
           />
           <Grid fluid>
@@ -96,12 +96,13 @@ class App extends Component {
                     },
                   ])(MyPolicies)}/>
                   <Route path="/new-policy" component={SignPolicyPage}/>
+                  <Route path="/hhb-enroll" component={HhbEnroll}/>
                 </Paper>
               </Col>
 
-              <Col xs={12} sm={3}>
+             {/*<Col xs={12} sm={3}>
                 <UserInfo/>
-              </Col>
+              </Col>*/}
             </Row>
           </Grid>
         </div>

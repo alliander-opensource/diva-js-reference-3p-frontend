@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 import axios from 'axios';
@@ -54,13 +55,18 @@ class SignPolicyPage extends Component {
     console.log('Succes: ', result);
     addPolicy(this.state.policy, { ...result }, this.getServiceProvider())
       .then(data => {
-        this.setState({
-          signPolicyCompleted: true,
-        });
+          this.setState({
+            signPolicyCompleted: true,
+          });
+
+          // Use success handler if provided
+          if (this.props.onAdd !== undefined) {
+            this.props.onAdd(result.jwt);
+          }
       })
       .catch(() => {
         this.setState({
-          signPolicyFailed: true,
+          signPolicyFailed: true, // TODO: add formData
         });
       });
   };
@@ -70,6 +76,9 @@ class SignPolicyPage extends Component {
   };
 
   getServiceProvider = () => {
+    if (this.props.spId) {
+      return this.props.spId;
+    }
     return queryString.parse(this.props.location.search)['spId'];
   }
 
@@ -127,11 +136,18 @@ class SignPolicyPage extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.signPolicyCompleted) {
-      this.props.history.push('/my-policies');
-    }
+    // if (this.state.signPolicyCompleted) {
+    //   this.props.history.push('/my-policies');
+    // }
   }
 
+}
+
+SignPolicyPage.propTypes = {
+  formData: PropTypes.object,
+  spId: PropTypes.string,
+  onAdd: PropTypes.func,
+  onError: PropTypes.func,
 }
 
 export default withRouter(SignPolicyPage);
