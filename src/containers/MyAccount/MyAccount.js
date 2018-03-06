@@ -25,7 +25,7 @@ MyAccount.propTypes = {
 function mapStateToProps(state) {
   const { user } = state
   return {
-    emails: user.attributes['pbdf.pbdf.email.email'],
+    emails: user.attributes['irma-demo.idin.email.email'],
   }
 }
 

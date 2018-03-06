@@ -35,10 +35,10 @@ class SignPolicyPage extends Component {
       signPolicyFailed: false,
       attributesForSigning: [{
         label: 'Address',
-        attributes: ['pbdf.pbdf.idin.address'],
+        attributes: ['irma-demo.idin.idin.address'],
       },{
         label: 'City',
-        attributes: ['pbdf.pbdf.idin.city'],
+        attributes: ['irma-demo.idin.idin.city'],
       }],
     };
   }

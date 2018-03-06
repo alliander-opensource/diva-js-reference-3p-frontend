@@ -79,20 +79,20 @@ class App extends Component {
                   <Route path="/my-home" component={WithDivaAuthorization([
                     {
                       label: 'Address',
-                      attributes: ['pbdf.pbdf.idin.address'],
+                      attributes: ['irma-demo.idin.idin.address'],
                     },{
                       label: 'City',
-                      attributes: ['pbdf.pbdf.idin.city'],
+                      attributes: ['irma-demo.idin.idin.city'],
                     },
                   ])(MyHome)}/>
-                  <Route path="/my-account" component={WithSimpleDivaAuthorization('pbdf.pbdf.email.email')(MyAccount)}/>
+                  <Route path="/my-account" component={WithSimpleDivaAuthorization('irma-demo.email.email')(MyAccount)}/>
                   <Route path="/my-policies" component={WithDivaAuthorization([
                     {
                       label: 'Address',
-                      attributes: ['pbdf.pbdf.idin.address'],
+                      attributes: ['irma-demo.idin.idin.address'],
                     },{
                       label: 'City',
-                      attributes: ['pbdf.pbdf.idin.city'],
+                      attributes: ['irma-demo.idin.idin.city'],
                     },
                   ])(MyPolicies)}/>
                   <Route path="/new-policy" component={SignPolicyPage}/>
