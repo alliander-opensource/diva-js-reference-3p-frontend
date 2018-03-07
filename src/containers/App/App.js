@@ -28,9 +28,15 @@ import './App.css';
 const styles = {
   main: {
     minHeight: 200,
-    margin: 20,
+    margin: '40px',
+    padding: '20px',
+    backgroundColor: 'white',
   },
 };
+
+const headerStyle = {
+  backgroundImage: "url( http://incheck.huishoudboekje030.nl/wp-content/uploads/2018/02/cropped-cropped-header-MV-1024x157.png )"
+}
 
 class App extends Component {
   handleDeauth() {
@@ -63,17 +69,19 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <AppBar
-            title="Huishoudboekje incheckapp"
-            iconElementRight={<RightMenu/>}
-          />
-          <Grid fluid>
+          <Grid fluid style={{ padding: 0 }}>
             <Row>
-              <Col xs={12} sm={3}>
-                <SideMenu/>
+              <Col xs style={{ textAlign: 'center', margin: '20px'}}>
+                <img src="/gemeente-utrecht-logo.jpg" style={{ width: '240px' }}/>
               </Col>
-
-              <Col xs>
+            </Row>
+            <Row>
+              <Col xs style={{ backgroundColor: "black", color: 'white', padding: '5px', paddingLeft: '50px'}}>
+                <h2>Incheck App huishoudboekje</h2>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs style={{ backgroundColor: '#f1f1f1' }}>
                 <Paper style={styles.main} id="main-content">
                   <Route exact path="/" component={HhbEnroll}/>
                   <Route path="/my-home" component={WithDivaAuthorization([
