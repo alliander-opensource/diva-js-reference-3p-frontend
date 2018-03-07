@@ -20,7 +20,7 @@ export default class SideMenu extends React.Component {
         <Paper style={style} id="navigation-menu">
           <List>
             <Link to="/">
-              <ListItem primaryText="Navigation menu"/>
+              <ListItem primaryText="Menu"/>
             </Link>
           </List>
           <Divider />

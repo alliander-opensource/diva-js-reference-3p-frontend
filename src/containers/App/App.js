@@ -14,7 +14,7 @@ import WithDivaAuthorization from '../../util/WithDivaAuthorization';
 
 import  SideMenu from '../../components/SideMenu/SideMenu';
 
-import  Home from '../../containers/Home/Home';
+// import  Home from '../../containers/Home/Home';
 import  MyAccount from '../../containers/MyAccount/MyAccount';
 import  MyHome from '../../containers/MyHome/MyHome';
 import  MyPolicies from '../../containers/MyPolicies/MyPolicies';
@@ -75,7 +75,7 @@ class App extends Component {
 
               <Col xs>
                 <Paper style={styles.main} id="main-content">
-                  <Route exact path="/" component={Home}/>
+                  <Route exact path="/" component={HhbEnroll}/>
                   <Route path="/my-home" component={WithDivaAuthorization([
                     {
                       label: 'Address',

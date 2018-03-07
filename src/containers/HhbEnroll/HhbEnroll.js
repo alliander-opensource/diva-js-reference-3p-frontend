@@ -186,7 +186,7 @@ class HhbEnroll extends Component {
         />
         <RaisedButton
           label="Volgende"
-          disabled={stepIndex > 3}
+          disabled={stepIndex > 2}
           primary={true}
           onClick={this.handleNext}
         />
