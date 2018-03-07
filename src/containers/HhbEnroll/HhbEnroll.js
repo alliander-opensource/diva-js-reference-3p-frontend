@@ -54,6 +54,7 @@ class HhbEnroll extends Component {
         housenumber: '5',
         bsn: '900008179',
         birthdate: '1978-07-24',
+        gender: 'Vrouw',
       },
     };
   }
