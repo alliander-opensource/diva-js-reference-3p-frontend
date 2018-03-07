@@ -93,7 +93,7 @@ class SignPolicyPage extends Component {
       action: "verwerken en onderling delen",
       actee: "mijn (persoonlijke) gegevens",
       conditions: [],
-      goal: "het Huishoudboekje mijn Inkomsten en Vaste Lasten voor mij kan beheren"
+      goal: "het Huishoudboekje mijn Inkomsten en Vaste Lasten voor mij kan beheren volgens de Huishoudboekje overeenkomst"
     };
     const options = {
       headers: {

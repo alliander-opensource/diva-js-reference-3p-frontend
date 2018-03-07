@@ -11,6 +11,7 @@ class HhbForm extends Component {
         <TextField
           id="mail"
           hintText="E-mail"
+          floatingLabelText="E-mail"
           errorText={(error && formData.mail === '') ? errorText : ''}
           onChange={onChange}
           fullWidth
@@ -19,6 +20,7 @@ class HhbForm extends Component {
         <TextField
           id="initials"
           hintText="Voorletters"
+          floatingLabelText="Voorletters"
           errorText={(error && formData.initials === '') ? errorText : ''}
           onChange={onChange}
           fullWidth
@@ -27,6 +29,7 @@ class HhbForm extends Component {
         <TextField
           id="surname"
           hintText="Initialen en Achternaam"
+          floatingLabelText="Initialen en Achternaam"
           errorText={(error && formData.surname === '') ? errorText : ''}
           onChange={onChange}
           fullWidth
@@ -35,6 +38,7 @@ class HhbForm extends Component {
         <TextField
           id="gender"
           hintText="Geslacht"
+          floatingLabelText="Geslacht"
           errorText={(error && formData.gender === '') ? errorText : ''}
           onChange={onChange}
           fullWidth
@@ -44,6 +48,7 @@ class HhbForm extends Component {
           id="birthdate"
           type="date"
           hintText="Geboortedatum"
+          floatingLabelText="Geboortedatum"
           errorText={(error && formData.birthdate === '') ? errorText : ''}
           onChange={onChange}
           fullWidth
@@ -52,6 +57,7 @@ class HhbForm extends Component {
         <TextField
           id="postcode"
           hintText="Postcode"
+          floatingLabelText="Postcode"
           errorText={(error && formData.postcode === '') ? errorText : ''}
           onChange={onChange}
           fullWidth
@@ -60,6 +66,7 @@ class HhbForm extends Component {
         <TextField
           id="city"
           hintText="Plaats"
+          floatingLabelText="Plaats"
           errorText={(error && formData.city === '') ? errorText : ''}
           onChange={onChange}
           fullWidth
@@ -68,6 +75,7 @@ class HhbForm extends Component {
         <TextField
           id="street"
           hintText="Straat"
+          floatingLabelText="Straat"
           errorText={(error && formData.street === '') ? errorText : ''}
           onChange={onChange}
           fullWidth
@@ -76,6 +84,7 @@ class HhbForm extends Component {
         <TextField
           id="housenumber"
           hintText="Huisnummer"
+          floatingLabelText="Huisnummer"
           errorText={(error && formData.housenumber === '') ? errorText : ''}
           onChange={onChange}
           fullWidth
@@ -84,6 +93,7 @@ class HhbForm extends Component {
         <TextField
           id="telefoon"
           hintText="Telefoonnummer"
+          floatingLabelText="Telefoonnummer"
           errorText={(error && formData.telefoon === '') ? errorText : ''}
           onChange={onChange}
           fullWidth
@@ -92,6 +102,7 @@ class HhbForm extends Component {
         <TextField
           id="bsn"
           hintText="Burgersericenummer (BSN)"
+          floatingLabelText="Burgersericenummer (BSN)"
           errorText={(error && formData.bsn === '') ? errorText : ''}
           onChange={onChange}
           fullWidth
