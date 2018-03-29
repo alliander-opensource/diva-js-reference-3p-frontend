@@ -16,7 +16,7 @@ def buildClosure = {
 }
 
 def buildParameterMap = [:]
-buildParameterMap['appName'] = 'diva-fieldlab-frontend'
+buildParameterMap['appName'] = 'diva-js-reference-3p-frontend'
 buildParameterMap['buildClosure'] = buildClosure
 buildParameterMap['namespaces'] = ['nebm-dev']
 buildParameterMap['namespacesWithApproval'] = []
