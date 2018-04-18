@@ -6,33 +6,31 @@ import Divider from 'material-ui/Divider';
 import IconActionHome from 'material-ui/svg-icons/action/home';
 import IconSocialPerson from 'material-ui/svg-icons/social/person';
 
-export default class SideMenu extends React.Component {
+const SideMenu = () => {
+  const style = {
+    height: '100%',
+    margin: 20,
+  };
+  return (
+    <div>
+      <Paper style={style} id="navigation-menu">
+        <List>
+          <Link to="/">
+            <ListItem primaryText="Navigation menu"/>
+          </Link>
+        </List>
+        <Divider />
+        <List>
+          <Link to="/my-home">
+            <ListItem primaryText="My Home" leftIcon={<IconActionHome />} />
+          </Link>
+          <Link to="/my-account">
+            <ListItem primaryText="My Account" leftIcon={<IconSocialPerson />} />
+          </Link>
+        </List>
+      </Paper>
+    </div>
+  );
+};
 
-  render() {
-    const style = {
-      height: '100%',
-      margin: 20,
-    };
-
-    return (
-      <div>
-        <Paper style={style} id="navigation-menu">
-          <List>
-            <Link to="/">
-              <ListItem primaryText="Navigation menu"/>
-            </Link>
-          </List>
-          <Divider />
-          <List>
-            <Link to="/my-home">
-              <ListItem primaryText="My Home" leftIcon={<IconActionHome />} />
-            </Link>
-            <Link to="/my-account">
-              <ListItem primaryText="My Account" leftIcon={<IconSocialPerson />} />
-            </Link>
-          </List>
-        </Paper>
-      </div>
-    );
-  }
-}
+export { SideMenu as default };
