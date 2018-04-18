@@ -33,11 +33,10 @@ export function fetchSession() {
 }
 
 export function deauthenticate() {
-  return dispatch => {
-    return axios
+  return dispatch =>
+    axios
       .get('/api/deauthenticate', {
         withCredentials: true,
       })
       .then(() => dispatch(fetchSession()));
-  }
 }
