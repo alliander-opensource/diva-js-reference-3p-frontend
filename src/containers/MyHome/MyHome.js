@@ -12,8 +12,8 @@ class MyHome extends Component {
         <h2>My Home</h2>
 
         <br/><br/>
-        Address: { (addresses && addresses.length > 0) ? addresses[0] : "Unknown address."}<br />
-        City: { (cities && cities.length > 0) ? cities[0] : "Unknown city."}<br />
+        Address: { (addresses && addresses.length > 0) ? addresses[0] : 'Unknown address.'}<br />
+        City: { (cities && cities.length > 0) ? cities[0] : 'Unknown city.'}<br />
         <br/>
         <Row center="xs">
           <Col xs>
