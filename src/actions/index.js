@@ -20,7 +20,7 @@ function receiveSession(json) {
 }
 
 export function fetchSession() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(requestSession());
     return axios
       .get('/api/get-session', {

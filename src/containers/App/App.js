@@ -37,7 +37,7 @@ class App extends Component {
   }
 
   render() {
-    const RightMenu = (props) => (
+    const RightMenu = props => (
       <IconMenu id="user-menu"
         {...props}
         iconButtonElement={
