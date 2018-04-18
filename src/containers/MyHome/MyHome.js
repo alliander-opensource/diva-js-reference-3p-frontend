@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
 
 class MyHome extends Component {
@@ -29,14 +29,14 @@ class MyHome extends Component {
 MyHome.propTypes = {
   addresses: PropTypes.array.isRequired,
   cities: PropTypes.array.isRequired,
-}
+};
 
 function mapStateToProps(state) {
-  const { user } = state
+  const { user } = state;
   return {
     addresses: user.attributes['pbdf.pbdf.idin.address'],
     cities: user.attributes['pbdf.pbdf.idin.city'],
-  }
+  };
 }
 
 export default connect(mapStateToProps)(MyHome);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class MyAccount extends Component {
   render() {
@@ -20,13 +20,13 @@ class MyAccount extends Component {
 
 MyAccount.propTypes = {
   emails: PropTypes.array.isRequired,
-}
+};
 
 function mapStateToProps(state) {
-  const { user } = state
+  const { user } = state;
   return {
     emails: user.attributes['pbdf.pbdf.email.email'],
-  }
+  };
 }
 
 export default connect(mapStateToProps)(MyAccount);

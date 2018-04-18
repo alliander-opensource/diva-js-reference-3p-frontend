@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Paper from 'material-ui/Paper';
-import {List, ListItem} from 'material-ui/List';
+import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import IconActionLabel from 'material-ui/svg-icons/action/label';
 import IconSocialPerson from 'material-ui/svg-icons/social/person';
@@ -91,14 +91,14 @@ UserInfo.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const { user } = state
+  const { user } = state;
 
   return {
     sessionId: user.sessionId,
     attributes: user.attributes,
     isFetching: user.isFetching,
     lastUpdated: user.lastUpdated,
-  }
+  };
 }
 
 export default connect(mapStateToProps)(UserInfo);

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import Paper from 'material-ui/Paper';
@@ -12,12 +12,12 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import WithSimpleDivaAuthorization from '../../util/WithSimpleDivaAuthorization';
 import WithDivaAuthorization from '../../util/WithDivaAuthorization';
 
-import  SideMenu from '../../components/SideMenu/SideMenu';
+import SideMenu from '../../components/SideMenu/SideMenu';
 
-import  Home from '../../containers/Home/Home';
-import  MyAccount from '../../containers/MyAccount/MyAccount';
-import  MyHome from '../../containers/MyHome/MyHome';
-import  UserInfo from '../../containers/UserInfo/UserInfo';
+import Home from '../../containers/Home/Home';
+import MyAccount from '../../containers/MyAccount/MyAccount';
+import MyHome from '../../containers/MyHome/MyHome';
+import UserInfo from '../../containers/UserInfo/UserInfo';
 
 import { deauthenticate } from '../../actions';
 
