@@ -16,7 +16,7 @@ const SideMenu = () => {
       <Paper style={style} id="navigation-menu">
         <List>
           <Link to="/">
-            <ListItem primaryText="Navigation menu"/>
+            <ListItem primaryText="Navigation menu" />
           </Link>
         </List>
         <Divider />

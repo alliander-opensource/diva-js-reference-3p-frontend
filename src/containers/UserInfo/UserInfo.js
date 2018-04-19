@@ -18,7 +18,6 @@ class UserInfo extends Component {
 
   render() {
     const { sessionId, attributes, lastUpdated } = this.props;
-
     const attributeTypes = Object.keys(attributes);
     const attributesList = attributeTypes.reduce((result, type) => {
       attributes[type].forEach((value) => {
@@ -39,35 +38,41 @@ class UserInfo extends Component {
       <div id="user-panel">
         <Paper style={style}>
           <List>
-            <ListItem primaryText="User Session" leftIcon={<IconSocialPerson/>}/>
+            <ListItem primaryText="User Session" leftIcon={<IconSocialPerson />} />
           </List>
 
           {sessionId &&
             <div>
-              <Divider/>
+              <Divider />
               <List>
                 <ListItem>
-                  SessionId:<br/>
+                  SessionId:<br />
                   <span id="session-id">{sessionId}</span>
                 </ListItem>
               </List>
             </div>
           }
 
-          <Divider/>
+          <Divider />
 
           <List>
-            {attributesList.map(a =>
-              <ListItem key={a.value} primaryText={a.value} secondaryText={a.type} leftIcon={<IconActionLabel/>} />
-            )}
+            {attributesList.map(a => (
+              <ListItem
+                key={a.value}
+                primaryText={a.value}
+                secondaryText={a.type}
+                leftIcon={<IconActionLabel />}
+              />
+            ))
+            }
             { attributesList.length === 0 &&
-              <ListItem primaryText="There are no attributes disclosed to your session"/>
+              <ListItem primaryText="There are no attributes disclosed to your session" />
             }
           </List>
 
           {lastUpdated &&
             <div>
-              <Divider/>
+              <Divider />
               <List>
                 <ListItem>
                   Last updated at {new Date(lastUpdated).toLocaleTimeString()}.
@@ -84,11 +89,10 @@ class UserInfo extends Component {
 
 UserInfo.propTypes = {
   sessionId: PropTypes.string.isRequired,
-  attributes: PropTypes.object.isRequired,
-  isFetching: PropTypes.bool.isRequired,
+  attributes: PropTypes.objectOf(PropTypes.array).isRequired,
   lastUpdated: PropTypes.number,
   dispatch: PropTypes.func.isRequired,
-}
+};
 
 function mapStateToProps(state) {
   const { user } = state;
@@ -96,7 +100,6 @@ function mapStateToProps(state) {
   return {
     sessionId: user.sessionId,
     attributes: user.attributes,
-    isFetching: user.isFetching,
     lastUpdated: user.lastUpdated,
   };
 }

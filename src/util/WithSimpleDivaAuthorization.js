@@ -10,10 +10,14 @@ import RequestAttributeDisclosure from '../containers/RequestAttributeDisclosure
  * @returns {Component}
  */
 export default function WithSimpleDivaAuthorization(requiredAttribute) {
-  return WrappedComponent => {
+  return (WrappedComponent) => {
     class WithSimpleAuthorization extends Component {
       static propTypes = {
-        user: PropTypes.object,
+        user: PropTypes.shape({
+          isFetching: PropTypes.bool.isRequired,
+          sessionId: PropTypes.string.isRequired,
+          attributes: PropTypes.objectOf(PropTypes.array).isRequired,
+        }),
       };
 
       constructor(props) {
@@ -28,13 +32,10 @@ export default function WithSimpleDivaAuthorization(requiredAttribute) {
         const { user } = this.props;
         if (user.attributes[requiredAttribute]) {
           return <WrappedComponent {...this.props} />;
-        } else {
-          return <RequestAttributeDisclosure requiredAttributes={this.content}/>;
         }
-      };
-    };
-    return connect(state => {
-      return { user: state.user };
-    })(WithSimpleAuthorization);
+        return <RequestAttributeDisclosure requiredAttributes={this.content} />;
+      }
+    }
+    return connect(state => ({ user: state.user }))(WithSimpleAuthorization);
   };
-};
+}
