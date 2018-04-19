@@ -1,3 +1,21 @@
-// Necessary till index.jsx files are supported.
-// See https://github.com/facebook/create-react-app/pull/4012
-require('./index.jsx');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import configureStore from './configureStore';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import './index.css';
+import App from './containers/App/App';
+import registerServiceWorker from './registerServiceWorker';
+
+const store = configureStore();
+
+ReactDOM.render(
+  <Provider store={store}>
+    <MuiThemeProvider>
+      <App store={store}/>
+    </MuiThemeProvider>
+  </Provider>,
+  document.getElementById('root')
+);
+registerServiceWorker();
