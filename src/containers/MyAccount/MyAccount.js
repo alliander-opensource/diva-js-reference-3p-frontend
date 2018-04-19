@@ -1,25 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-class MyAccount extends Component {
-  render() {
-    const { emails } = this.props;
-
-    return (
-      <div style={{ padding: '20px' }} id="my-account-page">
-        <h2>My Account</h2>
-
-        <br/><br/>
-        Email Address: { (emails && emails.length > 0) ? emails[0] : "No email address available."}
-        <br/>
-      </div>
-    );
-  }
-}
+const MyAccount = ({ emails }) => (
+  <div style={{ padding: '20px' }} id="my-account-page">
+    <h2>My Account</h2>
+    <br />
+    <br />
+    Email Address: { (emails && emails.length > 0) ? emails[0] : 'No email address available.'}
+    <br />
+  </div>
+);
 
 MyAccount.propTypes = {
-  emails: PropTypes.array.isRequired,
+  emails: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 function mapStateToProps(state) {
