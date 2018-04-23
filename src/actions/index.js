@@ -7,7 +7,7 @@ export const RECEIVE_SESSION = 'update_session';
 export const DEAUTHENTICATE = 'deauthenticate';
 
 export function requestSession() {
-  return { type: REQUEST_SESSION }
+  return { type: REQUEST_SESSION };
 }
 
 function receiveSession(json) {
@@ -16,11 +16,11 @@ function receiveSession(json) {
     sessionId: json.sessionId,
     attributes: json.attributes,
     receivedAt: Date.now(),
-  }
+  };
 }
 
 export function fetchSession() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(requestSession());
     return axios
       .get('/api/get-session', {
@@ -29,15 +29,14 @@ export function fetchSession() {
       // .then(response => response.json())
       .then(response => response.data)
       .then(json => dispatch(receiveSession(json)));
-  }
+  };
 }
 
 export function deauthenticate() {
-  return dispatch => {
-    return axios
+  return dispatch =>
+    axios
       .get('/api/deauthenticate', {
         withCredentials: true,
       })
       .then(() => dispatch(fetchSession()));
-  }
 }

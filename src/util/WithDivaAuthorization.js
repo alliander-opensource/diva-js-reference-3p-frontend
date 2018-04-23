@@ -11,30 +11,33 @@ import RequestAttributeDisclosure from '../containers/RequestAttributeDisclosure
  * @returns {Component}
  */
 export default function WithDivaAuthorization(content) {
-  return WrappedComponent => {
+  return (WrappedComponent) => {
     class WithAuthorization extends Component {
       static propTypes = {
-        user: PropTypes.object,
+        user: PropTypes.shape({
+          isFetching: PropTypes.bool.isRequired,
+          sessionId: PropTypes.string.isRequired,
+          attributes: PropTypes.objectOf(PropTypes.array).isRequired,
+        }),
       };
 
-      hasRequiredAttributes = (existing, content) => {
+      hasRequiredAttributes = (existing, contentToCheck) => {
         const existingAttributes = Object.keys(existing);
-        return content.reduce((accumulator, attributeGroup) => {
-          return accumulator && attributeGroup.attributes.some(el => existingAttributes.includes(el));
-        }, true);
+        return contentToCheck.reduce(
+          (accumulator, attributeGroup) =>
+            accumulator && attributeGroup.attributes.some(el => existingAttributes.includes(el)),
+          true,
+        );
       }
 
       render() {
         const { user } = this.props;
         if (this.hasRequiredAttributes(user.attributes, content)) {
           return <WrappedComponent {...this.props} />;
-        } else {
-          return <RequestAttributeDisclosure requiredAttributes={content}/>;
         }
-      };
-    };
-    return connect(state => {
-      return { user: state.user };
-    })(WithAuthorization);
+        return <RequestAttributeDisclosure requiredAttributes={content} />;
+      }
+    }
+    return connect(state => ({ user: state.user }))(WithAuthorization);
   };
-};
+}

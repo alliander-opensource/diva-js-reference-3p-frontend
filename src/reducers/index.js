@@ -1,16 +1,16 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 import {
   REQUEST_SESSION,
   RECEIVE_SESSION,
-} from '../actions'
+} from '../actions';
 
 function user(
   state = {
     isFetching: false,
     sessionId: '',
-    attributes: {}
+    attributes: {},
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case REQUEST_SESSION:
@@ -31,6 +31,6 @@ function user(
 
 const rootReducer = combineReducers({
   user,
-})
+});
 
-export default rootReducer
+export default rootReducer;
