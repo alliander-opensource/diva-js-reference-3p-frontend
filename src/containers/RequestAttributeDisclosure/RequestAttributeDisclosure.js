@@ -78,25 +78,25 @@ class RequestAttributeDisclosure extends Component {
       sessionStarted: true,
     });
     axios
-      .post('/api/start-disclosure-session', {
-        content: requiredAttributes,
+      .post('/api/start-irma-session', {
+        content: requiredAttributes
       }, {
         withCredentials: true,
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         },
       })
       .then(response => response.data)
-      .then((data) => {
-        if (this._isMounted) { // eslint-disable-line no-underscore-dangle
+      .then(data => {
+        if (this._isMounted) {
           this.setState({
             qrContent: data.qrContent,
           });
           this.startPolling(data.irmaSessionId);
         }
       });
-  }
+	}
 
   getDisclosureStatus(irmaSessionId) {
     return  axios

@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import queryString from 'query-string';
 
 import SignPolicy from '../SignPolicy/SignPolicy';
 
@@ -11,12 +10,7 @@ const onSigningFailure = (result) => {
   console.log('Error: ', result);
 };
 
-const onSigningFailed = (result) => {
-  console.log(result);
-};
-
 const SignPolicyPage = () => {
-  let params = queryString.parse(this.props.location.search);
   const message = "I owe you nothing";
   const attributesForSigning = [{
     label: 'Address',
