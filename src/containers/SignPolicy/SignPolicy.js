@@ -17,7 +17,8 @@ class SignPolicy extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      serverStatus: 'PENDING',
+      signatureStatus: 'PENDING',
+      serverStatus: 'INITIALIZED',
       sessionStarted: false,
     };
   }
@@ -32,6 +33,8 @@ class SignPolicy extends Component {
   fetchQR = () => {
     const { requiredAttributes, message } = this.props;
     this.setState({
+      signatureStatus: 'PENDING',
+      serverStatus: 'INITIALIZED',
       sessionStarted: true,
     });
     axios
@@ -73,19 +76,16 @@ class SignPolicy extends Component {
       .getSignatureStatus(irmaSessionId)
       .then(result => {
         self.setState({
+          signatureStatus: result.signatureStatus,
           serverStatus: result.serverStatus,
           proofStatus: result.proofStatus,
         });
-        switch (result.serverStatus) {
-          case 'DONE':
+        switch (result.signatureStatus) {
+          case 'COMPLETED':
             self.stopPolling();
             self.props.onComplete(result);
             break;
-          case 'CANCELLED':
-            self.props.onFailure(result);
-            self.stopPolling();
-            break;
-          case 'NOT_FOUND':
+          case 'ABORTED':
             self.props.onFailure(result);
             self.stopPolling();
             break;
@@ -112,6 +112,7 @@ class SignPolicy extends Component {
     const { requiredAttributes, message } = this.props;
     const {
       qrContent,
+      signatureStatus,
       proofStatus,
       serverStatus
     } = this.state;
@@ -121,7 +122,7 @@ class SignPolicy extends Component {
         {qrContent ? (
           <div>
 
-            {(serverStatus === 'INITIALIZED' || serverStatus === 'CONNECTED' || serverStatus === 'DONE') && (
+            {(signatureStatus === 'PENDING') && (
               <div>
 
                 <Toolbar style={{ backgroundColor: 'none' }}>
@@ -152,7 +153,7 @@ class SignPolicy extends Component {
                     <Row center="xs">
                       <Col xs>
                         <QRCode value={JSON.stringify(qrContent)} size={256}/><br/>
-                        <span style={{display: 'none'}} id="qr-content">JSON.stringify(qrContent</span>
+                        <span style={{display: 'none'}} id="qr-content">{JSON.stringify(qrContent)}</span>
                         <br/>
                       </Col>
                     </Row>
@@ -179,7 +180,7 @@ class SignPolicy extends Component {
               </div>
             )}
 
-            {(serverStatus === 'DONE') && (
+            {(signatureStatus === 'COMPLETED') && (
               <div>
                 {(proofStatus === 'VALID') ? (
                   <div id='signature-proof-completed'>
@@ -214,7 +215,7 @@ class SignPolicy extends Component {
                 )}
               </div>
             )}
-            {(serverStatus === 'CANCELLED' || serverStatus === 'NOT_FOUND') && (
+            {(signatureStatus === 'ABORTED') && (
               <div>
               <Toolbar style={{ backgroundColor: 'none' }}>
                 <ToolbarGroup>

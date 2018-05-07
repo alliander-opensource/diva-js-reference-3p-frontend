@@ -5,7 +5,10 @@ import queryString from 'query-string';
 import SignPolicy from '../SignPolicy/SignPolicy';
 
 const onSigningComplete = (result) => {
-  console.log(result);
+  console.log('Succes: ', result);
+};
+const onSigningFailure = (result) => {
+  console.log('Error: ', result);
 };
 
 const onSigningFailed = (result) => {
@@ -24,8 +27,12 @@ const SignPolicyPage = () => {
   }];
 
   return (
-    <SignPolicy requiredAttributes={attributesForSigning} message={message}
-      onComplete={onSigningComplete} onFailure={onSigningFailed}/>
+    <SignPolicy
+      requiredAttributes={attributesForSigning}
+      message={message}
+      onComplete={onSigningComplete}
+      onFailure={onSigningFailure}
+    />
   )
 };
 
