@@ -6,7 +6,7 @@ import {
   RECEIVE_POLICIES,
   REQUEST_DELETE_POLICY,
   POLICY_DELETED,
-} from '../actions'
+} from '../actions';
 
 function user(
   state = {
@@ -38,7 +38,7 @@ function policies(
     isFetching: false,
     policies: [],
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case REQUEST_POLICIES:
