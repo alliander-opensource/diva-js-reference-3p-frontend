@@ -34,19 +34,6 @@ class RequestAttributeDisclosure extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this._isMounted = false; // eslint-disable-line no-underscore-dangle
-    this.stopPolling();
-  }
-
-  getDisclosureStatus(irmaSessionId) { // eslint-disable-line class-methods-use-this
-    return axios
-      .get(`/api/disclosure-status?irmaSessionId=${irmaSessionId}`, {
-        withCredentials: true,
-      })
-      .then(response => response.data);
-  }
-
   startPolling = (irmaSessionId) => {
     const pollTimerId = setInterval(() => this.poll(irmaSessionId), 1000);
     this.setState({ pollTimerId });
@@ -91,24 +78,37 @@ class RequestAttributeDisclosure extends Component {
       sessionStarted: true,
     });
     axios
-      .post('/api/start-disclosure-session', {
-        content: requiredAttributes,
+      .post('/api/start-irma-session', {
+        content: requiredAttributes
       }, {
         withCredentials: true,
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         },
       })
       .then(response => response.data)
-      .then((data) => {
-        if (this._isMounted) { // eslint-disable-line no-underscore-dangle
+      .then(data => {
+        if (this._isMounted) {
           this.setState({
             qrContent: data.qrContent,
           });
           this.startPolling(data.irmaSessionId);
         }
       });
+	}
+
+  getDisclosureStatus(irmaSessionId) {
+    return  axios
+      .get(`/api/disclosure-status?irmaSessionId=${irmaSessionId}`, {
+        withCredentials: true,
+      })
+      .then(response => response.data);
+	}
+
+  componentWillUnmount() {
+    this._isMounted = false; // eslint-disable-line no-underscore-dangle
+    this.stopPolling();
   }
 
   refreshSession() {
@@ -158,9 +158,9 @@ class RequestAttributeDisclosure extends Component {
                     </Row>
                     <Row center="xs">
                       <Col xs>
-                        <QRCode value={JSON.stringify(qrContent)} size={256} /><br />
-                        <span style={{ display: 'none' }} id="qr-content">JSON.stringify(qrContent</span>
-                        <br />
+                        <QRCode value={JSON.stringify(qrContent)} size={256}/><br/>
+                        <span style={{display: 'none'}} id="qr-content">{JSON.stringify(qrContent)}</span>
+                        <br/>
                       </Col>
                     </Row>
                     <Row center="xs">

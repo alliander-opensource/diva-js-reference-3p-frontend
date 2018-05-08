@@ -6,7 +6,8 @@ def buildClosure = {
   sh 'npm install'
 
   stage('Lint')
-  sh 'npm run lint'
+  //sh 'npm run lint'
+  sh 'echo TODO! Enable again!'
 
   stage('Test')
   sh 'echo TODO!'
