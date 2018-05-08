@@ -10,8 +10,8 @@ import IconSocialPerson from 'material-ui/svg-icons/social/person';
 import MenuItem from 'material-ui/MenuItem';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import WithSimpleDivaAuthorization from '../../util/WithSimpleDivaAuthorization';
-import WithDivaAuthorization from '../../util/WithDivaAuthorization';
+import WithSimpleDivaAuthorization from '../../diva-react/WithSimpleDivaAuthorization';
+import WithDivaAuthorization from '../../diva-react/WithDivaAuthorization';
 
 import SideMenu from '../../components/SideMenu/SideMenu';
 
