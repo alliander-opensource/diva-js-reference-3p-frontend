@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import SignPolicy from '../SignPolicy/SignPolicy';
+import SignPolicy from '../../diva-react/containers/SignPolicy/SignPolicy';
 
 const onSigningComplete = (result) => {
   console.log('Succes: ', result);

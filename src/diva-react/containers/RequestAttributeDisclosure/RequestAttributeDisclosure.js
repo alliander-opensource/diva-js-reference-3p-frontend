@@ -15,7 +15,7 @@ import IconAlertError from 'material-ui/svg-icons/alert/error';
 import IconButton from 'material-ui/IconButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 
-import { fetchSession } from '../../actions';
+import { fetchSession } from '../../../actions';
 
 class RequestAttributeDisclosure extends Component {
   constructor(props) {

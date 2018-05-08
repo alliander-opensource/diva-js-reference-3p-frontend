@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import RequestAttributeDisclosure from '../containers/RequestAttributeDisclosure/RequestAttributeDisclosure';
+import RequestAttributeDisclosure from './containers/RequestAttributeDisclosure/RequestAttributeDisclosure';
 
 /**
  * HOC that Handles whether or not the user is allowed to see the page.
