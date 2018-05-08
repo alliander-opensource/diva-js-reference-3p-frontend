@@ -10,8 +10,8 @@ import IconSocialPerson from 'material-ui/svg-icons/social/person';
 import MenuItem from 'material-ui/MenuItem';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import WithSimpleDivaAuthorization from '../../diva-react/WithSimpleDivaAuthorization';
-import WithDivaAuthorization from '../../diva-react/WithDivaAuthorization';
+import withSimpleDivaAuthorization from '../../diva-react/WithSimpleDivaAuthorization';
+import withDivaAuthorization from '../../diva-react/WithDivaAuthorization';
 
 import SideMenu from '../../components/SideMenu/SideMenu';
 
@@ -39,6 +39,8 @@ class App extends Component {
   }
 
   render() {
+    const { user } = this.props;
+
     const RightMenu = props => (
       <IconMenu
         id="user-menu"
@@ -78,16 +80,19 @@ class App extends Component {
               <Col xs>
                 <Paper style={styles.main} id="main-content">
                   <Route exact path="/" component={Home}/>
-                  <Route path="/my-home" component={WithDivaAuthorization([
-                    {
-                      label: 'Address',
-                      attributes: ['pbdf.pbdf.idin.address'],
-                    },{
-                      label: 'City',
-                      attributes: ['pbdf.pbdf.idin.city'],
-                    },
-                  ])(MyHome)}/>
-                  <Route path="/my-account" component={WithSimpleDivaAuthorization('pbdf.pbdf.email.email')(MyAccount)}/>
+                  <Route path="/my-home" component={withDivaAuthorization({
+                    attributes: user.attributes,
+                    requiredAttributes: [
+                      {
+                        label: 'Address',
+                        attributes: ['pbdf.pbdf.idin.address'],
+                      },{
+                        label: 'City',
+                        attributes: ['pbdf.pbdf.idin.city'],
+                      },
+                    ]
+                  })(MyHome)}/>
+                  <Route path="/my-account" component={withSimpleDivaAuthorization(user.attributes, 'pbdf.pbdf.email.email')(MyAccount)}/>
                   <Route path="/new-policy" component={SignPolicyPage}/>
                 </Paper>
               </Col>
@@ -107,4 +112,4 @@ App.propTypes = {
   dispatch: PropTypes.func,
 };
 
-export default connect()(App);
+export default connect(state => ({ user: state.user }))(App);
