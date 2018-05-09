@@ -22,9 +22,13 @@ import UserInfo from '../../containers/UserInfo/UserInfo';
 import SignPolicyPage from '../SignPolicyPage/SignPolicyPage';
 import IssueCredentialsPage from '../IssueCredentialsPage/IssueCredentialsPage';
 
-import { deauthenticate } from '../../actions';
-
 import './App.css';
+
+// import { deauthenticate } from '../../actions';
+
+function deauthenticate() {
+  console.log('deauthenticate');
+}
 
 const styles = {
   main: {
@@ -112,6 +116,7 @@ class App extends Component {
 
 App.propTypes = {
   dispatch: PropTypes.func,
+  user: PropTypes.any,
 };
 
 export default connect(state => ({ user: state.user }))(App);
