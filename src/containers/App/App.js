@@ -15,10 +15,10 @@ import withDivaAuthorization from '../../diva-react/WithDivaAuthorization';
 
 import SideMenu from '../../components/SideMenu/SideMenu';
 
-import  Home from '../../containers/Home/Home';
-import  MyAccount from '../../containers/MyAccount/MyAccount';
-import  MyHome from '../../containers/MyHome/MyHome';
-import  UserInfo from '../../containers/UserInfo/UserInfo';
+import Home from '../../containers/Home/Home';
+import MyAccount from '../../containers/MyAccount/MyAccount';
+import MyHome from '../../containers/MyHome/MyHome';
+import UserInfo from '../../containers/UserInfo/UserInfo';
 import SignPolicyPage from '../SignPolicyPage/SignPolicyPage';
 
 import { deauthenticate } from '../../actions';
