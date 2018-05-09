@@ -20,6 +20,7 @@ import MyAccount from '../../containers/MyAccount/MyAccount';
 import MyHome from '../../containers/MyHome/MyHome';
 import UserInfo from '../../containers/UserInfo/UserInfo';
 import SignPolicyPage from '../SignPolicyPage/SignPolicyPage';
+import IssueCredentialsPage from '../IssueCredentialsPage/IssueCredentialsPage';
 
 import { deauthenticate } from '../../actions';
 
@@ -94,6 +95,7 @@ class App extends Component {
                   })(MyHome)}/>
                   <Route path="/my-account" component={withSimpleDivaAuthorization(user.attributes, 'pbdf.pbdf.email.email')(MyAccount)}/>
                   <Route path="/new-policy" component={SignPolicyPage}/>
+                  <Route path="/issue" component={IssueCredentialsPage}/>
                 </Paper>
               </Col>
 
