@@ -8,12 +8,12 @@ import Divider from 'material-ui/Divider';
 import IconActionLabel from 'material-ui/svg-icons/action/label';
 import IconSocialPerson from 'material-ui/svg-icons/social/person';
 
-import { fetchSession } from '../../actions';
+import { requestSession } from '../../actions';
 
 class UserInfo extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchSession());
+    dispatch(requestSession());
   }
 
   render() {

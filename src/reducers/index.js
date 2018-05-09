@@ -4,6 +4,8 @@ import {
   RECEIVE_SESSION,
 } from '../actions';
 
+import diva from '../diva-react/reducers/diva-reducer';
+
 function user(
   state = {
     isFetching: false,
@@ -31,6 +33,7 @@ function user(
 
 const rootReducer = combineReducers({
   user,
+  diva,
 });
 
 export default rootReducer;
