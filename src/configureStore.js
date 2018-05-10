@@ -5,7 +5,7 @@ import { createLogger } from 'redux-logger';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
 const loggerMiddleware = createLogger();
 
 export default function configureStore(preloadedState) {
