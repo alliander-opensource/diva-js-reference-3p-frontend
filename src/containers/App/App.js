@@ -43,9 +43,9 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
     const {
       attributes,
+      error,
     } = this.props;
 
     const RightMenu = () => (
@@ -79,41 +79,48 @@ class App extends Component {
             title="DIVA 3rd party reference implementation"
             iconElementRight={<RightMenu />}
           />
-          <Grid fluid>
-            <Row>
-              <Col xs={12} sm={3}>
-                <SideMenu />
-              </Col>
+          { !error ? (
+            <Grid fluid>
+              <Row>
+                <Col xs={12} sm={3}>
+                  <SideMenu />
+                </Col>
 
-              <Col xs>
-                <Paper style={styles.main} id="main-content">
-                  <Route exact path="/" component={Home} />
-                  <Route
-                    path="/my-home"
-                    component={withDivaAuthorization({
-                      attributes,
-                      requiredAttributes: [
-                        {
-                          label: 'Address',
-                          attributes: ['pbdf.pbdf.idin.address'],
-                        }, {
-                          label: 'City',
-                          attributes: ['pbdf.pbdf.idin.city'],
-                        },
-                      ],
-                    })(MyHome)}
-                  />
-                  <Route path="/my-account" component={withSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email')(MyAccount)} />
-                  <Route path="/new-policy" component={SignPolicyPage} />
-                  <Route path="/issue" component={IssueCredentialsPage} />
-                </Paper>
-              </Col>
+                <Col xs>
+                  <Paper style={styles.main} id="main-content">
+                    <Route exact path="/" component={Home} />
+                    <Route
+                      path="/my-home"
+                      component={withDivaAuthorization({
+                        attributes,
+                        requiredAttributes: [
+                          {
+                            label: 'Address',
+                            attributes: ['pbdf.pbdf.idin.address'],
+                          }, {
+                            label: 'City',
+                            attributes: ['pbdf.pbdf.idin.city'],
+                          },
+                        ],
+                      })(MyHome)}
+                    />
+                    <Route path="/my-account" component={withSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email')(MyAccount)} />
+                    <Route path="/new-policy" component={SignPolicyPage} />
+                    <Route path="/issue" component={IssueCredentialsPage} />
+                  </Paper>
+                </Col>
 
-              <Col xs={12} sm={3}>
-                <UserInfo />
-              </Col>
-            </Row>
-          </Grid>
+                <Col xs={12} sm={3}>
+                  <UserInfo />
+                </Col>
+              </Row>
+            </Grid>
+          ) : (
+            <div>
+              <h3> Error: { error.reason } </h3>
+              <i> { error.response.data } </i>
+            </div>
+          )}
         </div>
       </BrowserRouter>
     );
@@ -121,10 +128,10 @@ class App extends Component {
 }
 
 App.propTypes = {
-  sessionId: PropTypes.any,
   attributes: PropTypes.any,
   getSessionData: PropTypes.func,
   deauthenticate: PropTypes.func,
+  error: PropTypes.any,
 };
 
 const mapStateToProps = state => state.session;
