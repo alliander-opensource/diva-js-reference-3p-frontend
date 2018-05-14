@@ -26,10 +26,10 @@ MyHome.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { user } = state;
+  const { session } = state;
   return {
-    addresses: user.attributes['pbdf.pbdf.idin.address'],
-    cities: user.attributes['pbdf.pbdf.idin.city'],
+    addresses: session.attributes['pbdf.pbdf.idin.address'],
+    cities: session.attributes['pbdf.pbdf.idin.city'],
   };
 }
 

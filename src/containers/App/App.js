@@ -24,11 +24,7 @@ import IssueCredentialsPage from '../IssueCredentialsPage/IssueCredentialsPage';
 
 import './App.css';
 
-// import { deauthenticate } from '../../actions';
-
-function deauthenticate() {
-  console.log('deauthenticate');
-}
+import { actions } from '../../reducers/session-reducer';
 
 const styles = {
   main: {
@@ -38,18 +34,25 @@ const styles = {
 };
 
 class App extends Component {
-  handleDeauth() {
-    const { dispatch } = this.props;
-    dispatch(deauthenticate());
+  componentDidMount() {
+    this.props.getSessionData();
+  }
+
+  deauthenticate() {
+    this.props.deauthenticate();
   }
 
   render() {
-    const { user } = this.props;
+    console.log(this.props);
+    const {
+      attributes,
+    } = this.props;
 
-    const RightMenu = props => (
+    const RightMenu = () => (
       <IconMenu
         id="user-menu"
-        {...props}
+        // sessionId={sessionId}
+        // attributes={attributes}
         iconButtonElement={
           <IconButton id="navbar-user-icon">
             <IconSocialPerson style={{ color: 'red' }} />
@@ -64,7 +67,7 @@ class App extends Component {
         <MenuItem
           primaryText="Clear session"
           id="deauthenticate-button"
-          onClick={() => this.handleDeauth()}
+          onClick={() => this.deauthenticate()}
         />
       </IconMenu>
     );
@@ -84,22 +87,25 @@ class App extends Component {
 
               <Col xs>
                 <Paper style={styles.main} id="main-content">
-                  <Route exact path="/" component={Home}/>
-                  <Route path="/my-home" component={withDivaAuthorization({
-                    attributes: user.attributes,
-                    requiredAttributes: [
-                      {
-                        label: 'Address',
-                        attributes: ['pbdf.pbdf.idin.address'],
-                      },{
-                        label: 'City',
-                        attributes: ['pbdf.pbdf.idin.city'],
-                      },
-                    ]
-                  })(MyHome)}/>
-                  <Route path="/my-account" component={withSimpleDivaAuthorization(user.attributes, 'pbdf.pbdf.email.email')(MyAccount)}/>
-                  <Route path="/new-policy" component={SignPolicyPage}/>
-                  <Route path="/issue" component={IssueCredentialsPage}/>
+                  <Route exact path="/" component={Home} />
+                  <Route
+                    path="/my-home"
+                    component={withDivaAuthorization({
+                      attributes,
+                      requiredAttributes: [
+                        {
+                          label: 'Address',
+                          attributes: ['pbdf.pbdf.idin.address'],
+                        }, {
+                          label: 'City',
+                          attributes: ['pbdf.pbdf.idin.city'],
+                        },
+                      ],
+                    })(MyHome)}
+                  />
+                  <Route path="/my-account" component={withSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email')(MyAccount)} />
+                  <Route path="/new-policy" component={SignPolicyPage} />
+                  <Route path="/issue" component={IssueCredentialsPage} />
                 </Paper>
               </Col>
 
@@ -115,8 +121,17 @@ class App extends Component {
 }
 
 App.propTypes = {
-  dispatch: PropTypes.func,
-  user: PropTypes.any,
+  sessionId: PropTypes.any,
+  attributes: PropTypes.any,
+  getSessionData: PropTypes.func,
+  deauthenticate: PropTypes.func,
 };
 
-export default connect(state => ({ user: state.user }))(App);
+const mapStateToProps = state => state.session;
+
+const mapDispatchToProps = {
+  getSessionData: actions.getSessionData,
+  deauthenticate: actions.deauthenticate,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
