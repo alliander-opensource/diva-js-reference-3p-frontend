@@ -1,6 +1,7 @@
 export const types = {
-  GET_SESSION_DATA: 'SESSION/GET_SESSION_DATA',
-  SESSION_DATA_RECEIVED: 'SESSION/SESSION_DATA_RECEIVED',
+  GET_DATA: 'SESSION/GET_DATA',
+  GET_DATA_SUCCESS: 'SESSION/GET_DATA_SUCCESS',
+  GET_DATA_FAILED: 'SESSION/GET_DATA_FAILED',
   DEAUTHENTICATE: 'SESSION/DEAUTHENTICATE',
 };
 
@@ -12,15 +13,19 @@ export const initialState = {
 
 export const actions = {
   getSessionData: () => ({
-    type: types.GET_SESSION_DATA,
+    type: types.GET_DATA,
   }),
   sessionDataReceived: (sessionId, attributes) => ({
-    type: types.SESSION_DATA_RECEIVED,
+    type: types.GET_DATA_SUCCESS,
     sessionId,
     attributes,
     receivedAt: Date.now(),
   }),
-  // TODO: getSessionDataFailed
+  getSessionDataFailed: (reason, response) => ({
+    type: types.GET_DATA_FAILED,
+    reason,
+    response,
+  }),
   deauthenticate: () => ({
     type: types.DEAUTHENTICATE,
   }),
@@ -28,18 +33,27 @@ export const actions = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.GET_SESSION_DATA:
+    case types.GET_DATA:
       return {
         ...state,
         isFetching: true,
       };
-    case types.SESSION_DATA_RECEIVED:
+    case types.GET_DATA_SUCCESS:
       return {
         ...state,
         isFetching: false,
         lastUpdated: action.receivedAt,
         sessionId: action.sessionId,
         attributes: action.attributes,
+      };
+    case types.GET_DATA_FAILED:
+      return {
+        ...state,
+        isFetching: false,
+        error: {
+          reason: action.reason,
+          response: action.response,
+        },
       };
     default:
       return state;

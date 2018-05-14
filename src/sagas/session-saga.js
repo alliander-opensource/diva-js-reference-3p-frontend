@@ -9,10 +9,10 @@ function* getSessionData() {
     if (response.sessionId && response.attributes) {
       yield put(actions.sessionDataReceived(response.sessionId, response.attributes));
     } else {
-      // TODO: fail case
+      yield put(actions.getSessionDataFailed('Server Error', response));
     }
   } catch (error) {
-    // TODO: fail case
+    yield put(actions.getSessionDataFailed('Network Error', error.response));
   }
 }
 
@@ -22,16 +22,16 @@ function* deauthenticate() {
     if (response) {
       yield put(actions.getSessionData());
     } else {
-      // TODO: fail case
+      yield put(actions.getSessionDataFailed('Server Error', response));
     }
   } catch (error) {
-    // TODO: fail case
+    yield put(actions.getSessionDataFailed('Network Error', error.response));
   }
 }
 
 function* sagas() {
   yield all([
-    takeEvery(types.GET_SESSION_DATA, getSessionData),
+    takeEvery(types.GET_DATA, getSessionData),
     takeEvery(types.DEAUTHENTICATE, deauthenticate),
   ]);
 }
