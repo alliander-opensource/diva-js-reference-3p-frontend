@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 
 import IssueCredentials from '../../diva-react/containers/IssueCredentials/IssueCredentials';
 
-
 const IssueCredentialsPage = () => {
   return (
     <IssueCredentials
