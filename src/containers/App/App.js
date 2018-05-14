@@ -91,9 +91,9 @@ class App extends Component {
                     <Route exact path="/" component={Home} />
                     <Route
                       path="/my-home"
-                      component={withDivaAuthorization({
+                      component={withDivaAuthorization(
                         attributes,
-                        requiredAttributes: [
+                        [
                           {
                             label: 'Address',
                             attributes: ['pbdf.pbdf.idin.address'],
@@ -102,9 +102,9 @@ class App extends Component {
                             attributes: ['pbdf.pbdf.idin.city'],
                           },
                         ],
-                      })(MyHome)}
+                      )(MyHome)}
                     />
-                    <Route path="/my-account" component={withSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email')(MyAccount)} />
+                    <Route path="/my-account" component={withSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email', 'Email')(MyAccount)} />
                     <Route path="/new-policy" component={SignPolicyPage} />
                     <Route path="/issue" component={IssueCredentialsPage} />
                   </Paper>
