@@ -44,6 +44,7 @@ class App extends Component {
 
   render() {
     const {
+      sessionId,
       attributes,
       error,
     } = this.props;
@@ -79,7 +80,7 @@ class App extends Component {
             title="DIVA 3rd party reference implementation"
             iconElementRight={<RightMenu />}
           />
-          { !error ? (
+          { sessionId && (
             <Grid fluid>
               <Row>
                 <Col xs={12} sm={3}>
@@ -115,11 +116,17 @@ class App extends Component {
                 </Col>
               </Row>
             </Grid>
-          ) : (
+          )}
+
+          { error && (
             <div>
               <h3> Error: { error.reason } </h3>
               <i> { error.response.data } </i>
             </div>
+          )}
+
+          { !sessionId && !error && (
+            <div> Loading </div>
           )}
         </div>
       </BrowserRouter>
@@ -128,6 +135,7 @@ class App extends Component {
 }
 
 App.propTypes = {
+  sessionId: PropTypes.string,
   attributes: PropTypes.any,
   getSessionData: PropTypes.func,
   deauthenticate: PropTypes.func,
