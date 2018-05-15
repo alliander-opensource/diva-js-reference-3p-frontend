@@ -52,8 +52,6 @@ class App extends Component {
     const RightMenu = () => (
       <IconMenu
         id="user-menu"
-        // sessionId={sessionId}
-        // attributes={attributes}
         iconButtonElement={
           <IconButton id="navbar-user-icon">
             <IconSocialPerson style={{ color: 'red' }} />
