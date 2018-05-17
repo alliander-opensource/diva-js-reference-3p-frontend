@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import SignPolicy from '../SignPolicy/SignPolicy';
+import SignPolicy from '../../diva-react/containers/SignPolicy/SignPolicy';
 
 const onSigningComplete = (result) => {
   console.log('Succes: ', result);
@@ -11,11 +11,11 @@ const onSigningFailure = (result) => {
 };
 
 const SignPolicyPage = () => {
-  const message = "I owe you nothing";
+  const message = 'I owe you nothing';
   const attributesForSigning = [{
     label: 'Address',
     attributes: ['pbdf.pbdf.idin.address'],
-  },{
+  }, {
     label: 'City',
     attributes: ['pbdf.pbdf.idin.city'],
   }];
@@ -27,7 +27,7 @@ const SignPolicyPage = () => {
       onComplete={onSigningComplete}
       onFailure={onSigningFailure}
     />
-  )
+  );
 };
 
 export default withRouter(SignPolicyPage);

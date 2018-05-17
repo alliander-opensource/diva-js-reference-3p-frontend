@@ -8,14 +8,7 @@ import Divider from 'material-ui/Divider';
 import IconActionLabel from 'material-ui/svg-icons/action/label';
 import IconSocialPerson from 'material-ui/svg-icons/social/person';
 
-import { fetchSession } from '../../actions';
-
 class UserInfo extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchSession());
-  }
-
   render() {
     const { sessionId, attributes, lastUpdated } = this.props;
     const attributeTypes = Object.keys(attributes);
@@ -88,20 +81,11 @@ class UserInfo extends Component {
 }
 
 UserInfo.propTypes = {
-  sessionId: PropTypes.string.isRequired,
+  sessionId: PropTypes.string,
   attributes: PropTypes.objectOf(PropTypes.array).isRequired,
   lastUpdated: PropTypes.number,
-  dispatch: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(state) {
-  const { user } = state;
-
-  return {
-    sessionId: user.sessionId,
-    attributes: user.attributes,
-    lastUpdated: user.lastUpdated,
-  };
-}
+const mapStateToProps = state => state.session;
 
 export default connect(mapStateToProps)(UserInfo);

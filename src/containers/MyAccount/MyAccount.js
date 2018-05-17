@@ -17,9 +17,9 @@ MyAccount.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { user } = state;
+  const { session } = state;
   return {
-    emails: user.attributes['pbdf.pbdf.email.email'],
+    emails: session.attributes['pbdf.pbdf.email.email'],
   };
 }
 

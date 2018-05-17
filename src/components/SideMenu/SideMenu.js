@@ -28,6 +28,15 @@ const SideMenu = () => {
             <ListItem primaryText="My Account" leftIcon={<IconSocialPerson />} />
           </Link>
         </List>
+        <Divider />
+        <List>
+          <Link to="/new-policy">
+            <ListItem primaryText="Signing" leftIcon={<IconActionHome />} />
+          </Link>
+          <Link to="/issue">
+            <ListItem primaryText="Issue Credential" leftIcon={<IconSocialPerson />} />
+          </Link>
+        </List>
       </Paper>
     </div>
   );
