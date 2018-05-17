@@ -139,10 +139,13 @@ class App extends Component {
 
 App.propTypes = {
   sessionId: PropTypes.string,
-  attributes: PropTypes.any,
+  attributes: PropTypes.objectOf(PropTypes.string),
   getSessionData: PropTypes.func,
   deauthenticate: PropTypes.func,
-  error: PropTypes.any,
+  error: PropTypes.shape({
+    reason: PropTypes.string,
+    response: PropTypes.object,
+  }),
 };
 
 const mapStateToProps = state => state.session;
