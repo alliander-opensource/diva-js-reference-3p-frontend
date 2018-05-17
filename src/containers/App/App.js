@@ -139,7 +139,7 @@ class App extends Component {
 
 App.propTypes = {
   sessionId: PropTypes.string,
-  attributes: PropTypes.objectOf(PropTypes.string),
+  attributes: PropTypes.objectOf(PropTypes.array),
   getSessionData: PropTypes.func,
   deauthenticate: PropTypes.func,
   error: PropTypes.shape({
