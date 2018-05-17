@@ -5,6 +5,7 @@ import IssueCredentials from '../../diva-react/containers/IssueCredentials/Issue
 
 const IssueCredentialsPage = () => (
   <IssueCredentials
+    viewId="issue-brp1"
     credentialType="BRP1"
   />
 );
