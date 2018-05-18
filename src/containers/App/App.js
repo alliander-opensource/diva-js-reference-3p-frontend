@@ -38,11 +38,6 @@ class App extends Component {
     this.props.getSessionData();
   }
 
-  shouldComponentUpdate(nextProps) {
-    return nextProps.attributes !== this.props.attributes
-      || nextProps.sessionId !== this.props.sessionId;
-  }
-
   deauthenticate() {
     this.props.deauthenticate();
   }
