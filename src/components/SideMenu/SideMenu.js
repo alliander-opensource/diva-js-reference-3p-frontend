@@ -30,7 +30,7 @@ const SideMenu = () => {
         </List>
         <Divider />
         <List>
-          <Link to="/new-policy">
+          <Link to="/sign">
             <ListItem primaryText="Signing" leftIcon={<IconActionHome />} />
           </Link>
           <Link to="/issue">
