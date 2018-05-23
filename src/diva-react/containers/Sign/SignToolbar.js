@@ -4,10 +4,10 @@ import IconActionHelp from 'material-ui/svg-icons/action/help';
 import IconActionInfo from 'material-ui/svg-icons/action/info';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 
-const IssueCredentialsToolbar = () => (
+const SignToolbar = () => (
   <Toolbar style={{ backgroundColor: 'none' }}>
     <ToolbarGroup>
-      <ToolbarTitle text="Attribute issuance" />
+      <ToolbarTitle text="Sign a message" />
     </ToolbarGroup>
     <ToolbarGroup lastChild>
       <IconButton tooltip="Help">
@@ -20,4 +20,4 @@ const IssueCredentialsToolbar = () => (
   </Toolbar>
 );
 
-export default IssueCredentialsToolbar;
+export default SignToolbar;

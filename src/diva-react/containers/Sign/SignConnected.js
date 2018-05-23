@@ -1,15 +1,15 @@
 import React from 'react';
 import { Row, Col } from 'react-flexbox-grid';
 
-const IssueCredentialsConnected = () => (
+const SignConnected = () => (
   <div style={{ padding: '20px' }} id="qr-scanned">
     <Row center="xs">
       <Col xs={6}>
-        To continue, accept the credentials in your IRMA app.<br />
+        To continue, approve signing of the message with your IRMA app.<br />
         <br />
       </Col>
     </Row>
   </div>
 );
 
-export default IssueCredentialsConnected;
+export default SignConnected;

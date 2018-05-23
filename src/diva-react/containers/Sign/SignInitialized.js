@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 import { Row, Col } from 'react-flexbox-grid';
 
-const IssueCredentialsInitialized = ({ credentialType, qrContent }) => (
+const SignInitialized = ({ requiredAttributes, message, qrContent }) => (
   <div style={{ padding: '20px' }}>
     <Row center="xs">
       <Col xs={6}>
-        Credential(s) type: {credentialType}<br />
+        Message that will be signed: <b>{message}</b><br />
+        <br />
+        With the following attributes:<br />
+        <b>{requiredAttributes.map(el => el.label).join(', ')}</b><br />
         <br />
       </Col>
     </Row>
@@ -20,16 +23,17 @@ const IssueCredentialsInitialized = ({ credentialType, qrContent }) => (
     </Row>
     <Row center="xs">
       <Col xs={6}>
-        Please scan the QR code with your IRMA app to receive the credentials.
+        Please scan the QR code with your IRMA app to sign the message.
         <br />
       </Col>
     </Row>
   </div>
 );
 
-IssueCredentialsInitialized.propTypes = {
-  credentialType: PropTypes.string.isRequired,
+SignInitialized.propTypes = {
+  requiredAttributes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  message: PropTypes.string.isRequired,
   qrContent: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-export default IssueCredentialsInitialized;
+export default SignInitialized;

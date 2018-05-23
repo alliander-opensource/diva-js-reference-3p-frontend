@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-flexbox-grid';
 import RaisedButton from 'material-ui/RaisedButton';
 
-const IssueCredentialsNotFound = ({ onRetry }) => (
+// TODO: same component as RequestAttributeDisclosureNotFound, merge?
+const SignNotFound = ({ onRetry }) => (
   <div style={{ padding: '20px' }} id="qr-expired">
     <Row center="xs">
       <Col xs={6}>
@@ -20,8 +21,8 @@ const IssueCredentialsNotFound = ({ onRetry }) => (
   </div>
 );
 
-IssueCredentialsNotFound.propTypes = {
+SignNotFound.propTypes = {
   onRetry: PropTypes.func.isRequired,
 };
 
-export default IssueCredentialsNotFound;
+export default SignNotFound;

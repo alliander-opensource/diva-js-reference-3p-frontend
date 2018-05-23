@@ -4,8 +4,8 @@ import { Row, Col } from 'react-flexbox-grid';
 import RaisedButton from 'material-ui/RaisedButton';
 import IconAlertError from 'material-ui/svg-icons/alert/error';
 
-const IssueCredentialsError = ({ onRetry }) => (
-  <div id="issue-error">
+const SignError = ({ onRetry }) => (
+  <div id="sign-error">
     <Row center="xs">
       <Col xs>
         <IconAlertError style={{ width: '100px', height: '100px', color: 'orangered' }} />
@@ -25,8 +25,8 @@ const IssueCredentialsError = ({ onRetry }) => (
   </div>
 );
 
-IssueCredentialsError.propTypes = {
+SignError.propTypes = {
   onRetry: PropTypes.func.isRequired,
 };
 
-export default IssueCredentialsError;
+export default SignError;

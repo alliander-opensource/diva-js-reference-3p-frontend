@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-flexbox-grid';
 import RaisedButton from 'material-ui/RaisedButton';
 
-const IssueCredentialsNotFound = ({ onRetry }) => (
-  <div style={{ padding: '20px' }} id="qr-expired">
+const SignCancelled = ({ onRetry }) => (
+  <div style={{ padding: '20px' }} id="sign-cancelled">
     <Row center="xs">
       <Col xs={6}>
-        The QR code expired.<br />
+        You cancelled signing of the message.<br />
         <br />
         <RaisedButton
           label="Retry"
@@ -20,8 +20,8 @@ const IssueCredentialsNotFound = ({ onRetry }) => (
   </div>
 );
 
-IssueCredentialsNotFound.propTypes = {
+SignCancelled.propTypes = {
   onRetry: PropTypes.func.isRequired,
 };
 
-export default IssueCredentialsNotFound;
+export default SignCancelled;

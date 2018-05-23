@@ -19,7 +19,7 @@ import Home from '../../containers/Home/Home';
 import MyAccount from '../../containers/MyAccount/MyAccount';
 import MyHome from '../../containers/MyHome/MyHome';
 import UserInfo from '../../containers/UserInfo/UserInfo';
-import SignPolicyPage from '../SignPolicyPage/SignPolicyPage';
+import SignPage from '../SignPage/SignPage';
 import IssueCredentialsPage from '../IssueCredentialsPage/IssueCredentialsPage';
 
 import './App.css';
@@ -104,7 +104,7 @@ class App extends Component {
                       )(MyHome)}
                     />
                     <Route path="/my-account" component={withSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email', 'Email')(MyAccount)} />
-                    <Route path="/new-policy" component={SignPolicyPage} />
+                    <Route path="/sign" component={SignPage} />
                     <Route path="/issue" component={IssueCredentialsPage} />
                   </Paper>
                 </Col>

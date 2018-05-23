@@ -3,7 +3,7 @@ import { Row, Col } from 'react-flexbox-grid';
 import IconActionCheckCircle from 'material-ui/svg-icons/action/check-circle';
 
 const RequestAttributeDisclosureDone = () => (
-  <div id="issuing-completed">
+  <div id="disclosure-completed">
     <Row center="xs">
       <Col xs>
         <IconActionCheckCircle style={{ width: '100px', height: '100px', color: 'limegreen' }} />
