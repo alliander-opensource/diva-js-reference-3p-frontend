@@ -2,7 +2,7 @@ import axios from 'axios';
 
 function getSessionData() {
   return axios
-    .get('/api/get-session', {
+    .get(`${window.env.baseUrl}/api/get-session`, {
       withCredentials: true,
     })
     .then(response => response.data);
@@ -10,7 +10,7 @@ function getSessionData() {
 
 function deauthenticate() {
   return axios
-    .get('/api/deauthenticate', {
+    .get(`${window.env.baseUrl}/api/deauthenticate`, {
       withCredentials: true,
     });
 }
