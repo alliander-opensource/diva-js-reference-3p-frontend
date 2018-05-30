@@ -30,6 +30,7 @@
     "start": "react-scripts start",
     "dev": "react-scripts start",
     "build": "react-scripts build",
+    "build-docker": "PUBLIC_URL=STARTUP_TIME_BASE_URL react-scripts build",
     "lint": "./node_modules/.bin/eslint -c .eslintrc src",
     "cypres:open": "npx cypress open",
     "test": "react-scripts test --env=jsdom",
