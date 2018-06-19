@@ -36,6 +36,9 @@ const SideMenu = () => {
           <Link to="/issue">
             <ListItem primaryText="Issue Credential" leftIcon={<IconSocialPerson />} />
           </Link>
+          <Link to="/issue-ean">
+            <ListItem primaryText="Issue EAN" leftIcon={<IconSocialPerson />} />
+          </Link>
         </List>
       </Paper>
     </div>
