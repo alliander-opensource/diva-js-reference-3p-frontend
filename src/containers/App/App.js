@@ -102,6 +102,7 @@ class App extends Component {
                             attributes: ['pbdf.pbdf.idin.city'],
                           },
                         ],
+                        'my-home-disclose',
                       )(MyHome)}
                     />
                     <Route path="/my-account" component={withSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email', 'Email')(MyAccount)} />
@@ -120,6 +121,7 @@ class App extends Component {
                             attributes: ['pbdf.pbdf.idin.zipcode'],
                           },
                         ],
+                        'issue-ean-disclose',
                       )(IssueEanPage)}
                     />
                   </Paper>
