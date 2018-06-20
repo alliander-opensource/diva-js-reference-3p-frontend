@@ -28,8 +28,8 @@ MyHome.propTypes = {
 function mapStateToProps(state) {
   const { session } = state;
   return {
-    addresses: session.attributes['pbdf.pbdf.idin.address'],
-    cities: session.attributes['pbdf.pbdf.idin.city'],
+    addresses: session.attributes['irma-demo.MijnOverheid.address.street'],
+    cities: session.attributes['irma-demo.MijnOverheid.address.city'],
   };
 }
 

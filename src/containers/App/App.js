@@ -96,10 +96,10 @@ class App extends Component {
                         [
                           {
                             label: 'Address',
-                            attributes: ['pbdf.pbdf.idin.address'],
+                            attributes: ['irma-demo.MijnOverheid.address.street'],
                           }, {
                             label: 'City',
-                            attributes: ['pbdf.pbdf.idin.city'],
+                            attributes: ['irma-demo.MijnOverheid.address.city'],
                           },
                         ],
                         'my-home-disclose',
@@ -114,10 +114,10 @@ class App extends Component {
                         attributes,
                         [
                           {
-                            label: 'Address',
+                            label: 'iDin Address',
                             attributes: ['pbdf.pbdf.idin.address'],
                           }, {
-                            label: 'City',
+                            label: 'iDin City',
                             attributes: ['pbdf.pbdf.idin.zipcode'],
                           },
                         ],
