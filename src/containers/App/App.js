@@ -21,6 +21,7 @@ import MyHome from '../../containers/MyHome/MyHome';
 import UserInfo from '../../containers/UserInfo/UserInfo';
 import SignPage from '../SignPage/SignPage';
 import IssueCredentialsPage from '../IssueCredentialsPage/IssueCredentialsPage';
+import IssueEanPage from '../IssueEanPage/IssueEanPage';
 
 import './App.css';
 
@@ -95,17 +96,34 @@ class App extends Component {
                         [
                           {
                             label: 'Address',
-                            attributes: ['pbdf.pbdf.idin.address'],
+                            attributes: ['irma-demo.MijnOverheid.address.street'],
                           }, {
                             label: 'City',
-                            attributes: ['pbdf.pbdf.idin.city'],
+                            attributes: ['irma-demo.MijnOverheid.address.city'],
                           },
                         ],
+                        'my-home-disclose',
                       )(MyHome)}
                     />
                     <Route path="/my-account" component={withSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email', 'Email')(MyAccount)} />
                     <Route path="/sign" component={SignPage} />
                     <Route path="/issue" component={IssueCredentialsPage} />
+                    <Route
+                      path="/issue-ean"
+                      component={withDivaAuthorization(
+                        attributes,
+                        [
+                          {
+                            label: 'iDin Address',
+                            attributes: ['pbdf.pbdf.idin.address'],
+                          }, {
+                            label: 'iDin City',
+                            attributes: ['pbdf.pbdf.idin.zipcode'],
+                          },
+                        ],
+                        'issue-ean-disclose',
+                      )(IssueEanPage)}
+                    />
                   </Paper>
                 </Col>
 

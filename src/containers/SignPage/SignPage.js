@@ -7,10 +7,10 @@ const SignPage = () => {
   const message = 'I owe you nothing';
   const attributesForSigning = [{
     label: 'Address',
-    attributes: ['pbdf.pbdf.idin.address'],
+    attributes: ['irma-demo.MijnOverheid.address.street'],
   }, {
     label: 'City',
-    attributes: ['pbdf.pbdf.idin.city'],
+    attributes: ['irma-demo.MijnOverheid.address.city'],
   }];
 
   return (
