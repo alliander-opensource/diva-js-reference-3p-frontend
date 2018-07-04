@@ -5,6 +5,9 @@ import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import IconActionHome from 'material-ui/svg-icons/action/home';
 import IconSocialPerson from 'material-ui/svg-icons/social/person';
+import IconAssignmentReturned from 'material-ui/svg-icons/action/assignment-returned';
+import IconAddLocation from 'material-ui/svg-icons/maps/add-location';
+import IconCreate from 'material-ui/svg-icons/content/create';
 
 const SideMenu = () => {
   const style = {
@@ -31,10 +34,13 @@ const SideMenu = () => {
         <Divider />
         <List>
           <Link to="/sign">
-            <ListItem primaryText="Signing" leftIcon={<IconActionHome />} />
+            <ListItem primaryText="Signing" leftIcon={<IconCreate />} />
           </Link>
           <Link to="/issue">
-            <ListItem primaryText="Issue Credential" leftIcon={<IconSocialPerson />} />
+            <ListItem primaryText="Issue Address" leftIcon={<IconAddLocation />} />
+          </Link>
+          <Link to="/issue-ean">
+            <ListItem primaryText="Issue EAN" leftIcon={<IconAssignmentReturned />} />
           </Link>
         </List>
       </Paper>

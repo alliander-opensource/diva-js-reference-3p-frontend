@@ -3,16 +3,16 @@ def buildClosure = {
   env.PATH = "${nodeHome}/bin:${env.PATH}"
 
   stage('Install')
-  sh 'npm install'
+  sh 'yarn'
 
   stage('Lint')
-  sh 'npm run lint'
+  sh 'yarn run lint'
 
   stage('Test')
   sh 'echo TODO!'
 
   stage('Build')
-  sh 'npm run build'
+  sh 'yarn run build'
 }
 
 def buildParameterMap = [:]
