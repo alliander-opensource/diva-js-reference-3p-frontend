@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {appName}-env
+  namespace: {namespace}
+  labels:
+    app: {appName}
+data:
+  BASE_URL: "https://diva-js-reference-3p.appx.cloud"
