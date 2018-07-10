@@ -12,7 +12,7 @@ def buildClosure = {
   sh 'echo TODO!'
 
   stage('Build')
-  sh 'yarn run build'
+  sh 'yarn run build-docker'
 }
 
 def buildParameterMap = [:]

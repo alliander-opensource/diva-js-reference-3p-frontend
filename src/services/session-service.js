@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const baseUrl = `${window.env.baseUrl}/api`;
+
 function getSessionData() {
   return axios
-    .get('/api/get-session', {
+    .get(`${baseUrl}/get-session`, {
       withCredentials: true,
     })
     .then(response => response.data);
@@ -10,7 +12,7 @@ function getSessionData() {
 
 function deauthenticate() {
   return axios
-    .get('/api/deauthenticate', {
+    .get(`${baseUrl}/deauthenticate`, {
       withCredentials: true,
     });
 }

@@ -17,6 +17,9 @@ spec:
       containers:
       - name: {appName}
         image: {image}
+        envFrom:
+        - configMapRef:
+            name: {appName}-env
         resources:
           limits:
             cpu: 500m
@@ -43,3 +46,12 @@ spec:
             port: 80
           initialDelaySeconds: 30
           timeoutSeconds: 5
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html/env
+          name: config-volume
+          readOnly: true
+      volumes:
+      - configMap:
+          items:
+          name: {appName}
+        name: config-volume
