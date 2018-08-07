@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = `${window.env.baseUrl}/api`;
-
-function getSessionData() {
+function getSessionData(baseUrl) {
   return axios
     .get(`${baseUrl}/get-session`, {
       withCredentials: true,
@@ -10,7 +8,7 @@ function getSessionData() {
     .then(response => response.data);
 }
 
-function deauthenticate() {
+function deauthenticate(baseUrl) {
   return axios
     .get(`${baseUrl}/deauthenticate`, {
       withCredentials: true,
