@@ -10,8 +10,7 @@ import IconSocialPerson from 'material-ui/svg-icons/social/person';
 import MenuItem from 'material-ui/MenuItem';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import withSimpleDivaAuthorization from '../../diva-react/WithSimpleDivaAuthorization';
-import withDivaAuthorization from '../../diva-react/WithDivaAuthorization';
+import { WithSimpleDivaAuthorization, WithDivaAuthorization } from '../../diva-react';
 
 import SideMenu from '../../components/SideMenu/SideMenu';
 
@@ -91,7 +90,7 @@ class App extends Component {
                     <Route exact path="/" component={Home} />
                     <Route
                       path="/my-home"
-                      component={withDivaAuthorization(
+                      component={WithDivaAuthorization(
                         attributes,
                         [
                           {
@@ -105,12 +104,12 @@ class App extends Component {
                         'my-home-disclose',
                       )(MyHome)}
                     />
-                    <Route path="/my-account" component={withSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email', 'Email')(MyAccount)} />
+                    <Route path="/my-account" component={WithSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email', 'Email')(MyAccount)} />
                     <Route path="/sign" component={SignPage} />
                     <Route path="/issue" component={IssueCredentialsPage} />
                     <Route
                       path="/issue-ean"
-                      component={withDivaAuthorization(
+                      component={WithDivaAuthorization(
                         attributes,
                         [
                           {

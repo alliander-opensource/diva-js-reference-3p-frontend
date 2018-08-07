@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Sign from '../../diva-react/containers/Sign/Sign';
+import { Sign } from '../../diva-react';
 
 const SignPage = () => {
   const message = 'I owe you nothing';
