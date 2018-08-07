@@ -1,6 +1,6 @@
 import { put, all, takeEvery } from 'redux-saga/effects';
 
-import { types as divaTypes } from '../diva-react/reducers/diva-reducer';
+import { types as divaTypes } from '../diva-react';
 import { actions as sessionActions } from '../reducers/session-reducer';
 
 export function* onDivaSessionCompleted(action) {
