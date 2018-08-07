@@ -3,9 +3,9 @@ import { put, call, all, takeEvery } from 'redux-saga/effects';
 import { types, actions } from '../reducers/session-reducer';
 import service from '../services/session-service';
 
-function* getSessionData() {
+function* getSessionData(baseUrl) {
   try {
-    const response = yield call(service.getSessionData);
+    const response = yield call(service.getSessionData, baseUrl);
     if (response.sessionId && response.attributes) {
       yield put(actions.sessionDataReceived(response.sessionId, response.attributes));
     } else {
@@ -16,9 +16,9 @@ function* getSessionData() {
   }
 }
 
-function* deauthenticate() {
+function* deauthenticate(baseUrl) {
   try {
-    const response = yield call(service.deauthenticate);
+    const response = yield call(service.deauthenticate, baseUrl);
     if (response) {
       yield put(actions.getSessionData());
     } else {
@@ -29,10 +29,10 @@ function* deauthenticate() {
   }
 }
 
-function* sagas() {
+function* sagas(baseUrl = '/api') {
   yield all([
-    takeEvery(types.GET_DATA, getSessionData),
-    takeEvery(types.DEAUTHENTICATE, deauthenticate),
+    takeEvery(types.GET_DATA, getSessionData, baseUrl),
+    takeEvery(types.DEAUTHENTICATE, deauthenticate, baseUrl),
   ]);
 }
 
