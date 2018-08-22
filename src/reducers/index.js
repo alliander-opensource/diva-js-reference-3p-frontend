@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
 import session from './session-reducer';
-import diva from '../diva-react/reducers/diva-reducer';
+import { divaReducer } from '../diva-react';
 
 const rootReducer = combineReducers({
   session,
-  diva,
+  divaReducer,
 });
 
 export default rootReducer;

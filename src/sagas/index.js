@@ -2,12 +2,14 @@ import { all } from 'redux-saga/effects';
 
 import appSaga from './app-saga';
 import sessionSaga from './session-saga';
-import divaSaga from '../diva-react/sagas/diva-saga';
+import { divaSaga } from '../diva-react';
+
+const baseUrl = `${window.env.baseUrl}/api`;
 
 export default function* rootSaga() {
   yield all([
     appSaga(),
-    sessionSaga(),
-    divaSaga(),
+    sessionSaga(baseUrl),
+    divaSaga(baseUrl),
   ]);
 }
