@@ -2077,6 +2077,14 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
+diva-react@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/diva-react/-/diva-react-1.0.2.tgz#ad779005b651783c44472fbdd5037a6f7bc7fbca"
+  dependencies:
+    axios "0.17.0"
+    qrcode.react "0.7.2"
+    react-flexbox-grid "1.1.5"
+
 dns-equal@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/dns-equal/-/dns-equal-1.0.0.tgz#b39e7f1da6eb0a75ba9c17324b34753c47e0654d"
