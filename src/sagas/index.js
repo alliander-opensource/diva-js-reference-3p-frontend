@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
+import { divaSaga } from 'diva-react';
 
 import appSaga from './app-saga';
 import sessionSaga from './session-saga';
-import { divaSaga } from 'diva-react';
 
 const baseUrl = `${window.env.baseUrl}/api`;
 
