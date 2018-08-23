@@ -10,8 +10,7 @@ import IconSocialPerson from 'material-ui/svg-icons/social/person';
 import MenuItem from 'material-ui/MenuItem';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import WithSimpleDivaAuthorization from '../../util/WithSimpleDivaAuthorization';
-import WithDivaAuthorization from '../../util/WithDivaAuthorization';
+import { WithSimpleDivaAuthorization, WithDivaAuthorization } from 'diva-react';
 
 import SideMenu from '../../components/SideMenu/SideMenu';
 
@@ -19,10 +18,13 @@ import Home from '../../containers/Home/Home';
 import MyAccount from '../../containers/MyAccount/MyAccount';
 import MyHome from '../../containers/MyHome/MyHome';
 import UserInfo from '../../containers/UserInfo/UserInfo';
-
-import { deauthenticate } from '../../actions';
+import SignPage from '../SignPage/SignPage';
+import IssueCredentialsPage from '../IssueCredentialsPage/IssueCredentialsPage';
+import IssueEanPage from '../IssueEanPage/IssueEanPage';
 
 import './App.css';
+
+import { actions } from '../../reducers/session-reducer';
 
 const styles = {
   main: {
@@ -32,16 +34,24 @@ const styles = {
 };
 
 class App extends Component {
-  handleDeauth() {
-    const { dispatch } = this.props;
-    dispatch(deauthenticate());
+  componentDidMount() {
+    this.props.getSessionData();
+  }
+
+  deauthenticate() {
+    this.props.deauthenticate();
   }
 
   render() {
-    const RightMenu = props => (
+    const {
+      sessionId,
+      attributes,
+      error,
+    } = this.props;
+
+    const RightMenu = () => (
       <IconMenu
         id="user-menu"
-        {...props}
         iconButtonElement={
           <IconButton id="navbar-user-icon">
             <IconSocialPerson style={{ color: 'red' }} />
@@ -56,7 +66,7 @@ class App extends Component {
         <MenuItem
           primaryText="Clear session"
           id="deauthenticate-button"
-          onClick={() => this.handleDeauth()}
+          onClick={() => this.deauthenticate()}
         />
       </IconMenu>
     );
@@ -68,37 +78,71 @@ class App extends Component {
             title="DIVA 3rd party reference implementation"
             iconElementRight={<RightMenu />}
           />
-          <Grid fluid>
-            <Row>
-              <Col xs={12} sm={3}>
-                <SideMenu />
-              </Col>
+          { sessionId && (
+            <Grid fluid>
+              <Row>
+                <Col xs={12} sm={3}>
+                  <SideMenu />
+                </Col>
 
-              <Col xs>
-                <Paper style={styles.main} id="main-content">
-                  <Route exact path="/" component={Home} />
-                  <Route
-                    path="/my-home"
-                    component={WithDivaAuthorization([
-                      {
-                        label: 'Address',
-                        attributes: ['pbdf.pbdf.idin.address'],
-                      },
-                      {
-                        label: 'City',
-                        attributes: ['pbdf.pbdf.idin.city'],
-                      },
-                    ])(MyHome)}
-                  />
-                  <Route path="/my-account" component={WithSimpleDivaAuthorization('pbdf.pbdf.email.email')(MyAccount)} />
-                </Paper>
-              </Col>
+                <Col xs>
+                  <Paper style={styles.main} id="main-content">
+                    <Route exact path="/" component={Home} />
+                    <Route
+                      path="/my-home"
+                      component={WithDivaAuthorization(
+                        attributes,
+                        [
+                          {
+                            label: 'Address',
+                            attributes: ['irma-demo.MijnOverheid.address.street'],
+                          }, {
+                            label: 'City',
+                            attributes: ['irma-demo.MijnOverheid.address.city'],
+                          },
+                        ],
+                        'my-home-disclose',
+                      )(MyHome)}
+                    />
+                    <Route path="/my-account" component={WithSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email', 'Email')(MyAccount)} />
+                    <Route path="/sign" component={SignPage} />
+                    <Route path="/issue" component={IssueCredentialsPage} />
+                    <Route
+                      path="/issue-ean"
+                      component={WithDivaAuthorization(
+                        attributes,
+                        [
+                          {
+                            label: 'iDin Address',
+                            attributes: ['pbdf.pbdf.idin.address'],
+                          }, {
+                            label: 'iDin City',
+                            attributes: ['pbdf.pbdf.idin.zipcode'],
+                          },
+                        ],
+                        'issue-ean-disclose',
+                      )(IssueEanPage)}
+                    />
+                  </Paper>
+                </Col>
 
-              <Col xs={12} sm={3}>
-                <UserInfo />
-              </Col>
-            </Row>
-          </Grid>
+                <Col xs={12} sm={3}>
+                  <UserInfo />
+                </Col>
+              </Row>
+            </Grid>
+          )}
+
+          { error && (
+            <div>
+              <h3> Error: { error.reason } </h3>
+              <i> { error.response.data } </i>
+            </div>
+          )}
+
+          { !sessionId && !error && (
+            <div> Loading </div>
+          )}
         </div>
       </BrowserRouter>
     );
@@ -106,7 +150,21 @@ class App extends Component {
 }
 
 App.propTypes = {
-  dispatch: PropTypes.func,
+  sessionId: PropTypes.string,
+  attributes: PropTypes.objectOf(PropTypes.array),
+  getSessionData: PropTypes.func,
+  deauthenticate: PropTypes.func,
+  error: PropTypes.shape({
+    reason: PropTypes.string,
+    response: PropTypes.object,
+  }),
 };
 
-export default connect()(App);
+const mapStateToProps = state => state.session;
+
+const mapDispatchToProps = {
+  getSessionData: actions.getSessionData,
+  deauthenticate: actions.deauthenticate,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
