@@ -1,7 +1,8 @@
 # diva-js-reference-3p-frontend
 
-This repository contains an example/reference frontend implementation to show a nice GUI for [diva-js-reference-3p-backend](https://github.com/Alliander/diva-js-reference-3p-backend)
-that uses the DIVA SDK [diva-irma-js](https://github.com/Alliander/diva-irma-js) to easily integrate [IRMA attributes](https://privacybydesign.foundation/irma-verifier/) into NodeJS based applications.
+This repository contains an example/reference frontend implementation that uses [diva-react](https://github.com/Alliander/diva-react) to show a nice GUI for IRMA authorization.
+
+For the backend, [diva-js-reference-3p-backend](https://github.com/Alliander/diva-js-reference-3p-backend) is used in combination with [diva-irma-js](https://github.com/Alliander/diva-irma-js) to easily integrate [IRMA attributes](https://privacybydesign.foundation/irma-verifier/) into NodeJS based applications.
 
 IRMA is a decentralized, attribute based Identity Management protocol that allows easy and fine-grained authentication (and based on specific attributes) authorization. Attributes are issued by trusted issuers and therefore provide easy validation of users.
 
@@ -12,24 +13,9 @@ This frontend in particular demonstrates
 - How attribute based authorization can be integrated into a frontend application.
 - How frontends may use and display authentication/authorization status to their users.
 
-# DIVA middleware components
+## Diva-react
 
-Any container component can be wrapped with the `WithSimpleDivaAuthorization` component to control identity requirements.
-For example to require the `pbdf.pbdf.email.email` attribute,
-
-```
-<Route 	path="/my-account”
-	component={ MyAccount }/>
-```
-
-becomes
-
-```
-<Route 	path="/my-account”
-	component={ WithSimpleDivaAuthorization('pbdf.pbdf.email.email')(MyAccount) }/>
-```
-
-Note: for more complex scenarios see the `WithDivaAuthorization` higher order component.
+This application is just an example implementation: it uses [diva-react](https://github.com/Alliander/diva-react) as its main library, see the documentation of that project for more details on how to integrate `diva-react` in your own application.
 
 ## Running the application
 
@@ -38,6 +24,8 @@ Note: for more complex scenarios see the `WithDivaAuthorization` higher order co
 - `npm start`
 
 Note: for development, use `npm run dev` to run the application in development mode with hot reloading.
+
+Note that in order for this application to work, the [diva-js-reference-3p-backend](https://github.com/Alliander/diva-js-reference-3p-backend) needs to be running as well.
 
 ## Tests
 
