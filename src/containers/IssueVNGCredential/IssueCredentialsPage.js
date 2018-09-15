@@ -1,12 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { IssueCredentials } from 'diva-react';
+import IssueCredentials from './IssueCredentials';
 
 const IssueCredentialsPage = () => (
   <IssueCredentials
-    viewId="issue-brp1"
-    credentialType="BRP1"
+    viewId="issue-fieldlab"
+    credentialType="FIELDLAB"
   />
 );
 

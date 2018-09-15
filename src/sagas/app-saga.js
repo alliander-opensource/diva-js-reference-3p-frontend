@@ -1,17 +1,25 @@
 import { put, all, takeEvery } from 'redux-saga/effects';
 
-import { types as divaTypes } from 'diva-react';
-import { actions as sessionActions } from '../reducers/session-reducer';
+import { types as divaTypes, actions } from 'diva-react';
 
-export function* onDivaSessionCompleted(action) {
-  if (action.serverStatus === 'DONE') {
-    yield put(sessionActions.getSessionData());
+function* onPollResult(action) {
+  if (action.data.serverStatus === 'CONNECTED') {
+    yield put(actions.abandonIrmaSession(action.viewId, action.irmaSessionId));
+    yield put(actions.startIrmaSession(action.viewId, 'ISSUE', { credentialsType: 'FIELDLAB' }));
+  }
+}
+
+function* onSessionCompleted(action) {
+  if (action.data.serverStatus === 'NOT_FOUND') {
+    yield put(actions.abandonIrmaSession(action.viewId, action.irmaSessionId));
+    yield put(actions.startIrmaSession(action.viewId, 'ISSUE', { credentialsType: 'FIELDLAB' }));
   }
 }
 
 function* sagas() {
   yield all([
-    takeEvery(divaTypes.SESSION_COMPLETED, onDivaSessionCompleted),
+    takeEvery(divaTypes.PROCESS_POLL_SUCCESS, onPollResult), // Scanned
+    takeEvery(divaTypes.SESSION_COMPLETED, onSessionCompleted), // Timeout
   ]);
 }
 
