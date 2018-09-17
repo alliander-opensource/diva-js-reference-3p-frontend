@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "axios": "0.17.0",
-    "diva-react": "1.0.2",
+    "diva-react": "1.1.0",
     "material-ui": "0.19.4",
     "react": "16.4.2",
     "react-dom": "16.4.2",
