@@ -2229,9 +2229,9 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
-diva-react@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/diva-react/-/diva-react-1.0.2.tgz#ad779005b651783c44472fbdd5037a6f7bc7fbca"
+diva-react@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/diva-react/-/diva-react-1.1.1.tgz#6f2ac95df3aa9c22c2e596fe1cb4710309a129bb"
   dependencies:
     axios "0.17.0"
     qrcode.react "0.7.2"
