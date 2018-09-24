@@ -1,36 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-flexbox-grid';
 
-const MyHome = ({ addresses, cities, session }) => (
-  <div style={{ padding: '20px' }} id="my-home-page">
-    <h2>My Home</h2>
-    <br />
-    <br />
-    Address: { (addresses && addresses.length > 0) ? addresses[0] : 'Unknown address.'}<br />
-    City: { (cities && cities.length > 0) ? cities[0] : 'Unknown city.'}<br />
-    <br />
-    <Row center="xs">
-      <Col xs>
-        {JSON.stringify(session)}
-        <br />
-      </Col>
-    </Row>
-  </div>
-);
+class MyHome extends Component {
+  componentWillMount() {
+    const { disclosureResult } = this.props;
+    const signature = disclosureResult.signature;
+    if (signature !== undefined && signature.jwt !== undefined) {
+      window.location.href = `http://fieldlab.westeurope.cloudapp.azure.com:3030/ebase/akte.eb?irma_token=${signature.jwt}`;
+    }
+  }
+
+  render() {
+    return (
+      <div style={{ padding: '20px' }} id="my-home-page">
+        Je wordt doorgestuurd...
+      </div>
+    );
+  }
+}
 
 MyHome.propTypes = {
-  addresses: PropTypes.arrayOf(PropTypes.string).isRequired,
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  disclosureResult: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {
-  const { session } = state;
+  const { divaReducer } = state;
   return {
-    addresses: session.attributes['irma-demo.MijnOverheid.address.street'],
-    cities: session.attributes['irma-demo.MijnOverheid.address.city'],
-    session,
+    disclosureResult: divaReducer.sessions['my-home-disclose'],
   };
 }
 
