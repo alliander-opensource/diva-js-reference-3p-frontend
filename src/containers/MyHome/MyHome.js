@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
 
-const MyHome = ({ addresses, cities }) => (
+const MyHome = ({ addresses, cities, session }) => (
   <div style={{ padding: '20px' }} id="my-home-page">
     <h2>My Home</h2>
     <br />
@@ -13,7 +13,7 @@ const MyHome = ({ addresses, cities }) => (
     <br />
     <Row center="xs">
       <Col xs>
-        <img src="/api/images/address.jpg" alt="Your house on the map" />
+        {JSON.stringify(session)}
         <br />
       </Col>
     </Row>
@@ -30,6 +30,7 @@ function mapStateToProps(state) {
   return {
     addresses: session.attributes['irma-demo.MijnOverheid.address.street'],
     cities: session.attributes['irma-demo.MijnOverheid.address.city'],
+    session,
   };
 }
 

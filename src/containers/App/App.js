@@ -12,12 +12,12 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { WithSimpleDivaAuthorization, WithDivaAuthorization } from 'diva-react';
 
-import SideMenu from '../../components/SideMenu/SideMenu';
+// import SideMenu from '../../components/SideMenu/SideMenu';
 
 import Home from '../../containers/Home/Home';
 import MyAccount from '../../containers/MyAccount/MyAccount';
 import MyHome from '../../containers/MyHome/MyHome';
-import UserInfo from '../../containers/UserInfo/UserInfo';
+// import UserInfo from '../../containers/UserInfo/UserInfo';
 import SignPage from '../SignPage/SignPage';
 import IssueCredentialsPage from '../IssueCredentialsPage/IssueCredentialsPage';
 import IssueEanPage from '../IssueEanPage/IssueEanPage';
@@ -74,22 +74,19 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <AppBar
-            title="DIVA 3rd party reference implementation"
-            iconElementRight={<RightMenu />}
-          />
           { sessionId && (
             <Grid fluid>
               <Row>
-                <Col xs={12} sm={3}>
-                  <SideMenu />
+                <Col xs style={{ textAlign: 'center', margin: '20px' }}>
+                  <img src="http://www.warmtenetwerk.nl/assets/Uploads/gem.haarlem.jpg" alt="Logo Haarlem" style={{ width: '500px' }} />
                 </Col>
-
+              </Row>
+              <Row>
                 <Col xs>
                   <Paper style={styles.main} id="main-content">
-                    <Route exact path="/" component={Home} />
                     <Route
-                      path="/my-home"
+                      exact
+                      path="/"
                       component={WithDivaAuthorization(
                         attributes,
                         [
@@ -104,30 +101,7 @@ class App extends Component {
                         'my-home-disclose',
                       )(MyHome)}
                     />
-                    <Route path="/my-account" component={WithSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email', 'Email')(MyAccount)} />
-                    <Route path="/sign" component={SignPage} />
-                    <Route path="/issue" component={IssueCredentialsPage} />
-                    <Route
-                      path="/issue-ean"
-                      component={WithDivaAuthorization(
-                        attributes,
-                        [
-                          {
-                            label: 'iDin Address',
-                            attributes: ['pbdf.pbdf.idin.address'],
-                          }, {
-                            label: 'iDin City',
-                            attributes: ['pbdf.pbdf.idin.zipcode'],
-                          },
-                        ],
-                        'issue-ean-disclose',
-                      )(IssueEanPage)}
-                    />
                   </Paper>
-                </Col>
-
-                <Col xs={12} sm={3}>
-                  <UserInfo />
                 </Col>
               </Row>
             </Grid>
