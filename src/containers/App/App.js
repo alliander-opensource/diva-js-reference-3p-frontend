@@ -21,6 +21,10 @@ const styles = {
 };
 
 class App extends Component {
+  componentWillMount() {
+    this.props.deauthenticate();
+  }
+
   componentDidMount() {
     this.props.getSessionData();
   }
@@ -56,11 +60,8 @@ class App extends Component {
                         attributes,
                         [
                           {
-                            label: 'Address',
-                            attributes: ['irma-demo.MijnOverheid.address.street'],
-                          }, {
-                            label: 'City',
-                            attributes: ['irma-demo.MijnOverheid.address.city'],
+                            label: 'Burgerservicenummer',
+                            attributes: ['pbdf.nijmegen.bsn.bsn'],
                           },
                         ],
                         'my-home-disclose',
