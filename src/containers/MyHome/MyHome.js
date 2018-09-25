@@ -6,7 +6,7 @@ import qs from 'qs';
 
 function constructRedirectUri(urlParams, irmaToken) {
   const parsedParams = qs.parse(urlParams.replace('?', ''));
-  return `${parsedParams.ufsReturnURL}?irmaToken=${irmaToken}`;
+  return `${parsedParams.ufsReturnURL}&irmaToken=${irmaToken}`;
 }
 
 class MyHome extends Component {
