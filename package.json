@@ -11,6 +11,7 @@
     "axios": "0.17.0",
     "diva-react": "1.0.2",
     "material-ui": "0.19.4",
+    "qs": "6.5.2",
     "react": "16.4.2",
     "react-dom": "16.4.2",
     "react-flexbox-grid": "1.1.5",

@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import qs from 'qs';
+
+function constructRedirectUri(urlParams, irmaToken) {
+  const parsedParams = qs.parse(urlParams.replace('?', ''));
+  return `${parsedParams.ufsReturnURL}?irmaToken=${irmaToken}`;
+}
 
 class MyHome extends Component {
   componentWillMount() {
-    const { disclosureResult } = this.props;
-    const signature = disclosureResult.signature;
+    const { disclosureResult, location } = this.props;
+    const signature = (disclosureResult !== undefined) ? disclosureResult.signature : undefined;
     if (signature !== undefined && signature.jwt !== undefined) {
-      window.location.href = `http://fieldlab.westeurope.cloudapp.azure.com:3030/ebase/akte.eb?irma_token=${signature.jwt}`;
+      const redirectUri = constructRedirectUri(location.search, signature.jwt);
+      window.location.href = redirectUri;
     }
   }
 
@@ -21,7 +29,8 @@ class MyHome extends Component {
 }
 
 MyHome.propTypes = {
-  disclosureResult: PropTypes.objectOf(PropTypes.object).isRequired,
+  disclosureResult: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  location: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 function mapStateToProps(state) {
@@ -31,4 +40,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(MyHome);
+export default withRouter(connect(mapStateToProps)(MyHome));
