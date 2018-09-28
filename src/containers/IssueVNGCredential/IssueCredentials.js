@@ -41,9 +41,9 @@ class IssueCredentials extends Component {
       <div>
         <div
           style={{
-            backgroundColor: '#FFBC2C',
             height: '230px',
             padding: '30px',
+            textAlign: 'center',
           }}
         >
           <img
@@ -52,7 +52,7 @@ class IssueCredentials extends Component {
               maxHeight: '200px',
             }}
             alt="logo"
-            src="https://d95acc204d31494586c35e16014afbba.objectstore.eu/static/common-ground/logo-top.svg"
+            src="https://privacybydesign.foundation/irmavng.png"
           />
         </div>
 
