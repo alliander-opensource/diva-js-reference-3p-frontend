@@ -23,10 +23,10 @@ spec:
         resources:
           limits:
             cpu: 500m
-            memory: 256Mi
+            memory: 200Mi
           requests:
-            cpu: 100m
-            memory: 256Mi
+            cpu: 10m
+            memory: 30Mi
         ports:
         - containerPort: 80
           protocol: TCP
