@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "axios": "0.17.0",
-    "diva-react": "1.0.2",
+    "diva-react": "https://github.com/Alliander/diva-react#new-irma",
     "material-ui": "0.19.4",
     "react": "16.4.2",
     "react-dom": "16.4.2",
@@ -21,7 +21,6 @@
     "redux-logger": "3.0.6",
     "redux-saga": "0.16.0"
   },
-  "proxy": "http://localhost:4000",
   "scripts": {
     "start": "react-scripts start",
     "dev": "react-scripts start",

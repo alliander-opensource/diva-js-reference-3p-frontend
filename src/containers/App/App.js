@@ -10,7 +10,7 @@ import IconSocialPerson from 'material-ui/svg-icons/social/person';
 import MenuItem from 'material-ui/MenuItem';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import { WithSimpleDivaAuthorization, WithDivaAuthorization } from 'diva-react';
+import { WithSimpleDivaAuthorization, WithDivaAuthorization, actions as divaActions } from 'diva-react';
 
 import SideMenu from '../../components/SideMenu/SideMenu';
 
@@ -26,8 +26,6 @@ import IssueEanPage from '../IssueEanPage/IssueEanPage';
 
 import './App.css';
 
-import { actions } from '../../reducers/session-reducer';
-
 const styles = {
   main: {
     minHeight: 200,
@@ -36,20 +34,17 @@ const styles = {
 };
 
 class App extends Component {
-  componentDidMount() {
-    this.props.getSessionData();
-  }
-
   deauthenticate() {
-    this.props.deauthenticate();
+    this.props.deauthenticate(); // TODO: abandon all running sessions once clearSession() is fired!
   }
 
   render() {
     const {
-      sessionId,
       attributes,
-      error,
+      // error,
     } = this.props;
+
+    const error = undefined;
 
     const RightMenu = () => (
       <IconMenu
@@ -80,7 +75,7 @@ class App extends Component {
             title="DIVA 3rd party reference implementation"
             iconElementRight={<RightMenu />}
           />
-          { sessionId && (
+          { true && (
             <Grid fluid>
               <Row>
                 <Col xs={12} sm={3}>
@@ -143,10 +138,6 @@ class App extends Component {
               <i> { error.response.data } </i>
             </div>
           )}
-
-          { !sessionId && !error && (
-            <div> Loading </div>
-          )}
         </div>
       </BrowserRouter>
     );
@@ -154,21 +145,16 @@ class App extends Component {
 }
 
 App.propTypes = {
-  sessionId: PropTypes.string,
-  attributes: PropTypes.objectOf(PropTypes.array),
-  getSessionData: PropTypes.func,
+  attributes: PropTypes.arrayOf(PropTypes.object),
   deauthenticate: PropTypes.func,
-  error: PropTypes.shape({
-    reason: PropTypes.string,
-    response: PropTypes.object,
-  }),
 };
 
-const mapStateToProps = state => state.session;
+const mapStateToProps = state => ({
+  attributes: state.divaReducer.attributes,
+});
 
 const mapDispatchToProps = {
-  getSessionData: actions.getSessionData,
-  deauthenticate: actions.deauthenticate,
+  deauthenticate: divaActions.clearSession,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

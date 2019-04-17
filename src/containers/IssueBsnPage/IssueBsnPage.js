@@ -6,7 +6,14 @@ import { IssueCredentials } from 'diva-react';
 const IssueBsnPage = () => (
   <IssueCredentials
     viewId="issue-bsn"
-    credentialType="BSN"
+    credentials={
+      [{
+        credential: 'irma-demo.nijmegen.bsn',
+        attributes: {
+          bsn: '302641828',
+        },
+      }]
+    }
   />
 );
 

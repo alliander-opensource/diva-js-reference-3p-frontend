@@ -17,9 +17,11 @@ MyAccount.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { session } = state;
+  const { divaReducer } = state;
   return {
-    emails: session.attributes['pbdf.pbdf.email.email'],
+    emails: divaReducer.attributes
+      .filter(el => el.id === 'pbdf.pbdf.email.email')
+      .map(el => el.rawvalue),
   };
 }
 
