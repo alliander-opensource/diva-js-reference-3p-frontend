@@ -1,10 +1,15 @@
 import { all } from 'redux-saga/effects';
 import { divaSaga } from 'diva-react';
 
-const irmaServer = 'https://POINT_TO_IRMA_SERVER';
+const irmaConfig = {
+  irmaUrl: 'https://FILL_IN',
+  jwtEnabled: false,
+  jwtPublicKey: 'FILL_IN',
+};
+
 
 export default function* rootSaga() {
   yield all([
-    divaSaga(irmaServer),
+    divaSaga(irmaConfig),
   ]);
 }
