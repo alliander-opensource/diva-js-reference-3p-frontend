@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import AppBar from 'material-ui/AppBar';
-import Paper from 'material-ui/Paper';
-import IconMenu from 'material-ui/IconMenu';
-import IconButton from 'material-ui/IconButton';
-import IconSocialPerson from 'material-ui/svg-icons/social/person';
-import MenuItem from 'material-ui/MenuItem';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-
 import { WithSimpleDivaAuthorization, WithDivaAuthorization, actions as divaActions } from 'diva-react';
 
-import SideMenu from '../../components/SideMenu/SideMenu';
+// Material UI
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import MenuIcon from '@material-ui/icons/Menu';
 
+import SideMenu from '../../components/SideMenu/SideMenu';
+import RightMenu from '../../components/RightMenu/RightMenu';
 import Home from '../../containers/Home/Home';
 import MyAccount from '../../containers/MyAccount/MyAccount';
 import MyHome from '../../containers/MyHome/MyHome';
@@ -46,35 +47,20 @@ class App extends Component {
 
     const error = undefined;
 
-    const RightMenu = () => (
-      <IconMenu
-        id="user-menu"
-        iconButtonElement={
-          <IconButton id="navbar-user-icon">
-            <IconSocialPerson style={{ color: 'red' }} />
-          </IconButton>
-        }
-        targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-      >
-        <Link to="/">
-          <MenuItem primaryText="About" />
-        </Link>
-        <MenuItem
-          primaryText="Clear session"
-          id="deauthenticate-button"
-          onClick={() => this.deauthenticate()}
-        />
-      </IconMenu>
-    );
-
     return (
       <BrowserRouter>
         <div>
-          <AppBar
-            title="DIVA 3rd party reference implementation"
-            iconElementRight={<RightMenu />}
-          />
+          <AppBar position="static" style={{ background: '#00bcd4' }}>
+            <Toolbar>
+              <IconButton color="inherit" aria-label="Menu" style={{ marginLeft: -12 }}>
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h5" color="inherit" style={{ flexGrow: 1 }}>
+                DIVA 3rd party reference implementation
+              </Typography>
+              <RightMenu deauthenticate={this.deauthenticate} />
+            </Toolbar>
+          </AppBar>
           { true && (
             <Grid fluid>
               <Row>

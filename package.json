@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "axios": "0.17.0",
-    "diva-react": "https://github.com/Alliander/diva-react#new-irma",
-    "material-ui": "0.19.4",
+    "@material-ui/core": "3.9.2",
+    "@material-ui/icons": "3.0.2",
     "react": "16.4.2",
     "react-dom": "16.4.2",
     "react-flexbox-grid": "1.1.5",
@@ -45,7 +45,6 @@
   ],
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "cypress": "1.0.3",
     "eslint": "4.8.0",
     "eslint-config-airbnb": "15.1.0",
     "eslint-config-react-app": "2.0.1",

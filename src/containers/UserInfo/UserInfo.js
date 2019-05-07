@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Paper from 'material-ui/Paper';
-import { List, ListItem } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import IconActionLabel from 'material-ui/svg-icons/action/label';
-import IconSocialPerson from 'material-ui/svg-icons/social/person';
+import Paper from '@material-ui/core/Paper';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import IconActionLabel from '@material-ui/icons/Label';
+import IconSocialPerson from '@material-ui/icons/Person';
 
 const style = {
   height: '100%',
@@ -17,23 +20,27 @@ const UserInfo = ({ attributes, lastUpdated }) => (
   <div id="user-panel">
     <Paper style={style}>
       <List>
-        <ListItem primaryText="Disclosed attributes" leftIcon={<IconSocialPerson />} />
+        <ListItem>
+          <ListItemIcon><IconSocialPerson /></ListItemIcon>
+          <ListItemText primary="Disclosed attributes" />
+        </ListItem>
       </List>
 
       <Divider />
 
       <List>
         {attributes.map(a => (
-          <ListItem
-            key={a.rawvalue + a.id}
-            primaryText={a.rawvalue}
-            secondaryText={a.id}
-            leftIcon={<IconActionLabel />}
-          />
+          <ListItem key={a.rawvalue + a.id}>
+            <ListItemText
+              primary={a.rawvalue}
+              secondary={a.id}
+            />
+            <ListItemIcon><IconActionLabel /></ListItemIcon>
+          </ListItem>
         ))
         }
         { attributes.length === 0 &&
-          <ListItem primaryText="There are yet no attributes disclosed." />
+          <ListItem primary="There are yet no attributes disclosed." />
         }
       </List>
 
@@ -42,7 +49,9 @@ const UserInfo = ({ attributes, lastUpdated }) => (
           <Divider />
           <List>
             <ListItem>
-              Last updated at {new Date(lastUpdated).toLocaleTimeString()}.
+              <ListItemText>
+                Last updated at {new Date(lastUpdated).toLocaleTimeString()}.
+              </ListItemText>
             </ListItem>
           </List>
         </div>
