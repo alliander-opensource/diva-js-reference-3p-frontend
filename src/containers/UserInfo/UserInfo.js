@@ -39,12 +39,13 @@ const UserInfo = ({ attributes, lastUpdated }) => (
           </ListItem>
         ))
         }
-        { attributes.length === 0 &&
-          <ListItem primary="There are yet no attributes disclosed." />
+        { attributes.length === 0
+          && <ListItem primary="There are yet no attributes disclosed." />
         }
       </List>
 
-      {lastUpdated &&
+      {lastUpdated
+        && (
         <div>
           <Divider />
           <List>
@@ -55,6 +56,7 @@ const UserInfo = ({ attributes, lastUpdated }) => (
             </ListItem>
           </List>
         </div>
+        )
       }
 
     </Paper>

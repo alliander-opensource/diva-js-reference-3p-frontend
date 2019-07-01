@@ -13,10 +13,12 @@
       "jasmine": true
     },
     "rules": {
+      // TODO enable some of these rules and fix code!
       "import/no-extraneous-dependencies": ["off"],
       "import/no-unresolved": ["off"],
       "react/jsx-filename-extension": ["off"],
-      "react/require-default-props": ["off"]
+      "react/require-default-props": ["off"],
+      "react/jsx-one-expression-per-line": ["off"]
     },
     "plugins": [
       "jasmine",
