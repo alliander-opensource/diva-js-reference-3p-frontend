@@ -34,81 +34,79 @@ const styles = {
   },
 };
 
-const App = ({ attributes, deauthenticate }) => {
-  return (
-    <BrowserRouter>
-      <div>
-        <AppBar position="static" style={{ background: '#00bcd4' }}>
-          <Toolbar>
-            <IconButton color="inherit" aria-label="Menu" style={{ marginLeft: -12 }}>
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h5" color="inherit" style={{ flexGrow: 1 }}>
-              DIVA 3rd party reference implementation
-            </Typography>
-            <RightMenu deauthenticate={deauthenticate} />
-          </Toolbar>
-        </AppBar>
-        { true && (
-          <Grid fluid>
-            <Row>
-              <Col xs={12} sm={3}>
-                <SideMenu />
-              </Col>
+const App = ({ attributes, deauthenticate }) => (
+  <BrowserRouter>
+    <div>
+      <AppBar position="static" style={{ background: '#00bcd4' }}>
+        <Toolbar>
+          <IconButton color="inherit" aria-label="Menu" style={{ marginLeft: -12 }}>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h5" color="inherit" style={{ flexGrow: 1 }}>
+            DIVA 3rd party reference implementation
+          </Typography>
+          <RightMenu deauthenticate={deauthenticate} />
+        </Toolbar>
+      </AppBar>
+      { true && (
+        <Grid fluid>
+          <Row>
+            <Col xs={12} sm={3}>
+              <SideMenu />
+            </Col>
 
-              <Col xs>
-                <Paper style={styles.main} id="main-content">
-                  <Route exact path="/" component={Home} />
-                  <Route
-                    path="/my-home"
-                    component={WithDivaAuthorization(
-                      attributes,
-                      [
-                        {
-                          label: 'Address',
-                          attributes: ['irma-demo.MijnOverheid.address.street'],
-                        }, {
-                          label: 'City',
-                          attributes: ['irma-demo.MijnOverheid.address.city'],
-                        },
-                      ],
-                      'my-home-disclose',
-                    )(MyHome)}
-                  />
-                  <Route path="/my-account" component={WithSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email', 'Email')(MyAccount)} />
-                  <Route path="/sign" component={SignPage} />
-                  <Route path="/issue" component={IssueCredentialsPage} />
-                  <Route path="/issue-bsn" component={IssueBsnPage} />
-                  <Route path="/issue-vrn" component={IssueVrnPage} />
-                  <Route
-                    path="/issue-ean"
-                    component={WithDivaAuthorization(
-                      attributes,
-                      [
-                        {
-                          label: 'iDin Address',
-                          attributes: ['pbdf.pbdf.idin.address'],
-                        }, {
-                          label: 'iDin City',
-                          attributes: ['pbdf.pbdf.idin.zipcode'],
-                        },
-                      ],
-                      'issue-ean-disclose',
-                    )(IssueEanPage)}
-                  />
-                </Paper>
-              </Col>
+            <Col xs>
+              <Paper style={styles.main} id="main-content">
+                <Route exact path="/" component={Home} />
+                <Route
+                  path="/my-home"
+                  component={WithDivaAuthorization(
+                    attributes,
+                    [
+                      {
+                        label: 'Address',
+                        attributes: ['irma-demo.MijnOverheid.address.street'],
+                      }, {
+                        label: 'City',
+                        attributes: ['irma-demo.MijnOverheid.address.city'],
+                      },
+                    ],
+                    'my-home-disclose',
+                  )(MyHome)}
+                />
+                <Route path="/my-account" component={WithSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email', 'Email')(MyAccount)} />
+                <Route path="/sign" component={SignPage} />
+                <Route path="/issue" component={IssueCredentialsPage} />
+                <Route path="/issue-bsn" component={IssueBsnPage} />
+                <Route path="/issue-vrn" component={IssueVrnPage} />
+                <Route
+                  path="/issue-ean"
+                  component={WithDivaAuthorization(
+                    attributes,
+                    [
+                      {
+                        label: 'iDin Address',
+                        attributes: ['pbdf.pbdf.idin.address'],
+                      }, {
+                        label: 'iDin City',
+                        attributes: ['pbdf.pbdf.idin.zipcode'],
+                      },
+                    ],
+                    'issue-ean-disclose',
+                  )(IssueEanPage)}
+                />
+              </Paper>
+            </Col>
 
-              <Col xs={12} sm={3}>
-                <UserInfo />
-              </Col>
-            </Row>
-          </Grid>
-        )}
-      </div>
-    </BrowserRouter>
-  );
-};
+            <Col xs={12} sm={3}>
+              <UserInfo />
+            </Col>
+          </Row>
+        </Grid>
+      )}
+    </div>
+  </BrowserRouter>
+);
 
 App.propTypes = {
   attributes: PropTypes.arrayOf(PropTypes.object),
