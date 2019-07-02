@@ -1,6 +1,6 @@
 {
   "name": "diva-js-reference-3p-frontend",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A frontend for a reference implementation that uses the Diva SDK to verify IRMA attributes.",
   "private": true,
   "repository": {

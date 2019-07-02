@@ -35,7 +35,6 @@ const styles = {
 };
 
 const App = ({ attributes, deauthenticate }) => {
-  const error = undefined; // TODO
   return (
     <BrowserRouter>
       <div>
@@ -105,13 +104,6 @@ const App = ({ attributes, deauthenticate }) => {
               </Col>
             </Row>
           </Grid>
-        )}
-
-        { error && (
-          <div>
-            <h3> Error: { error.reason } </h3>
-            <i> { error.response.data } </i>
-          </div>
         )}
       </div>
     </BrowserRouter>
