@@ -5,17 +5,21 @@ import { Sign } from 'diva-react';
 
 const SignPage = () => {
   const message = 'I owe you nothing';
-  const attributesForSigning = [{
-    label: 'Address',
-    attributes: ['irma-demo.MijnOverheid.address.street'],
-  }, {
-    label: 'City',
-    attributes: ['irma-demo.MijnOverheid.address.city'],
-  }];
+  const attributesForSigning = [
+    [
+      [
+        'irma-demo.MijnOverheid.address.street',
+        'irma-demo.MijnOverheid.address.city',
+      ],
+    ],
+  ];
+
+  const label = 'Address, City';
 
   return (
     <Sign
       requiredAttributes={attributesForSigning}
+      label={label}
       message={message}
       viewId="sign-1"
     />

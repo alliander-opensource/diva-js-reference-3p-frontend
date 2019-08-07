@@ -63,18 +63,22 @@ const App = ({ attributes, deauthenticate }) => (
                   component={WithDivaAuthorization(
                     attributes,
                     [
-                      {
-                        label: 'Address',
-                        attributes: ['irma-demo.MijnOverheid.address.street'],
-                      }, {
-                        label: 'City',
-                        attributes: ['irma-demo.MijnOverheid.address.city'],
-                      },
+                      [
+                        [
+                          'irma-demo.MijnOverheid.address.street',
+                          'irma-demo.MijnOverheid.address.city',
+                        ],
+                        [
+                          'pbdf.gemeente.address.street',
+                          'pbdf.gemeente.address.city',
+                        ],
+                      ],
                     ],
+                    'Address, City (Demo or BRP)',
                     'my-home-disclose',
                   )(MyHome)}
                 />
-                <Route path="/my-account" component={WithSimpleDivaAuthorization(attributes, 'pbdf.pbdf.email.email', 'Email')(MyAccount)} />
+                <Route path="/my-account" component={WithSimpleDivaAuthorization(attributes, ['pbdf.pbdf.email.email'], 'Email')(MyAccount)} />
                 <Route path="/sign" component={SignPage} />
                 <Route path="/issue" component={IssueCredentialsPage} />
                 <Route path="/issue-bsn" component={IssueBsnPage} />
@@ -84,14 +88,14 @@ const App = ({ attributes, deauthenticate }) => (
                   component={WithDivaAuthorization(
                     attributes,
                     [
-                      {
-                        label: 'iDin Address',
-                        attributes: ['pbdf.pbdf.idin.address'],
-                      }, {
-                        label: 'iDin City',
-                        attributes: ['pbdf.pbdf.idin.zipcode'],
-                      },
+                      [
+                        [
+                          'pbdf.pbdf.idin.address',
+                          'pbdf.pbdf.idin.zipcode',
+                        ],
+                      ],
                     ],
+                    'iDin Address, iDin City',
                     'issue-ean-disclose',
                   )(IssueEanPage)}
                 />
