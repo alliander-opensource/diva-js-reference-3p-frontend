@@ -2,9 +2,9 @@ import { all } from 'redux-saga/effects';
 import { divaSaga } from 'diva-react';
 
 const irmaConfig = {
-  irmaUrl: 'https://FILL_IN',
-  jwtEnabled: false,
-  jwtPublicKey: 'FILL_IN',
+  irmaUrl: window.env.irmaUrl,
+  jwtEnabled: window.env.jwtEnabled,
+  jwtPublicKey: window.env.jwtPublicKey,
 };
 
 
