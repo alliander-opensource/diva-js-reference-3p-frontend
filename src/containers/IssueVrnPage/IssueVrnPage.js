@@ -6,7 +6,14 @@ import { IssueCredentials } from 'diva-react';
 const IssueVrnPage = () => (
   <IssueCredentials
     viewId="issue-vrn"
-    credentialType="VRN"
+    credentials={
+      [{
+        credential: 'irma-demo.rdw.vrn',
+        attributes: {
+          vrn: '00-00-00',
+        },
+      }]
+    }
   />
 );
 

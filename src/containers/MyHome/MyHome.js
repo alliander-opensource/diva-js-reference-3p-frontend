@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-flexbox-grid';
 
 const MyHome = ({ addresses, cities }) => (
   <div style={{ padding: '20px' }} id="my-home-page">
@@ -11,12 +10,6 @@ const MyHome = ({ addresses, cities }) => (
     Address: { (addresses && addresses.length > 0) ? addresses[0] : 'Unknown address.'}<br />
     City: { (cities && cities.length > 0) ? cities[0] : 'Unknown city.'}<br />
     <br />
-    <Row center="xs">
-      <Col xs>
-        <img src="/api/images/address.jpg" alt="Your house on the map" />
-        <br />
-      </Col>
-    </Row>
   </div>
 );
 
@@ -26,10 +19,14 @@ MyHome.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { session } = state;
+  const { divaReducer } = state;
   return {
-    addresses: session.attributes['irma-demo.MijnOverheid.address.street'],
-    cities: session.attributes['irma-demo.MijnOverheid.address.city'],
+    addresses: divaReducer.attributes
+      .filter(el => el.id === 'irma-demo.MijnOverheid.address.street')
+      .map(el => el.rawvalue),
+    cities: divaReducer.attributes
+      .filter(el => el.id === 'irma-demo.MijnOverheid.address.city')
+      .map(el => el.rawvalue),
   };
 }
 

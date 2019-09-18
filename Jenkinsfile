@@ -1,9 +1,12 @@
 def buildClosure = {
-  def nodeHome = tool name: 'nodejs-8.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+  def nodeHome = tool name: 'nodejs-dubnium', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
   env.PATH = "${nodeHome}/bin:${env.PATH}"
 
   stage('Install')
   sh 'yarn'
+  sh 'git submodule init && git submodule update'
+  sh 'cd diva-react && yarn && yarn run build && yarn link && cd ..'
+  sh 'yarn link diva-react'
 
   stage('Lint')
   sh 'yarn run lint'

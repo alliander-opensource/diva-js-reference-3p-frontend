@@ -1,15 +1,15 @@
 import { all } from 'redux-saga/effects';
 import { divaSaga } from 'diva-react';
 
-import appSaga from './app-saga';
-import sessionSaga from './session-saga';
+const irmaConfig = {
+  irmaUrl: window.env.irmaUrl,
+  jwtEnabled: window.env.jwtEnabled,
+  jwtPublicKey: window.env.jwtPublicKey,
+};
 
-const baseUrl = `${window.env.baseUrl}/api`;
 
 export default function* rootSaga() {
   yield all([
-    appSaga(),
-    sessionSaga(baseUrl),
-    divaSaga(baseUrl),
+    divaSaga(irmaConfig),
   ]);
 }

@@ -1,0 +1,3 @@
+[submodule "diva-react"]
+	path = diva-react
+	url = https://github.com/Alliander/diva-react

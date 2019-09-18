@@ -1,15 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Paper from 'material-ui/Paper';
-import { List, ListItem } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import IconActionHome from 'material-ui/svg-icons/action/home';
-import IconSocialPerson from 'material-ui/svg-icons/social/person';
-import IconAssignmentReturned from 'material-ui/svg-icons/action/assignment-returned';
-import IconAddLocation from 'material-ui/svg-icons/maps/add-location';
-import IconCreate from 'material-ui/svg-icons/content/create';
-import IconDirectionsCar from 'material-ui/svg-icons/maps/directions-car';
-import IconPermIdentity from 'material-ui/svg-icons/action/perm-identity';
+
+// Material UI
+import Paper from '@material-ui/core/Paper';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+
+// Material UI icons
+import IconActionHome from '@material-ui/icons/Home';
+import IconSocialPerson from '@material-ui/icons/Person';
+import IconAssignmentReturned from '@material-ui/icons/AssignmentReturned';
+import IconAddLocation from '@material-ui/icons/AddLocation';
+import IconCreate from '@material-ui/icons/Create';
+import IconDirectionsCar from '@material-ui/icons/DirectionsCar';
+import IconPermIdentity from '@material-ui/icons/PermIdentity';
 
 const SideMenu = () => {
   const style = {
@@ -21,34 +28,57 @@ const SideMenu = () => {
       <Paper style={style} id="navigation-menu">
         <List>
           <Link to="/">
-            <ListItem primaryText="Navigation menu" />
+            <ListItem button>
+              <ListItemText primary="Navigation menu" />
+            </ListItem>
           </Link>
         </List>
         <Divider />
         <List>
           <Link to="/my-home">
-            <ListItem primaryText="My Home" leftIcon={<IconActionHome />} />
+            <ListItem button>
+              <ListItemIcon><IconActionHome /></ListItemIcon>
+              <ListItemText primary="My Home" />
+            </ListItem>
           </Link>
           <Link to="/my-account">
-            <ListItem primaryText="My Account" leftIcon={<IconSocialPerson />} />
+            <ListItem button>
+              <ListItemIcon><IconSocialPerson /></ListItemIcon>
+              <ListItemText primary="My Account" />
+            </ListItem>
           </Link>
         </List>
         <Divider />
         <List>
           <Link to="/sign">
-            <ListItem primaryText="Signing" leftIcon={<IconCreate />} />
+            <ListItem button>
+              <ListItemIcon><IconCreate /></ListItemIcon>
+              <ListItemText primary="Signing" />
+            </ListItem>
           </Link>
           <Link to="/issue">
-            <ListItem primaryText="Issue Address" leftIcon={<IconAddLocation />} />
+            <ListItem button>
+              <ListItemIcon><IconAddLocation /></ListItemIcon>
+              <ListItemText primary="Issue Address" />
+            </ListItem>
           </Link>
           <Link to="/issue-ean">
-            <ListItem primaryText="Issue EAN" leftIcon={<IconAssignmentReturned />} />
+            <ListItem button>
+              <ListItemIcon><IconAssignmentReturned /></ListItemIcon>
+              <ListItemText primary="Issue EAN" />
+            </ListItem>
           </Link>
           <Link to="/issue-vrn">
-            <ListItem primaryText="Issue VRN" leftIcon={<IconDirectionsCar />} />
+            <ListItem button>
+              <ListItemIcon><IconDirectionsCar /></ListItemIcon>
+              <ListItemText primary="Issue VRN" />
+            </ListItem>
           </Link>
           <Link to="/issue-bsn">
-            <ListItem primaryText="Issue BSN" leftIcon={<IconPermIdentity />} />
+            <ListItem button>
+              <ListItemIcon><IconPermIdentity /></ListItemIcon>
+              <ListItemText primary="Issue BSN" />
+            </ListItem>
           </Link>
         </List>
       </Paper>
