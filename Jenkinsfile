@@ -4,9 +4,6 @@ def buildClosure = {
 
   stage('Install')
   sh 'yarn'
-  sh 'git submodule init && git submodule update'
-  sh 'cd diva-react && yarn && yarn run build && yarn link && cd ..'
-  sh 'yarn link diva-react'
 
   stage('Lint')
   sh 'yarn run lint'
