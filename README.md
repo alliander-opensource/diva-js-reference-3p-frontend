@@ -24,16 +24,6 @@ Notable absent features:
 - No session support (still uncertain whether we will add that again)
 - No Authenticated IRMA JWT issue/disclose support (however JWT token coming from the IRMA server can be verified)
 
-Because `diva-react` 2.0 isn't published on npm, one needs to build it manually, to run:
-
-```
-npm install
-git submodule init && git submodule update
-cd diva-react && npm install && npm run build && npm link && cd ..
-npm link diva-react
-npm start
-```
-
 ## Diva-react
 
 This application is just an example implementation: it uses [diva-react](https://github.com/Alliander/diva-react) as its main library, see the documentation of that project for more details on how to integrate `diva-react` in your own application.
@@ -41,7 +31,7 @@ This application is just an example implementation: it uses [diva-react](https:/
 ## Running the application
 
 - Checkout the code
-- Point `irmaConfig.irmaUrl` to a valid [IRMA server](https://irma.app/docs/irma-server/) in `src/sagas/index.js`.
+- Point `env.irmaUrl` to a valid [IRMA server](https://irma.app/docs/irma-server/) in `public/env/env.js`.
 - `npm install`
 - `npm start`
 
