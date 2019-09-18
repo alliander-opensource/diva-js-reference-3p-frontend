@@ -1,6 +1,8 @@
 # diva-js-reference-3p-frontend
 
-This repository contains an example/reference frontend implementation that uses [diva-react](https://github.com/Alliander/diva-react) to show a nice GUI for IRMA authorization.
+**Warning: This reference implementation is a frontend-only example. This means that it is unsafe to use this implementation for issuance of IRMA attributes in producten environments.**
+
+This repository contains an example/reference frontend implementation that uses [diva-react](https://github.com/Alliander/diva-react) to show a nice GUI for IRMA authorization. This example can be used to quickly build a frontend-only prototype with IRMA and React for i.e. hackathons.
 
 IRMA is a decentralized, attribute based Identity Management protocol that allows easy and fine-grained authentication (and based on specific attributes) authorization. Attributes are issued by trusted issuers and therefore provide easy validation of users.
 
