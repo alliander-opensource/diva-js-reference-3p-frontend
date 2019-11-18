@@ -8,7 +8,7 @@
     "url": "git+ssh://git@github.com/Alliander/diva-js.git"
   },
   "dependencies": {
-    "axios": "0.17.0",
+    "axios": "0.18.1",
     "diva-react": "1.0.2",
     "material-ui": "0.19.4",
     "react": "16.4.2",
