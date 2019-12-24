@@ -5,6 +5,8 @@ const irmaConfig = {
   irmaUrl: window.env.irmaUrl,
   jwtEnabled: window.env.jwtEnabled,
   jwtPublicKey: window.env.jwtPublicKey,
+  irmaBackendStartUrl: window.env.irmaBackendStartUrl,
+  irmaBackendProofUrl: window.env.irmaBackendProofUrl,
 };
 
 
